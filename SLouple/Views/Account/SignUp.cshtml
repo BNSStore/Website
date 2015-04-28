@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    SLouple.MVC.Shared.Lang lang = ViewBag.lang;
+}
+@section head{
+    <link rel="stylesheet" href="//account.bnsstore.com/res/CSS/SignUp/0.0.1.min/css">
+    <script src="//account.bnsstore.com/res/JS/SignUp/0.0.1/js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=@lang.GetLangCode()" async defer></script>
+}
+@section lang{
+    @{
+        lang.AddKeyword("Account.EmailAddress");
+        lang.AddKeyword("Account.SignUp.EmailAddress.Invalid");
+        lang.AddKeyword("Account.SignUp.EmailAddress.Taken");
+        lang.AddKeyword("Account.Username");
+        lang.AddKeyword("Account.SignUp.Username.TooShort");
+        lang.AddKeyword("Account.SignUp.Username.Taken");
+        lang.AddKeyword("Account.DisplayName");
+        lang.AddKeyword("Account.SignUp.DisplayName.Error");
+        lang.AddKeyword("Account.Password");
+        lang.AddKeyword("Account.SignUp.Password.TooShort");
+        lang.AddKeyword("Account.SignUp.ConfirmPassword");
+        lang.AddKeyword("Account.SignUp.ConfirmPassword.NotMatch");
+        lang.AddKeyword("Account.SignUp.Robot");
+        lang.AddKeyword("Account.SignUp.Submit");
+    }
+}
+@section main{
+    <div id="sign-up-side-content-container">
+    </div>
+    <form action="" method="POST" id="sign-up-form">
+        <!--Email Address-->
+        <div id="sign-up-email-address-container" class="sign-up-container">
+            <div id="sign-up-email-address-title" class="sign-up-title">
+                @lang.GetHTMLTrans("Account.EmailAddress")
+            </div>
+            <div id="sign-up-email-address-error-not-valid" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.EmailAddress.Invalid")
+            </div>
+            <div id="sign-up-email-address-error-taken" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.EmailAddress.Taken")
+            </div>
+            <input id="sign-up-email-address-input" class="sign-up-input" type="text" name="emailAddress" maxlength="254"/>
+        </div>
+        <!--Username-->
+        <div id="sign-up-username-container" class="sign-up-container">
+            <div id="sign-up-username-title" class="sign-up-title" >
+                @lang.GetHTMLTrans("Account.Username")
+            </div>
+            <div id="sign-up-username-error-too-short" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.Username.TooShort")
+            </div>
+            <div id="sign-up-username-error-taken" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.Username.Taken")
+            </div>
+            <input id="sign-up-username-input" class="sign-up-input" type="text" name="username" maxlength="100" accept-charset="ASCII" />
+        </div>
+        <!--Display Name-->
+        <div id="sign-up-display-name-container" class="sign-up-container">
+            <div id="sign-up-display-name-title" class="sign-up-title">
+                @lang.GetHTMLTrans("Account.DisplayName")
+            </div>
+            <div id="sign-up-display-name-error" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.DisplayName.Error")
+            </div>
+            <input id="sign-up-display-name-input" class="sign-up-input" type="text" name="displayName" maxlength="100" />
+        </div>
+        <!--Password-->
+        <div id="sign-up-password-container" class="sign-up-container">
+            <div id="sign-up-password-title" class="sign-up-title">
+                @lang.GetHTMLTrans("Account.Password")
+            </div>
+            <div id="sign-up-password-error" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.Password.TooShort")
+            </div>
+            <input id="sign-up-password-input" class="sign-up-input" type="password" name="password" maxlength="100" />
+        </div>
+        <!--Confirm Password-->
+        <div id="sign-up-confirm-password-container" class="sign-up-container">
+            <div id="sign-up-confirm-password-title" class="sign-up-title">
+                @lang.GetHTMLTrans("Account.SignUp.ConfirmPassword")
+            </div>
+            <div id="sign-up-confirm-password-error" class="sign-up-error">
+                @lang.GetHTMLTrans("Account.SignUp.ConfirmPassword.NotMatch")
+            </div>
+            <input id="sign-up-confirm-password-input" class="sign-up-input" type="password" maxlength="100" />
+        </div>
+        <!--reCaptcha-->
+        <div id="sign-up-recaptcha-container" class="sign-up-container">
+            <div id="sign-up-recaptcha-title" class="sign-up-title">
+                @lang.GetHTMLTrans("Account.SignUp.Robot")
+            </div>
+            <div id="sign-up-recaptcha" class="g-recaptcha" data-sitekey="6LeOnAATAAAAAAhh1LC27ZgTmZ5xznD9dPD4E_a7"></div>
+        </div>
+        <div id="sign-up-submit-container" class="sign-up-container">
+            <button id="sign-up-submit-button" type="submit">@lang.GetHTMLTrans("Account.SignUp.Submit")</button>
+        </div>
+        
+    </form>
+<script>
+    $('.sign-up-title').autoTextSize(1.1, 0, $("#sign-up-form"), false);
+    $('.sign-up-error').autoTextSize(1.7, 0, $("#sign-up-form"), false);
+    $('#sign-up-submit-button').autoTextSize(0.7, 0, $("#sign-up-form"), false);
+
+
+</script>
+
+}
+@section footer{
+
+}

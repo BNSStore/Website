@@ -1,0 +1,15 @@
+﻿#control-panel-container{
+    text-align:center;
+
+    input[type=button]{
+        border: none;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 20px;
+        background-color: #62d317;
+        color: white;
+    }
+    input[type=button]:hover{
+        background-color: #4ea813;
+    }
+}

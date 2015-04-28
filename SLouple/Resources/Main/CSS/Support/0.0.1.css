@@ -1,0 +1,112 @@
+﻿#ticket-arrow-container {
+  display: block;
+  position: absolute;
+  width: 100vw;
+  height: 75vh;
+  top: 10vh;
+  z-index: 5; }
+  #ticket-arrow-container .ticket-arrow {
+    display: block;
+    position: absolute;
+    width: 7vw;
+    height: 75vh;
+    background-color: #ed3e18; }
+    #ticket-arrow-container .ticket-arrow div {
+      position: absolute;
+      top: 10vh;
+      width: 0;
+      height: 0;
+      border-top: 28.6vh solid transparent;
+      border-bottom: 28.6vh solid transparent; }
+  #ticket-arrow-container .ticket-arrow:hover div {
+    border-left-color: #c41c04 !important;
+    border-right-color: #c41c04 !important; }
+  #ticket-arrow-container #ticket-arrow-left {
+    left: 0; }
+    #ticket-arrow-container #ticket-arrow-left div {
+      left: 0.5vw;
+      border-right: 5vw solid #cb3616; }
+  #ticket-arrow-container #ticket-arrow-right {
+    left: 93vw; }
+    #ticket-arrow-container #ticket-arrow-right div {
+      left: 1.5vw;
+      border-left: 5vw solid #cb3616; }
+
+#ticket-container {
+  position: absolute;
+  display: block;
+  width: 700vw;
+  height: 65vh;
+  top: 20vh; }
+  #ticket-container .ticket-subcontainer {
+    display: table-cell;
+    width: 80vw;
+    height: 65vh;
+    padding: 0 10vw 0 10vw;
+    vertical-align: middle; }
+    #ticket-container .ticket-subcontainer .ticket-float-helper {
+      display: table-cell;
+      float: left;
+      width: 80vw;
+      height: auto;
+      vertical-align: middle;
+      text-align: center; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper .ticket-content {
+        display: table-cell;
+        width: 80vw;
+        max-width: 80vw;
+        height: 65vh;
+        vertical-align: middle;
+        text-align: center; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper .ticket-input {
+        vertical-align: top; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-intro-title {
+        height: 65vh; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-title-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-title-input, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-category-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-category-input, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-comment-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-comment-input {
+        height: 32.5vh; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-rating-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-rating-value, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-rating-input {
+        height: 21vh; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-title {
+        height: 9vh; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-name-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-name-input, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-email-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-email-input, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-phone-title, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-phone-input {
+        height: 9vh; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-name-textbox, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-email-textbox, #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-contact-phone-textbox {
+        text-align: center; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-title-textbox {
+        text-align: center;
+        width: 50vw; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-category-selectmenu-button {
+        height: auto;
+        padding: 1vh 0 1vh 0;
+        width: 50vw; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-comment-input #ticket-comment-textarea {
+        width: 50vw;
+        height: 25vh;
+        resize: none; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-rating-input #ticket-rating-slider {
+        display: inline-block;
+        text-align: center;
+        width: 50vw;
+        background: linear-gradient(to right, #bc0003 0, #20bf20 100%); }
+        #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-rating-input #ticket-rating-slider .ui-slider-range {
+          background: white; }
+        #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-rating-input #ticket-rating-slider .ui-slider-handle {
+          width: 2%; }
+      #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-submit-input {
+        vertical-align: middle; }
+        #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-submit-input #ticket-submit-button {
+          width: 50vw;
+          height: 50vh;
+          background: #ed3e18;
+          color: white;
+          text-align: center;
+          padding: 0;
+          margin: 0;
+          border-style: solid; }
+        #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-submit-input #ticket-submit-button:hover {
+          background: #d73816; }
+        #ticket-container .ticket-subcontainer .ticket-float-helper #ticket-submit-input .ui-button-text {
+          margin: 0;
+          padding: 0; }
+
+/*# sourceMappingURL=0.0.1.css.map */

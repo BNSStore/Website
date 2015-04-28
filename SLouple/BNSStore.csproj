@@ -1,0 +1,881 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{68340D94-E4C6-4200-B28B-876BF7148802}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SLouple</RootNamespace>
+    <AssemblyName>SLouple</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\packages\Quartz.2.3.1\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="SHA3">
+      <HintPath>..\packages\SHA3.0.9.2\lib\net40\SHA3.dll</HintPath>
+    </Reference>
+    <Reference Include="SHA3Managed">
+      <HintPath>..\packages\SHA3.0.9.2\lib\net40\SHA3Managed.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Resources\Account\CSS\Settings\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\Settings\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\SignUp\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\SignUp\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\UserBtn\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\UserBtn\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\VerifyEmail\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\VerifyEmail\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\Images\image.jpg" />
+    <Content Include="Resources\Account\Images\User\Avatar\62.png" />
+    <Content Include="Resources\Account\Images\User\Avatar\Default.png" />
+    <Content Include="Resources\Account\Images\User\Avatar\36.png" />
+    <Content Include="Resources\Account\JS\Settings\0.0.1.js" />
+    <Content Include="Resources\Account\JS\Settings\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\SignUp\0.0.1.js" />
+    <Content Include="Resources\Account\JS\SignUp\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\UserBtn\0.0.1.js" />
+    <Content Include="Resources\Account\JS\UserBtn\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\VerifyEmail\0.0.1.js" />
+    <Content Include="Resources\Main\Audios\Home\IntroSwitch.mp3" />
+    <Content Include="Resources\Main\Audios\Home\Intro.mp3" />
+    <Content Include="Resources\Main\CSS\Chat\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Chat\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Home\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Home\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Main\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Main\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Intro\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Intro\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Layout\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Layout\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\HumanResources\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\HumanResources\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Marking\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Marking\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Schedule\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Schedule\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Sales\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Sales\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Support\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Support\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\UserAction\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\UserAction\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Products\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Products\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\Images\Bars\BottomBar.png" />
+    <Content Include="Resources\Main\Images\Bars\TopBar.png" />
+    <Content Include="Resources\Main\Images\Home\Background\1080.jpg" />
+    <Content Include="Resources\Main\Images\Home\Background\720.jpg" />
+    <Content Include="Resources\Main\Images\Home\Background\Grass_Hill_1080P_Oil.png" />
+    <Content Include="Resources\Main\Images\Home\Background\Rainbow.png" />
+    <Content Include="Resources\Main\Images\Home\Slides\1.png" />
+    <Content Include="Resources\Main\Images\Home\Slides\3.png" />
+    <Content Include="Resources\Main\Images\Home\Slides\2.png" />
+    <Content Include="Resources\Main\Images\Home\Slides\0.png" />
+    <Content Include="Resources\Main\Images\Intro\Glow.png" />
+    <Content Include="Resources\Main\Images\Intro\Glow_Small.png" />
+    <Content Include="Resources\Main\Images\Intro\Glow_Tiny.png" />
+    <Content Include="Resources\Main\Images\Intro\HandTouch.png" />
+    <Content Include="Resources\Store\CSS\ShiftRequest\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ShiftRequest\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\Images\Products\43.jpg" />
+    <Content Include="Resources\Store\Images\Products\47.jpg" />
+    <Content Include="Resources\Store\Images\Products\49.jpg" />
+    <Content Include="Resources\Store\Images\Products\48.jpg" />
+    <Content Include="Resources\Store\Images\Products\46.jpg" />
+    <Content Include="Resources\Store\Images\Products\51.jpg" />
+    <Content Include="Resources\Store\Images\Products\52.jpg" />
+    <Content Include="Resources\Store\Images\Products\53.jpg" />
+    <Content Include="Resources\Store\Images\Products\54.jpg" />
+    <Content Include="Resources\Store\Images\Products\55.jpg" />
+    <Content Include="Resources\Store\Images\Products\56.jpg" />
+    <Content Include="Resources\Store\Images\Products\57.jpg" />
+    <Content Include="Resources\Store\Images\Products\58.jpg" />
+    <Content Include="Resources\Store\Images\Products\59.jpg" />
+    <Content Include="Resources\Store\Images\Products\60.jpg" />
+    <Content Include="Resources\Store\Images\Products\61.jpg" />
+    <Content Include="Resources\Store\Images\Products\62.jpg" />
+    <Content Include="Resources\Store\Images\Products\64.jpg" />
+    <Content Include="Resources\Store\Images\Products\65.jpg" />
+    <Content Include="Resources\Store\Images\Products\66.jpg" />
+    <Content Include="Resources\Store\Images\Products\67.jpg" />
+    <Content Include="Resources\Store\Images\Products\68.jpg" />
+    <Content Include="Resources\Store\Images\Products\69.jpg" />
+    <Content Include="Resources\Store\Images\Products\70.jpg" />
+    <Content Include="Resources\Store\Images\Products\71.jpg" />
+    <Content Include="Resources\Store\Images\Products\72.jpg" />
+    <Content Include="Resources\Store\Images\Products\73.jpg" />
+    <Content Include="Resources\Store\Images\Products\74.jpg" />
+    <Content Include="Resources\Store\Images\Products\75.jpg" />
+    <Content Include="Resources\Store\Images\Products\44.jpg" />
+    <Content Include="Resources\Store\Images\Products\63.jpg" />
+    <Content Include="Resources\Store\Images\Products\2.jpg" />
+    <Content Include="Resources\Store\Images\Products\76.jpg" />
+    <Content Include="Resources\Store\Images\Products\77.jpg" />
+    <Content Include="Resources\Store\Images\Products\78.jpg" />
+    <Content Include="Resources\Store\Images\Products\79.jpg" />
+    <Content Include="Resources\Store\Images\Products\80.jpg" />
+    <Content Include="Resources\Store\Images\Products\Puddin’ Squeez.jpg" />
+    <Content Include="Resources\Store\Images\Products\1.jpg" />
+    <Content Include="Resources\Store\Images\Products\Praeventia Cookies.jpg" />
+    <Content Include="Resources\Store\Images\Products\50.jpg" />
+    <Content Include="Resources\Store\Images\Products\45.jpg" />
+    <Content Include="Resources\Main\JS\Chat\ChatHub\0.0.1.js" />
+    <Content Include="Resources\Main\JS\Chat\ChatHub\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.2.js" />
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.2.min.js">
+      <DependentUpon>0.0.2.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Intro\0.0.2.js" />
+    <Content Include="Resources\Main\JS\Intro\0.0.2.min.js">
+      <DependentUpon>0.0.2.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Main\0.0.1.js" />
+    <Content Include="Resources\Main\JS\Main\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\ControlPanel\Accounting\0.0.1.js" />
+    <Content Include="Resources\Store\JS\ControlPanel\Accounting\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\ControlPanel\HumanResources\0.0.1.js" />
+    <Content Include="Resources\Store\JS\ControlPanel\HumanResources\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Marking\0.0.1.js" />
+    <Content Include="Resources\Store\JS\Marking\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Schedule\0.0.1.js" />
+    <Content Include="Resources\Store\JS\Schedule\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Sales\0.0.1.js" />
+    <Content Include="Resources\Main\JS\Support\Ticket\0.0.1.js" />
+    <Content Include="Resources\Main\JS\Support\Ticket\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AngularJS\1.2.27.min.js">
+      <DependentUpon>1.2.27.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AngularJS\1.3.3.min.js">
+      <DependentUpon>1.3.3.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryAnimateShadow\0.0.1.js" />
+    <Content Include="Resources\Shared\JS\jQueryAnimateShadow\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUITouchPunch\0.2.3.js" />
+    <Content Include="Resources\Shared\JS\jQueryUITouchPunch\0.2.3.min.js">
+      <DependentUpon>0.2.3.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\LangBtn\0.0.1.js" />
+    <Content Include="Resources\Main\JS\LangBtn\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\PageTrans\0.0.1.js" />
+    <Content Include="Resources\Main\JS\PageTrans\0.0.1.min.js" />
+    <Content Include="Resources\Main\JS\Intro\0.0.1.js" />
+    <Content Include="Resources\Main\JS\Intro\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.1.js" />
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Products\0.0.1.js" />
+    <Content Include="Resources\Store\JS\Products\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\CSS\jQueryUI\1.11.2.css.map">
+      <DependentUpon>1.11.2.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Intro\0.0.2.min.js.map">
+      <DependentUpon>0.0.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUITouchPunch\0.2.3.min.js.map">
+      <DependentUpon>0.2.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Main\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.2.min.js.map">
+      <DependentUpon>0.0.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Support\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\Support\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Support\Ticket\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Chat\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\Chat\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Chat\ChatHub\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <None Include="job_scheduling_data_2_0.xsd" />
+    <None Include="Properties\PublishProfiles\FTP BNSStore.com.pubxml" />
+    <None Include="Properties\PublishProfiles\WebDeploy BNSStore.com.pubxml" />
+    <Content Include="Resources\Account\CSS\SignUp\0.0.1.scss" />
+    <Content Include="Resources\Account\CSS\SignUp\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\SignUp\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\VerifyEmail\0.0.1.scss" />
+    <Content Include="Resources\Account\CSS\VerifyEmail\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\UserBtn\0.0.1.scss" />
+    <Content Include="Resources\Account\CSS\UserBtn\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\UserBtn\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Schedule\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Schedule\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\Schedule\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Sales\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\Sales\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\PageTrans\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Intro\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Chat\ChatHub\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Schedule\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\SignUp\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Intro\0.0.2.min.js.gzip">
+      <DependentUpon>0.0.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\UserBtn\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.2.min.js.gzip">
+      <DependentUpon>0.0.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\LangBtn\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Main\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Products\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Support\Ticket\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\CSS\Settings\0.0.1.scss" />
+    <Content Include="Resources\Account\CSS\Settings\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Account\JS\Settings\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <None Include="Resources\Shared\CSS\jQueryUI\1.11.2.scss" />
+    <Content Include="Resources\Shared\CSS\jQueryUI\1.11.2.css">
+      <DependentUpon>1.11.2.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\CSS\jQueryUI\1.11.2.min.css">
+      <DependentUpon>1.11.2.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\CSS\Normalize\3.0.2.css" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_flat_55_ffffff_40x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_highlight-soft_25_0073ea_1x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-bg_highlight-soft_50_dddddd_1x100.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-icons_0073ea_256x240.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-icons_454545_256x240.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-icons_666666_256x240.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-icons_ff0084_256x240.png" />
+    <Content Include="Resources\Shared\Images\jQueryUI\1.11.2\ui-icons_ffffff_256x240.png" />
+    <Content Include="Resources\Shared\Images\Logo\Logo.ico" />
+    <Content Include="Resources\Shared\Images\Logo\logo.png" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_Blue.ico" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_Blue_NoText.ico" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_Green.ico" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_Green_NoText.ico" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_NoText.ico" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_Red.ico" />
+    <Content Include="Resources\Shared\Images\Logo\Logo_Red_NoText.ico" />
+    <Content Include="Resources\Shared\JS\AngularJS\1.2.27.js" />
+    <Content Include="Resources\Shared\JS\AngularJS\1.3.3.js" />
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.1.js" />
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.2.js" />
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.2.min.js">
+      <DependentUpon>0.0.2.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryMobile\1.4.5.js" />
+    <Content Include="Resources\Shared\JS\jQueryMobile\1.4.5.min.js">
+      <DependentUpon>1.4.5.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.2.js" />
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.2.min.js">
+      <DependentUpon>1.11.2.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.4.js" />
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.4.min.js">
+      <DependentUpon>1.11.4.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.11.1.min.js">
+      <DependentUpon>1.11.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.6.4.js" />
+    <Content Include="Resources\Shared\JS\jQuery\1.6.4.min.js">
+      <DependentUpon>1.6.4.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.11.1.js" />
+    <Content Include="Resources\Shared\JS\jQuery\2.1.1.js" />
+    <Content Include="Resources\Shared\JS\jQuery\2.1.1.min.js">
+      <DependentUpon>2.1.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\2.1.3.js" />
+    <Content Include="Resources\Shared\JS\jQuery\2.1.3.min.js">
+      <DependentUpon>2.1.3.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\SignalR\2.1.2.js" />
+    <Content Include="Resources\Shared\JS\SignalR\2.1.2.min.js">
+      <DependentUpon>2.1.2.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\SignalR\2.2.0.js" />
+    <Content Include="Resources\Shared\JS\SignalR\2.2.0.min.js">
+      <DependentUpon>2.2.0.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\Velocity\1.1.0.min.js">
+      <DependentUpon>1.1.0.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\2.1.3.min.js.map">
+      <DependentUpon>2.1.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\Velocity\1.2.2.min.js">
+      <DependentUpon>1.2.2.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\ShiftRequest\0.0.1.js" />
+    <Content Include="Resources\Store\JS\ShiftRequest\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="sitemap.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BasicRoute.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account\Hash.cs" />
+    <Compile Include="Models\Account\SLUser.cs" />
+    <Compile Include="Models\Main\Message.cs" />
+    <Compile Include="Models\Shared\CSV.cs" />
+    <Compile Include="Models\Store\NoPermissionException.cs" />
+    <Compile Include="Models\Store\Product.cs" />
+    <Compile Include="Models\Store\SaleCount.cs" />
+    <Compile Include="Models\Store\SalesHub.cs" />
+    <Compile Include="Models\Store\Shift.cs" />
+    <Compile Include="Models\Store\ShiftNotificationJob.cs" />
+    <Compile Include="Models\Main\Ticket.cs" />
+    <Compile Include="Models\Shared\AdvancedController.cs" />
+    <Compile Include="Models\Shared\Email.cs" />
+    <Compile Include="Models\Shared\Lang.cs" />
+    <Compile Include="Models\Main\ChatHub.cs" />
+    <Compile Include="Models\Shared\QuartzStartUp.cs" />
+    <Compile Include="Models\Shared\Sql.cs" />
+    <Compile Include="Models\Shared\SqlStoredProcedures.cs" />
+    <Compile Include="Models\Shared\SignalRStartUp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Layouts\Main\_MainLayout.cshtml" />
+    <Content Include="Views\Layouts\Error\_ErrorLayout.cshtml" />
+    <Content Include="Views\Layouts\Shared\_SharedLayout.cshtml" />
+    <None Include="Properties\PublishProfiles\SLouple.com.pubxml" />
+    <Content Include="Views\Main\Home.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Resources\Shared\CSS\Normalize\3.0.2.min.css" />
+    <Content Include="Resources\Shared\JS\Velocity\1.1.0.js" />
+    <Content Include="Resources\Main\CSS\Main\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\Main\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Home\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\Home\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\Bold.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\BoldItalic.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\Italic.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\Light.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\LightItalic.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\Regular.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\SemiBold.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\SemiBoldItalic.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\Thin.ttf" />
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\ThinItalic.ttf" />
+    <Content Include="Resources\Shared\CSS\Fonts\JosefinSlab.css" />
+    <Content Include="Resources\Main\JS\Home\Slides\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\Intro\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\Audios\Home\IntroSwitch.ogg" />
+    <Content Include="Views\Store\Products.cshtml" />
+    <Content Include="Views\Main\Support.cshtml" />
+    <Content Include="Views\Main\Chat.cshtml" />
+    <Content Include="Views\Main\HelloWorld.cshtml" />
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\JS\LangBtn\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.6.4.min.js.map">
+      <DependentUpon>1.6.4.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.11.1.min.js.map">
+      <DependentUpon>1.11.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\2.1.1.min.js.map">
+      <DependentUpon>2.1.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\SignalR\2.1.2.min.js.map">
+      <DependentUpon>2.1.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\Velocity\1.1.0.min.js.map">
+      <DependentUpon>1.1.0.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Layout\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\Layout\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\UserAction\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\UserAction\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Main\CSS\Intro\0.0.1.scss" />
+    <Content Include="Resources\Main\CSS\Intro\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryMobile\1.4.5.min.js.map">
+      <DependentUpon>1.4.5.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Products\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\Products\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\Products\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.2.min.js.map">
+      <DependentUpon>0.0.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.2.min.js.map">
+      <DependentUpon>1.11.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Account\VerifyEmail.cshtml" />
+    <Content Include="Views\Store\Schedule.cshtml" />
+    <Content Include="Resources\Shared\JS\jQueryAnimateShadow\0.0.1.min.js.map">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Store\Sales.cshtml" />
+    <Content Include="Resources\Shared\JS\SignalR\2.2.0.min.js.map">
+      <DependentUpon>2.2.0.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\Velocity\1.2.2.js" />
+    <Content Include="Resources\Shared\JS\Velocity\1.2.2.min.js.map">
+      <DependentUpon>1.2.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AutoTextSize\0.0.2.min.js.gzip">
+      <DependentUpon>0.0.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryAnimateShadow\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryMobile\1.4.5.min.js.gzip">
+      <DependentUpon>1.4.5.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUITouchPunch\0.2.3.min.js.gzip">
+      <DependentUpon>0.2.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.2.min.js.gzip">
+      <DependentUpon>1.11.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\2.1.1.min.js.gzip">
+      <DependentUpon>2.1.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\2.1.3.min.js.gzip">
+      <DependentUpon>2.1.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\SignalR\2.1.2.min.js.gzip">
+      <DependentUpon>2.1.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\SignalR\2.2.0.min.js.gzip">
+      <DependentUpon>2.2.0.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\Velocity\1.1.0.min.js.gzip">
+      <DependentUpon>1.1.0.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\Velocity\1.2.2.min.js.gzip">
+      <DependentUpon>1.2.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.11.1.min.js.gzip">
+      <DependentUpon>1.11.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQuery\1.6.4.min.js.gzip">
+      <DependentUpon>1.6.4.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AngularJS\1.2.27.min.js.gzip">
+      <DependentUpon>1.2.27.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\AngularJS\1.3.3.min.js.gzip">
+      <DependentUpon>1.3.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\JS\jQueryUI\1.11.4.min.js.gzip">
+      <DependentUpon>1.11.4.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Shared\Fonts\JosefinSlab\Regular.woff" />
+    <Content Include="Views\Store\Marking.cshtml" />
+    <Content Include="Resources\Store\JS\Marking\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\Marking\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\Marking\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Views\Store\ControlPanel.cshtml" />
+    <Content Include="Resources\Store\JS\ControlPanel\HumanResources\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\HumanResources\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\ControlPanel\HumanResources\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\ShiftRequest\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ShiftRequest\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\ShiftRequest\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Resources\Store\JS\ControlPanel\Accounting\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Accounting\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\Error\" />
+    <Folder Include="Resources\Account\Audios\" />
+    <Folder Include="Resources\Account\Videos\" />
+    <Folder Include="Resources\Error\Audios\" />
+    <Folder Include="Resources\Error\CSS\" />
+    <Folder Include="Resources\Error\Images\" />
+    <Folder Include="Resources\Error\JS\" />
+    <Folder Include="Resources\Error\Videos\" />
+    <Folder Include="Resources\Main\Videos\" />
+    <Folder Include="Resources\Shared\Audios\" />
+    <Folder Include="Resources\Shared\Videos\" />
+    <Folder Include="Resources\Store\Audios\" />
+    <Folder Include="Resources\Store\Videos\" />
+    <Folder Include="Views\Layouts\Store\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Shared\Images\Logo\Logo_NoText.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59772</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,78 @@
+﻿$defaultFont: 'Josefin Slab';
+/*
+$darkColor : #17aece;
+$color : #1abcde;
+$lightColor : #1bccf1;
+*/
+$darkColor: #c3c1c1;
+$color: #dedede;
+$lightColor: #fcfcfc;
+
+#sign-up-side-content-container {
+    display: inline-block;
+    position:fixed;
+    top: 15vh;
+    width: 45%;
+    height: 70%;
+    margin: 0 0 0 5%;
+    padding: 0 0 5vh 0;
+    vertical-align: top;
+    border-right-style: solid;
+    border-right-width: 3px;
+    border-right-color: #c3c1c1;
+    background: url(//account.bnsstore.com/res/Images/User/Avatar/Default/png) no-repeat center;
+}
+
+#sign-up-form {
+    display: inline-block;
+    width: 45%;
+    margin-left: 50%;
+    padding: 0 2.5% 0 2.5%;
+    text-align: center;
+    
+    .sign-up-container {
+        display: inline-block;
+        margin: 0.5vh 0 1.5vh 0;
+        width: 100%;
+        .sign-up-title {
+            font-family: $defaultFont;
+            margin: 0.5vh 0 0.5vh 0;
+        }
+
+        .sign-up-error{
+            color: rgb(222, 30, 30);
+            opacity: 0;
+        }
+
+        .sign-up-input {
+            text-align: center;
+            width: 80%;
+        }
+
+        #sign-up-username-error-taken, #sign-up-email-address-error-taken{
+            display: none;
+        }
+
+        #sign-up-recaptcha {
+            div {
+                div {
+                    display: inline-block !important;
+                }
+            }
+        }
+    }
+
+    #sign-up-submit-button{
+        width: 80%;
+        background-color: #1bccf1;
+        border: none;
+        color: white;
+        padding: 1vh 0 1vh 0;
+    }
+
+    #sign-up-username-container, #sign-up-display-name-container,
+    #sign-up-password-container,#sign-up-confirm-password-container
+    {
+        width: 48%;
+    }
+}

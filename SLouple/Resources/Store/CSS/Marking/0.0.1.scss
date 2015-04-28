@@ -1,0 +1,80 @@
+﻿#marking-container {
+    text-align: center;
+
+    .unmarked-shift-container {
+        display: inline-block;
+        background-color: #1bccf1;
+        text-align: center;
+        padding: 5px;
+        margin: 5px;
+
+        .unmarked-shift-date {
+            display: block;
+            color: white;
+            font-size: 24px;
+        }
+
+        .unmarked-shift-store {
+            display: inline-block;
+            color: white;
+            font-size: 24px;
+        }
+
+        .unmarked-shift-name {
+            display: inline-block;
+            color: white;
+            font-size: 28px;
+        }
+
+        .unmarked-shift-bottom {
+            display: table;
+
+            .unmarked-shift-bottom-left {
+                display: table-cell;
+                width: 100px;
+                padding: 0;
+                vertical-align:top;
+                .unmarked-shift-mark {
+                    display: block;
+                    margin: 10px;
+                    .unmarked-shift-mark-input {
+                        display: block;
+                        text-align: center;
+                        width: 100px;
+                        margin: 0;
+                        padding: 0;
+                        border: none;
+                    }
+                }
+
+                .unmarked-shift-submit-button {
+                    display: block;
+                    background-color: #62d317;
+                    color: white;
+                    border: none;
+                    margin: 2px auto;
+                    width: 100px;
+                    font-size: 24px;
+                    padding: 5px 0 5px 0;
+                }
+                .unmarked-shift-submit-button:hover{
+                    background-color: #58ba17;
+                }
+            }
+
+            .unmarked-shift-bottom-right {
+                display: table-cell;
+                .unmarked-shift-comment {
+                    min-width: 120px;
+                    width: 90%;
+                    max-width: 200px;
+                    border: none;
+                    padding: 0;
+                    margin: 10px;
+                    height: 83%;
+                    resize: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,179 @@
+﻿$defaultFont: 'Josefin Slab';
+
+#ticket-arrow-container {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 75vh;
+    top: 10vh;
+    z-index: 5;
+
+    .ticket-arrow {
+        display: block;
+        position: absolute;
+        width: 7vw;
+        height: 75vh;
+        background-color: #ed3e18;
+
+        div {
+            position: absolute;
+            top: 10vh;
+            width: 0;
+            height: 0;
+            border-top: 28.6vh solid transparent;
+            border-bottom: 28.6vh solid transparent;
+        }
+    }
+
+    .ticket-arrow:hover div {
+        border-left-color: #c41c04 !important;
+        border-right-color: #c41c04 !important;
+    }
+
+    #ticket-arrow-left {
+        left: 0;
+
+        div {
+            left: 0.5vw;
+            border-right: 5vw solid #cb3616;
+        }
+    }
+
+    #ticket-arrow-right {
+        left: 93vw;
+
+        div {
+            left: 1.5vw;
+            border-left: 5vw solid #cb3616;
+        }
+    }
+}
+
+#ticket-container {
+    position: absolute;
+    display: block;
+    width: 700vw;
+    height: 65vh;
+    top: 20vh;
+    //background-color: blue;
+    .ticket-subcontainer {
+        display: table-cell;
+        width: 80vw;
+        height: 65vh;
+        padding: 0 10vw 0 10vw;
+        //background-color: red;
+        vertical-align: middle;
+
+        .ticket-float-helper {
+            display: table-cell;
+            float: left;
+            width: 80vw;
+            height: auto;
+            //background-color: green;
+            vertical-align: middle;
+            text-align: center;
+
+            .ticket-content {
+                display: table-cell;
+                width: 80vw;
+                max-width: 80vw;
+                height: 65vh;
+                //background-color: green;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            .ticket-input {
+                vertical-align: top;
+            }
+
+            #ticket-intro-title {
+                height: 65vh;
+            }
+
+            #ticket-title-title, #ticket-title-input,
+            #ticket-category-title, #ticket-category-input,
+            #ticket-comment-title, #ticket-comment-input {
+                height: 32.5vh;
+            }
+
+            #ticket-rating-title, #ticket-rating-value, #ticket-rating-input {
+                height: 21vh;
+            }
+
+            #ticket-contact-title {
+                height: 9vh;
+            }
+
+            #ticket-contact-name-title, #ticket-contact-name-input,
+            #ticket-contact-email-title, #ticket-contact-email-input,
+            #ticket-contact-phone-title, #ticket-contact-phone-input {
+                height: 9vh;
+            }
+
+            #ticket-contact-name-textbox,
+            #ticket-contact-email-textbox,
+            #ticket-contact-phone-textbox {
+                text-align: center;
+            }
+
+            #ticket-title-textbox {
+                text-align: center;
+                width: 50vw;
+            }
+
+            #ticket-category-selectmenu-button {
+                height: auto;
+                padding: 1vh 0 1vh 0;
+                width: 50vw;
+            }
+
+            #ticket-comment-input {
+                #ticket-comment-textarea {
+                    width: 50vw;
+                    height: 25vh;
+                    resize: none;
+                }
+            }
+
+            #ticket-rating-input {
+                #ticket-rating-slider {
+                    display: inline-block;
+                    text-align: center;
+                    width: 50vw;
+                    background: linear-gradient(to right, rgba(188,0,3,1) 0,rgba(32,191,32,1) 100%);
+
+                    .ui-slider-range {
+                        background: white;
+                    }
+
+                    .ui-slider-handle {
+                        width: 2%;
+                    }
+                }
+            }
+
+            #ticket-submit-input {
+                vertical-align: middle;
+
+                #ticket-submit-button {
+                    width: 50vw;
+                    height: 50vh;
+                    background: #ed3e18;
+                    color: white;
+                    text-align: center;
+                    padding: 0;
+                    margin: 0;
+                    border-style: solid;
+                }
+                #ticket-submit-button:hover{
+                    background: #d73816;
+                }
+                .ui-button-text {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,307 @@
+﻿@{
+    Layout = "~/Views/Layouts/Shared/_SharedLayout.cshtml";
+    Lang lang = ViewBag.lang;
+    SLUser user = ViewBag.user;
+    bool firstLoad;
+    try
+    {
+        firstLoad = Convert.ToBoolean(Request.Cookies["firstLoad"].Value.ToString());
+    }
+    catch
+    {
+        firstLoad = false;
+    }
+    //firstLoad = true;
+    //firstLoad = false;
+}
+@if (IsSectionDefined("description"))
+{
+    @section description{
+        @RenderSection("description", required: false)
+    }
+}
+@if (IsSectionDefined("icon"))
+{
+    @section icon{
+        @RenderSection("icon", required: false)
+    }
+}
+@section meta{
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1" />
+}
+@section lang{
+    @{
+        lang.AddDayOfWeek();
+        lang.AddKeyword("Main.Header.Home");
+        lang.AddKeyword("Main.Header.Store");
+        lang.AddKeyword("Main.Header.Support");
+        lang.AddKeyword("Main.Header.Chat");
+        lang.AddKeyword("Main.Mobile.PortraitWarning");
+        lang.AddKeyword("Account.Login");
+        lang.AddKeyword("Account.Username");
+        lang.AddKeyword("Account.Password");
+        lang.AddKeyword("Account.NoAccount.Question");
+        lang.AddKeyword("Account.NoAccount.SignUp");
+        lang.AddKeyword("Account.Settings");
+        lang.AddKeyword("Account.Logout");
+        lang.AddKeyword("Store.Schedule");
+        lang.AddKeyword("Store.ControlPanel");
+        lang.AddKeyword("Store.Sales");
+        lang.AddKeyword("Store.Marking");
+        lang.AddKeyword("Store.ShiftRequest.Accept");
+        lang.AddKeyword("Store.ShiftRequest.Decline");
+    }
+    @RenderSection("lang", required: false)
+}
+@section head{
+    <link rel="stylesheet" href="//main.bnsstore.com/res/CSS/Main/0.0.1.min/css">
+    <link rel="stylesheet" href="//main.bnsstore.com/res/CSS/Layout/0.0.1.min/css">
+    <link rel="stylesheet" href="//main.bnsstore.com/res/CSS/UserAction/0.0.1.min/css">
+    <link rel="stylesheet" href="//account.bnsstore.com/res/CSS/UserBtn/0.0.1.min/css" />
+
+    <script src="//main.bnsstore.com/res/JS/Main/0.0.1.min/js"></script>
+    <script src="//main.bnsstore.com/res/JS/PageTrans/0.0.1.min/js"></script>
+    <script src="//account.bnsstore.com/res/JS/UserBtn/0.0.1.min/js"></script>
+    <script src="//main.bnsstore.com/res/JS/LangBtn/0.0.1.min/js"></script>
+    @if (user != null && user.IsEmployee())
+    {
+        <link rel="stylesheet" href="//store.bnsstore.com/res/CSS/ShiftRequest/0.0.1.min/css" />
+        <script src="//store.bnsstore.com/res/JS/ShiftRequest/0.0.1.min/js"></script>
+    }
+    @if (firstLoad)
+    {
+        <link rel="stylesheet" href="//main.bnsstore.com/res/CSS/Intro/0.0.1.min/css">
+        <script src="//main.bnsstore.com/res/JS/Intro/0.0.2.min/js"></script>
+    }
+    @RenderSection("head", false)
+}
+@section body{
+    <!--Header-->
+    <header class="no-overflow no-select click-through">
+        <div id="header-content" class="clickable">
+            <!--Nav-->
+            <ul id="header-nav-container">
+                <li class="vc-container"><a href="//bnsstore.com/" class="hc-text vc-child">@lang.GetHTMLTrans("Main.Header.Home")</a></li>
+                <li class="vc-container"><a href="//store.bnsstore.com/" class="hc-text vc-child">@lang.GetHTMLTrans("Main.Header.Store")</a></li>
+                <li class="vc-container"><a href="//bnsstore.com/Support" class="hc-text vc-child">@lang.GetHTMLTrans("Main.Header.Support")</a></li>
+                <li class="vc-container"><a href="//bnsstore.com/Chat" class="hc-text vc-child">@lang.GetHTMLTrans("Main.Header.Chat")</a></li>
+            </ul>
+            <!--Logo-->
+            <div id="header-logo-container">
+                <div id="header-logo">
+                    <img class="hc-margin" src="//shared.bnsstore.com/res/Images/Logo/Logo/png" alt="BNSS">
+                </div>
+            </div>
+            <!--Buttons-->
+            <div id="header-btn-container">
+                <div id="lang-btn" class="vc-container">
+                    @if (Request.Cookies["langName"] == null)
+                    {
+                        <a class="hc-text vc-child">English</a>
+                    }
+                    else
+                    {
+                        <a class="hc-text vc-child">@Lang.GetLangNameNative(Request.Cookies["langName"].Value.ToString())</a>
+                    }
+                </div>
+                <div id="user-btn">
+                    <div id="user-display-name-container" class="hc-text">
+                        <div id="user-display-name" class="vc-container">
+                            @if (user == null)
+                            {
+                                <a class="vc-child">@lang.GetHTMLTrans("Account.Login")</a>
+                            }
+                            else
+                            {
+                                <a class="vc-child">@user.displayName</a>
+
+                            }
+                        </div>
+                    </div>
+                    <div id="user-avatar-container">
+                        <span id="user-avatar-helper"></span>
+                        @if (user == null)
+                        {
+                            <img id="user-avatar" class="hc-margin" src="//account.bnsstore.com/res/Images/User/Avatar/Default/png" alt="Avatar">
+                        }
+                        else
+                        {
+                            <img id="user-avatar" class="hc-margin" src="//account.bnsstore.com/res/Images/User/Avatar/@user.userID/png" alt="Avatar" onerror="this.src = '//account.bnsstore.com/res/Images/User/Avatar/Default/png'">
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $('#header-content > ul > li > a').autoTextSize(0.22, 0, $('#header-content > ul > li'));
+            $('#lang-btn > a').autoTextSize(0.25, 0, $('#lang-btn'));
+            $('#user-display-name > a').autoTextSize(0.25, 0, $('#lang-btn'), false);
+        </script>
+        <img src="//main.bnsstore.com/res/Images/Bars/TopBar/png" id="header-bg" class="click-through">
+        @RenderSection("header", required: false)
+    </header>
+    <!--User Menu-->
+    <div id="user-menu">
+        <form id="user-menu-items-container">
+            @if (user == null)
+            {
+                <div id="user-menu-username-container">
+                    <div id="user-menu-username-title">
+                        @lang.GetHTMLTrans("Account.Username")
+                    </div>
+                    <input type="text" id="user-menu-username">
+                </div>
+                <div id="user-menu-password-container">
+                    <div id="user-menu-password-title">
+                        @lang.GetHTMLTrans("Account.Password")
+                    </div>
+                    <input type="password" id="user-menu-password">
+                </div>
+                <div id="user-menu-login-button-container" class="user-menu-button-container">
+                    <button id="user-menu-login-button" class="user-menu-button" type="button">@lang.GetHTMLTrans("Account.Login")</button>
+                </div>
+                <div id="user-menu-sign-up-container">
+                    <div id="user-menu-sign-up-title">@lang.GetHTMLTrans("Account.NoAccount.Question")</div>
+                    <a href="//account.bnsstore.com/SignUp/" id="user-menu-sign-up">@lang.GetHTMLTrans("Account.NoAccount.SignUp")</a>
+                </div>
+                <script>
+                    $('#user-menu-username-title').autoTextSize(0.4, 0, $("#user-menu-username-container"), false);
+                    $('#user-menu-username').autoTextSize(0.4, 0, $("#user-menu-username-container"), false);
+                    $('#user-menu-password-title').autoTextSize(0.4, 0, $("#user-menu-password-container"), false);
+                    $('#user-menu-password').autoTextSize(0.4, 0, $("#user-menu-password-container"), false);
+                    //$('#user-menu-login-button').autoTextSize(0.2, 0, $("#user-menu-login-button-container"), false);
+                    $('#user-menu-sign-up-title').autoTextSize(0.2, 0, $("#user-menu-sign-up-container"), false);
+                    $('#user-menu-sign-up').autoTextSize(0.2, 0, $("#user-menu-sign-up-container"), false);
+                </script>
+            }
+            else
+            {
+                if (user.IsEmployee())
+                {
+                    var shiftRequests = new SqlStoredProcedures().StoreSelectShiftRequest(user.userID);
+                    if (shiftRequests.Count > 0)
+                    {
+                        <div id="shift-request-container">
+                            @foreach (KeyValuePair<int, DateTime> shiftRequest in shiftRequests)
+                            {
+                                <div class="shift-request" id="@shiftRequest.Value.ToShortDateString()">
+                                    <div class="shift-request-date" id="@shiftRequest.Value.ToShortDateString()">@shiftRequest.Value.ToShortDateString() : @lang.GetHTMLTrans("Date." + shiftRequest.Value.DayOfWeek)</div>
+                                    <div class="shift-request-name" id="@shiftRequest.Key">@SLUser.GetDisplayName(shiftRequest.Key)</div>
+                                    <button class="shift-request-accept" type="button">@lang.GetHTMLTrans("Store.ShiftRequest.Accept")</button>
+                                    <button class="shift-request-decline" type="button">@lang.GetHTMLTrans("Store.ShiftRequest.Decline")</button>
+                                </div>
+                            }
+                            <hr>
+                        </div>
+                        
+                        
+                    }
+                    <div id="user-menu-schedule-button-container" class="user-menu-button-container">
+                        <button id="user-menu-schedule-button" class="user-menu-button" type="button" onclick="location.href='//store.bnsstore.com/Schedule'">@lang.GetHTMLTrans("Store.Schedule")</button>
+                    </div>
+                    <div id="user-menu-control-panel-button-container" class="user-menu-button-container">
+                        <button id="user-menu-control-panel-button" class="user-menu-button" type="button" onclick="location.href='//store.bnsstore.com/ControlPanel'">@lang.GetHTMLTrans("Store.ControlPanel")</button>
+                    </div>
+                    if (user.IsManager())
+                    {
+                        if (new SqlStoredProcedures().StoreGetCurrentShifts().ContainsKey(user.userID))
+                        {
+                            <div id="user-menu-sale-button-container" class="user-menu-button-container">
+                                <button id="user-menu-sale-button" class="user-menu-button" type="button" onclick="location.href='//store.bnsstore.com/Sales'">@lang.GetHTMLTrans("Store.Sales")</button>
+                            </div>
+                        }
+                        <div id="user-menu-marking-button-container" class="user-menu-button-container">
+                            <button id="user-menu-marking-button" class="user-menu-button" type="button" onclick="location.href='//store.bnsstore.com/Marking'">@lang.GetHTMLTrans("Store.Marking")</button>
+                        </div>
+                    }
+                }
+                <div id="user-menu-settings-button-container" class="user-menu-button-container">
+                    <button id="user-menu-settings-button" class="user-menu-button" type="button" onclick="location.href='//account.bnsstore.com/Settings'">@lang.GetHTMLTrans("Account.Settings")</button>
+                </div>
+                <div id="user-menu-logout-button-container" class="user-menu-button-container">
+                    <button id="user-menu-logout-button" class="user-menu-button" type="button">@lang.GetHTMLTrans("Account.Logout")</button>
+                </div>
+                <script>
+                    //$('#user-menu-logout-button').autoTextSize(0.2, 0, $("#user-menu-logout-button-container"), false);
+                </script>
+            }
+            <script>
+                $('.shift-request').autoTextSize(0.25, 0, $("#user-menu-logout-button-container"), false);
+                $('.user-menu-button').autoTextSize(0.25, 0, "parent", false);
+            </script>
+        </form>
+    </div>
+
+    <div id="user-menu-border"></div>
+
+    <!--Lang List-->
+    <div id="lang-list" class="vc-container">
+        @foreach (KeyValuePair<string, string> pair in SLouple.MVC.Shared.Lang.GetLangListNative())
+        {
+            if (Request.Cookies["langName"] == null)
+            {
+                if (pair.Key.ToLower() == "english")
+                {
+                    continue;
+                }
+            }
+            else if (pair.Key.ToLower() == Request.Cookies["langName"].Value.ToString().ToLower())
+            {
+                continue;
+            }
+            <div class="lang-list-element hc-text vc-child" id="@pair.Key">@pair.Value</div>
+        }
+    </div>
+    <script>
+        $('#lang-list > div').autoTextSize(0.2, 0);
+    </script>
+    <!---Intro-->
+    @if (firstLoad)
+    {
+        <div id="mobile-cover-container">
+            <img id="mobile-cover" class="hc-margin" src="//main.bnsstore.com/res/Images/Intro/HandTouch/png" alt="Touch">
+        </div>
+        <div id="home-intro-container" class="vc-container">
+            <span id="intro-text" class="hc-text vc-child">Welcome</span>
+        </div>
+        <div id="intro-glow"></div>
+        <script>
+            $('#intro-text').autoTextSize(0.5, 0, null, false);
+        </script>
+    }
+    <!---Mobile Landscape-->
+    <div id="portrait-warning-container" class="vc-container">
+        <div class="hc-text vc-child" id="portrait-warning">
+            @lang.GetHTMLTrans("Main.Mobile.PortraitWarning")
+        </div>
+    </div>
+
+    <script>
+        $('#portrait-warning').autoTextSize(0.7, 0, null, false);
+    </script>
+    <!--Main-->
+    @RenderSection("body", required: false)
+    <main>
+        <div id="main-container">
+            @RenderSection("main", required: true)
+        </div>
+    </main>
+    <!--Footer-->
+    <footer class="no-overflow click-through">
+        <img src="//main.bnsstore.com/res/Images/Bars/BottomBar/png" id="footer-bg">
+        <div id="footer-content" class="clickable">
+            @RenderSection("footer", required: false)
+            <div id="copyright" class="vc-container">
+                <a href="//bnsstore.com/HelloWorld" class="hc-text vc-child">© 2014 BNSStore</a>
+            </div>
+        </div>
+        <div class="social-buttons-container clickable">
+
+        </div>
+    </footer>
+    <script>
+        $('#copyright > a').autoTextSize(0.3, 0);
+        $(window).trigger("resize");
+    </script>
+}

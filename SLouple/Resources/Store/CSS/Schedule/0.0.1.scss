@@ -1,0 +1,63 @@
+﻿#schedule-container {
+    width: 80%;
+    text-align: center;
+    padding-left: 10%;
+
+    .shifts-container {
+        display: inline-block;
+        background-color: #62d317;
+        margin: 2% 2% 2% 2%;
+        color: white;
+
+        .shifts-date {
+            display: block;
+            border-bottom: solid 1px white;
+            padding: 3px 3px 3px 3px;
+            text-align: center;
+        }
+
+        .shifts-store-container {
+            display: block;
+
+            .shifts-store {
+                display: table-cell;
+                border-right: solid 1px white;
+                border-left: solid 1px white;
+
+                .shifts-store-title {
+                    border-bottom: solid 1px white;
+                    padding: 5px;
+                }
+
+                .shifts-display-name {
+                    word-break: break-all;
+                }
+
+                .self{
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                .self:hover{
+                    background-color: #58be15;
+                }
+            }
+        }
+    }
+}
+
+#show-all-checkbox-container {
+    position: fixed;
+    left: 2%;
+    top: 11%;
+    width: 40%;
+    height: 4vh;
+    z-index: 95;
+
+    #show-all-checkbox {
+        width: 4vh;
+        height: 4vh;
+        vertical-align: middle;
+    }
+}

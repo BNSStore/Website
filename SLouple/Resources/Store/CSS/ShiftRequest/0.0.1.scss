@@ -1,0 +1,101 @@
+﻿#shift-request-popup-container {
+    display: none;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 99;
+
+    #shift-request-popup {
+        position: absolute;
+        width: 50%;
+        height: auto;
+        top: 25%;
+        left: 23%;
+        background-color: rgba(255,255,255, 0.9);
+        border-radius: 20px;
+        padding: 10px 2% 10px 2%;
+        text-align: center;
+
+        #shift-reqeust-title {
+        }
+
+        #shift-request-first-name-container {
+            margin: 10px;
+            min-width: 100px;
+
+            #shift-request-first-name-input {
+                text-align: center;
+                width: 50%;
+                min-width: 100px;
+            }
+        }
+
+        #shift-request-last-name-container {
+            margin: 10px;
+            min-width: 100px;
+
+            #shift-request-last-name-input {
+                text-align: center;
+                width: 50%;
+                min-width: 100px;
+            }
+        }
+
+        #shift-request-submit {
+            width: 50%;
+            height: auto;
+            margin: 10px 0 0 0;
+            padding: 5px 0 5px 0;
+            border: none;
+            background-color: #62d317;
+            min-width: 100px;
+            color: white;
+        }
+
+        #shift-request-submit:hover {
+            background-color: #54b613;
+        }
+    }
+}
+
+#shift-request-container {
+
+    .shift-request {
+        text-align: center;
+        background-color: #1bccf1;
+        margin: 5px 5% 5px 5%;
+        padding: 5px;
+        color: white;
+
+        .shift-request-date {
+        }
+
+        .shift-reqeust-name {
+        }
+
+        .shift-request-accept {
+            border: none;
+            padding: 5px;
+            margin: 2px;
+            background-color: #62d317;
+        }
+
+        .shift-request-accept:hover {
+            background-color: #54b613;
+        }
+
+        .shift-request-decline {
+            border: none;
+            padding: 5px;
+            margin: 0;
+            background-color: #62d317;
+        }
+
+        .shift-request-decline:hover {
+            background-color: #54b613;
+        }
+    }
+}

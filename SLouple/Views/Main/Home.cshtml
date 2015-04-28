@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    Lang lang = ViewBag.lang;
+    int slideNum = 3;
+}
+
+@section lang{
+    @{
+        for (int i = 0; i < slideNum; i++)
+        {
+            lang.AddKeyword("Main.Home.Slide.Title." + @i);
+            lang.AddKeyword("Main.Home.Slide.Desc." + @i);
+        }
+    }
+}
+@section description{
+    Burnaby North School Store
+}
+@section head{
+    <link rel="stylesheet" href="//main.bnsstore.com/res/CSS/Home/0.0.1.min/css">
+    <script src="//main.bnsstore.com/res/JS/Home/Slides/0.0.2.min/js"></script>
+}
+@section main{
+    @for (int i = 0; i < slideNum; i++)
+    {
+        <div class="slide-container" id="slide-container-@i">
+            <div class="slide-text-container vc-container" id="slide-text-container-@i">
+                <div class="slide-text vc-child">
+                    <div class="slide-title" id="slide-title-@i">@lang.GetHTMLTrans("Main.Home.Slide.Title." + @i)</div>
+                    <div class="slide-desc" id="slide-desc-@i">@lang.GetHTMLTrans("Main.Home.Slide.Desc." + @i)</div>
+                </div>
+                
+            </div>
+
+            <div class="slide-image-container" id="slide-image-container-@i">
+                <span class="slide-image-helper"></span><img class="slide-image" id="slide-image-@i" src="//bnsstore.com/res/Images/Home/Slides/@i/png" alt="Slide @i">
+            </div>
+        </div>
+    }
+    <script>
+        $(".slide-title").autoTextSize(0.4, 0, $(".slide-text"), false);
+        $(".slide-desc").autoTextSize(1, 0, $(".slide-text"), false);
+        </script>
+    <div id="arrows">
+        <div id="arrow-left-container">
+            <div id="arrow-left"></div>
+        </div>
+        <div id="arrow-right-container">
+            <div id="arrow-right"></div>
+        </div>
+    </div>
+}
+@section footer{
+    @*@for (int i = 0; i < slideNum; i++)
+        {
+            <div class="title-container vc-container" id="title-container-@i">
+                <span class="title">@lang.GetHTMLTrans("Main.Home.Title." + @i)</span>
+            </div>
+        }
+        <script>
+            $('.title-container > .title').autoTextSize(0.2, 0, $('.title-container'));
+        </script>*@
+}

@@ -1,0 +1,19 @@
+﻿.vc-container {
+  display: inline-table;
+  table-layout: fixed; }
+  .vc-container .vc-child {
+    display: table-cell;
+    vertical-align: middle;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word; }
+
+.hc-text {
+  text-align: center; }
+
+.hc-margin {
+  margin: 0 auto; }
+
+.no-overflow {
+  overflow: hidden; }
+
+/*# sourceMappingURL=0.0.1.css.map */

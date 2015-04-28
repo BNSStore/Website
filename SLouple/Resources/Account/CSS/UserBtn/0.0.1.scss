@@ -1,0 +1,176 @@
+﻿$lang-color: rgb(200,200,200);
+$defaultFont: 'Josefin Slab';
+
+//Please google fix this
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset;
+}
+
+#user-btn {
+    width: 62.5%;
+
+    #user-display-name-container {
+        float: right;
+        display: inline-block;
+        overflow: hidden;
+        width: auto;
+        max-width: 60%;
+        min-width: 20%;
+        height: 100%;
+        margin: 0 0.5vw 0 0.5vw;
+
+        #user-display-name {
+            height: 100%;
+
+            a {
+                font-family: $defaultFont;
+                word-wrap: normal;
+            }
+        }
+    }
+
+    #user-avatar-container {
+        display: inline-block;
+        float: right;
+        height: 100%;
+        width: auto;
+        max-width: 35%;
+
+        #user-avatar-helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #user-avatar {
+            display: inline-block;
+            vertical-align: middle;
+            height: auto;
+            max-height: 90%;
+            width: auto;
+            max-width: 80%;
+            border-radius: 10px;
+        }
+    }
+}
+
+#user-menu {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 27.3vw;
+    height: 75.5%;
+    right: 12.7%;
+    min-width: 35vh;
+    top: 9.9%;
+    background-color: rgba(255,255,255, 0.95);
+    float: right;
+    overflow: auto;
+    z-index: 5000;
+    border-right-style: solid;
+    border-right-width: 0;
+    border-right-color: $lang-color;
+    font-family: $defaultFont;
+    box-sizing: border-box;
+
+    #user-menu-items-container {
+        height: 100%;
+        overflow: auto;
+        #user-menu-username-container {
+            height: 30%;
+            width: 90%;
+            margin-left: 5%;
+
+            #user-menu-username-title {
+                height: 50%;
+                width: 90%;
+                margin-left: 5%;
+                text-align: center;
+            }
+
+            #user-menu-username {
+                width: 90%;
+                margin-left: 5%;
+                text-align: center;
+                border: solid 1px;
+                padding: 0 0 0 0;
+            }
+        }
+
+        #user-menu-password-container {
+            height: 30%;
+            width: 90%;
+            margin-left: 5%;
+
+            #user-menu-password-title {
+                height: 50%;
+                width: 90%;
+                margin-left: 5%;
+                text-align: center;
+            }
+
+            #user-menu-password {
+                width: 90%;
+                margin-left: 5%;
+                text-align: center;
+                border: solid 1px;
+                padding: 0 0 0 0;
+            }
+        }
+
+        .user-menu-button-container {
+            height: 15%;
+            margin: 1.625vh 0 1.625vh 0;
+            width: 90%;
+            margin-left: 5%;
+
+            .user-menu-button {
+                display: block;
+                width: 91%;
+                margin-left: 5%;
+                padding: 0.5vh 0 0.5vh 0;
+                border: none;
+                background-color: rgb(200,200,200);
+            }
+
+            .user-menu-button:hover {
+                background-color: rgb(150,150,150);
+            }
+        }
+
+        #user-menu-sign-up-container {
+            height: 10%;
+            width: 90%;
+            margin-left: 5%;
+
+            #user-menu-sign-up-title {
+                width: 90%;
+                margin-left: 5%;
+                text-align: center;
+            }
+
+            #user-menu-sign-up {
+                display: block;
+                width: 90%;
+                margin-left: 5%;
+                text-align: center;
+                text-decoration: underline;
+                color: #62d317;
+            }
+        }
+
+        #user-menu-logout-button {
+        }
+    }
+}
+
+#user-menu-border {
+    position: absolute;
+    width: 0;
+    opacity: 0;
+    height: 75.5%;
+    left: 87.25%;
+    top: 9.9%;
+    background-color: $lang-color;
+    z-index: 1;
+}

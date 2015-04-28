@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    Lang lang = ViewBag.lang;
+    SLUser user = ViewBag.user;
+}
+@section head{
+    <link rel="stylesheet" href="//account.bnsstore.com/res/CSS/Settings/0.0.1.min/css">
+    <script src="//account.bnsstore.com/res/JS/Settings/0.0.1.min/js"></script>
+}
+@section lang{
+    @{
+        lang.AddKeyword("Account.Settings.Submit");
+    }
+
+}
+@section body{
+    <div id="settings-sidebar">
+        <button type="button" id="general" class="settings-sidebar-button">General</button>
+        <button type="button" id="profile" class="settings-sidebar-button">Profile</button>
+        <button type="button" id="email" class="settings-sidebar-button">Email</button>
+        <button type="button" id="chat" class="settings-sidebar-button">Chat</button>
+        @if (user.IsEmployee())
+        {
+            <button type="button" id="employee" class="settings-sidebar-button">Employee</button>
+        }
+    </div>
+}
+@section main{
+    <div id="settings-container">
+        <div id="settings-general-container" class="settings-item-container">
+            <div class="settings-item-title">
+            </div>
+        </div>
+        <div id="settings-profile-container" class="settings-item-container">
+            <div class="settings-item-title">
+            </div>
+        </div>
+        <div id="settings-email-container" class="settings-item-container">
+            <div class="settings-item-title">
+            </div>
+            <div id="settings-email-sub-item" class="settings-item">
+                @if (new SqlStoredProcedures().UserIsEmailSub(user.userID))
+                {
+                    <input type="checkbox" id="settings-email-sub-checkbox" checked="checked" name="emailSub" value="emailSub">
+                    <span>Subscribe for news and notifications.</span>
+                }
+                else
+                {
+                    <input type="checkbox" id="settings-email-sub-checkbox" name="emailSub" value="emailSub">
+                    <span>Subscribe for news and notifications.</span>
+                }
+            </div>
+        </div>
+        <div id="settings-chat-container" class="settings-item-container">
+            <div class="settings-item-title">
+            </div>
+        </div>
+        @if (user.IsEmployee())
+        {
+            <div id="settings-employee-container" class="settings-item-container">
+                <div class="settings-item-title">
+                </div>
+            </div>
+        }
+    </div>
+
+    <script>
+        $('.settings-sidebar-button').autoTextSize(0.5, 0, $("#settings-sidebar"), false);
+        $('.settings-item-title').autoTextSize(0.1, 0, null, false);
+        $('.settings-item').autoTextSize(1.5, 0, "parent", false);
+        // $('#show-all-checkbox-container').autoTextSize(1.5, 1, $("html"), false, { maxFontSize: '30px' });
+    </script>
+
+}
+@section footer{
+
+}

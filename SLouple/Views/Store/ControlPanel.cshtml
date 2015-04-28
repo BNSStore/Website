@@ -1,0 +1,286 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    Lang lang = ViewBag.lang;
+    SLUser user = ViewBag.user;
+    List<Shift> unmarkedSchedule = ViewBag.unmarkedSchedule;
+}
+@section head{
+    <link rel="stylesheet" href="//store.bnsstore.com/res/CSS/ControlPanel/0.0.1.min/css">
+    <script src="//store.bnsstore.com/res/JS/ControlPanel/0.0.1.min/js"></script>
+}
+@section lang{
+    @{
+        lang.AddKeyword("Store.ControlPanel.Submit");
+        lang.AddKeyword("Store.ControlPanel.Download");
+        lang.AddStores();
+        lang.AddDayOfWeek();
+    }
+
+}
+@section body{
+}
+@section main{
+    <div id="control-panel-container">
+        @if (user.IsManager())
+        {
+            <div>
+                @Manager(user, lang)
+                @HumanResources(user, lang)
+                @Product(user, lang)
+                @Accounting(user, lang)
+                @Default(user, lang)
+            </div>
+        }
+        else
+        {
+
+            switch (user.GetStoreGroupName())
+            {
+                case "Human Resources":
+                    <div>
+                        @HumanResources(user, lang)
+                    </div> break;
+                case "Product":
+                    <div>
+                        @Product(user, lang)
+                    </div> break;
+                case "Accounting":
+                    <div>
+                        @Accounting(user, lang)
+                    </div> break;
+                default: Default(user, lang); break;
+            }
+
+        }
+    </div>
+
+    <script>
+        //$('.unmarked-shift-date').autoTextSize(1.3, 1, $("html"), false, { maxFontSize: '30px' });
+        // $('.unmarked-shift-store').autoTextSize(1.2, 1, $("html"), false, { maxFontSize: '30px' });
+        //$('.unmarked-shift-name').autoTextSize(1.5, 1, $("html"), false, { maxFontSize: '30px' });
+        // $('#show-all-checkbox-container').autoTextSize(1.5, 1, $("html"), false, { maxFontSize: '30px' });
+    </script>
+
+}
+@helper Manager(SLUser suer, Lang lang)
+{
+
+}
+
+@helper HumanResources(SLUser user, Lang lang)
+{
+
+    <link rel="stylesheet" href="//store.bnsstore.com/res/CSS/ControlPanel/HumanResources/0.0.1.min/css">
+    <script src="//store.bnsstore.com/res/JS/ControlPanel/HumanResources/0.0.1.min/js"></script>
+    <!--#region ADD SHIFT-->
+    <div id="control-panel-method-add-shift">
+        <div id="add-shift-title" class="method-title">
+            Add Shift
+        </div>
+        <div id="add-shift-name">
+            <input id="add-shift-first-name" type="text" />
+            <input id="add-shift-last-name" type="text" />
+        </div>
+        <div id="add-shift-date">
+            <select name="year" id="add-shift-year">
+                <option value="@DateTime.Now.Year - 1">@(DateTime.Now.Year - 1)</option>
+                <option selected="selected" value="@DateTime.Now.Year">@DateTime.Now.Year</option>
+                <option value="@DateTime.Now.Year + 1">@(DateTime.Now.Year + 1)</option>
+            </select>
+            <select name="month" id="add-shift-month">
+                @for (int i = 1; i < 13; i++)
+                {
+                    if (i == DateTime.Now.Month)
+                    {
+                        <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+            <select name="day" id="add-shift-day">
+                @for (int i = 1; i < 32; i++)
+                {
+                    if (i == DateTime.Now.Day)
+                    {
+                        <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div id="add-shift-store-container">
+            <select name="store" id="add-shift-store">
+                <option value="N">North</option>
+                <option value="S">South</option>
+                <option value="X">Special</option>
+                <option value="Y">North Special</option>
+                <option value="Z">South Special</option>
+            </select>
+        </div>
+        <div id="add-shift-button-container">
+            <input id="add-shift-button" type="button" value="@lang.GetHTMLTrans("Store.ControlPanel.Submit")" />
+        </div>
+        
+    </div>
+    <!--#endregion ADD SHIFT-->
+    <hr />
+    <!--  #region DELETE SHIFT   -->
+
+    <div id="control-panel-del-shift">
+        <div id="del-shift-title" class="method-title">
+            Delete Shift
+        </div>
+        <div id="del-shift-name">
+            <input id="del-shift-first-name" type="text" />
+            <input id="del-shift-last-name" type="text" />
+        </div>
+        <div id="del-shift-date">
+            <select name="year" id="del-shift-year">
+                <option value="@(DateTime.Now.Year - 1)">@(DateTime.Now.Year - 1)</option>
+                <option selected="selected" value="@DateTime.Now.Year">@DateTime.Now.Year</option>
+                <option value="@(DateTime.Now.Year + 1)">@(DateTime.Now.Year + 1)</option>
+            </select>
+            <select name="month" id="del-shift-month">
+                @for (int i = 1; i < 13; i++)
+                {
+                    if (i == DateTime.Now.Month)
+                    {
+                <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+            <select name="day" id="del-shift-day">
+                @for (int i = 1; i < 32; i++)
+                {
+                    if (i == DateTime.Now.Day)
+                    {
+                <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div id="del-shift-button-container">
+            <input id="del-shift-button" type="button" value="@lang.GetHTMLTrans("Store.ControlPanel.Submit")" />
+        </div>
+    </div>
+            <!--#endregion-->
+    <hr />
+}
+
+@helper Product(SLUser user, Lang lang)
+{
+
+}
+@helper Accounting(SLUser user, Lang lang)
+{
+    <link rel="stylesheet" href="//store.bnsstore.com/res/CSS/Accounting/HumanResources/0.0.1.min/css">
+    <script src="//store.bnsstore.com/res/JS/ControlPanel/Accounting/0.0.1.min/js"></script>
+    
+    <div id="control-panel-method-download-sales">
+        <div id="download-sales-title" class="method-title">
+            Download Sales
+        </div>
+
+        <div id="download-sales-start-date">
+            Start Date:
+            <select name="year" id="download-sales-start-year">
+                <option value="@(DateTime.Now.Year - 1)">@(DateTime.Now.Year - 1)</option>
+                <option selected="selected" value="@DateTime.Now.Year">@DateTime.Now.Year</option>
+            </select>
+            <select name="month" id="download-sales-start-month">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    if (i == DateTime.Now.Month)
+                    {
+                        <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+            <select name="day" id="download-sales-start-day">
+                @for (int i = 1; i < 32; i++)
+                {
+                    if (i == DateTime.Now.Day - 1)
+                    {
+                        <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+        </div>
+
+        <div id="download-sales-end-date">
+            End Date:
+            <select name="year" id="download-sales-end-year">
+                <option value="@(DateTime.Now.Year - 1)">@(DateTime.Now.Year - 1)</option>
+                <option selected="selected" value="@DateTime.Now.Year">@DateTime.Now.Year</option>
+            </select>
+            <select name="month" id="download-sales-end-month">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    if (i == DateTime.Now.Month)
+                    {
+                        <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+            <select name="day" id="download-sales-end-day">
+                @for (int i = 1; i < 32; i++)
+                {
+                    if (i == DateTime.Now.Day)
+                    {
+                        <option selected="selected" value="@i">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+
+                }
+            </select>
+        </div>
+
+        <div id="download-sales-button-container">
+            <input id="download-sales-button" type="button" value="@lang.GetHTMLTrans("Store.ControlPanel.Download")" />
+        </div>
+    </div>
+    <hr />
+}
+@helper Default(SLUser user, Lang lang)
+{
+
+}
+@section footer{
+
+}

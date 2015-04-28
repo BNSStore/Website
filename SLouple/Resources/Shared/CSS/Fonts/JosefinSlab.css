@@ -1,0 +1,40 @@
+﻿@font-face {
+    font-family: 'Josefin Slab';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/Regular/woff");
+}
+@font-face {
+    font-family: 'Josefin Slab-Bold';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/Bold/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-BoldItalic';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/BoldItalic/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-Italic';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/Italic/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-Light';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/Light/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-LightItalic';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/LightItalic/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-SemiBold';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/SemiBold/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-SemiBoldItalic';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/SemiBoldItalic/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-Thin';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/Thin/ttf");
+}
+@font-face {
+    font-family: 'Josefin Slab-ThinItalic';
+    src: url("//shared.bnsstore.com/res/Fonts/JosefinSlab/ThinItalic/ttf");
+}

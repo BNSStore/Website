@@ -1,0 +1,93 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    SLouple.MVC.Shared.Lang lang = ViewBag.lang;
+
+    Dictionary<int, string> categories = ViewBag.categories;
+    List<Product> products = ViewBag.products;
+}
+@section head{
+    <link rel="stylesheet" href="//store.bnsstore.com/res/CSS/Sales/0.0.1.min/css">
+    <script src="//shared.bnsstore.com/res/JS/SignalR/2.1.2.min/js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="//store.bnsstore.com/res/JS/Sales/0.0.1/js"></script>
+}
+@section lang{
+
+}
+@section body{
+<div id="sales-total-container">
+    <span>Total: </span>
+    <span id="sales-total">$0.00</span>
+</div>
+}
+@section main{
+    <div id="sales-overlay">
+        <div id="sales-overlay-title">
+            Connecting...
+        </div>
+    </div>
+
+    <script>
+        $("#sales-overlay-title").autoTextSize(1.2, 0, $("#sales-overlay"), false);
+    </script>
+    <div id="store" style="display:none">@ViewBag.store</div>
+    
+    <div id="sales-container">
+        @foreach (KeyValuePair<int, string> category in categories)
+        {
+            <div class="category-container" id="category-container-@category.Value">
+                <div class="category-title" id="category-title-@category.Value">
+                    @category.Value
+                </div>
+                @foreach (Product product in products)
+                {
+                    if (product.categoryID == category.Key)
+                    {
+                        <div class="product-container" id="product-container-@product.productID">
+                            <!--Product Title-->
+                            <div class="product-title" id="product-title-@product.productID">
+                                @product.productName : @product.productID
+                            </div>
+
+                            <!--Product Price-->
+                            <div class="product-price" id="product-price-@product.productID">
+                                @if (product.isOnSale)
+                                {
+                                    @:$@Convert.ToDouble(product.onSalePrice).ToString("N2")
+                                }
+                                else
+                                {
+                                    @:$@Convert.ToDouble(product.productPrice).ToString("N2")
+                                }
+                            </div>
+                            <div class="product-price-input-container" id="product-price-input-@product.productID">
+                                <button class="product-subtract-button sales-button" name="@product.productID">-</button>
+                                <input type="text" value="0" class="product-count" id="product-count-@product.productID" name="@product.productID" maxlength="3" />
+                                <button class="product-add-button sales-button" name="@product.productID">+</button>
+                            </div>
+
+                            <!--Product Employee Price-->
+                            <div class="product-employee-price" id="product-employee-price-@product.productID">
+                                $@Convert.ToDouble(product.employeePrice).ToString("N2")
+                            </div>
+                            <div class="product-employee-price-input-container" id="product-employee-price-input-@product.productID">
+                                <button class="product-employee-subtract-button sales-button" name="@product.productID">-</button>
+                                <input type="text" value="0" class="product-employee-count" id="product-employee-count-@product.productID" name="@product.productID" maxlength="3" />
+                                <button class="product-employee-add-button sales-button" name="@product.productID">+</button>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+    <script>
+        $('#sales-total-container').autoTextSize(0.13, 0, null, false);
+        $('#sales-container').autoTextSize(1.3, 0, null, false, { maxFontSize: 18 });
+        $('.category-title').css({"font-size": "30px"});;
+    </script>
+
+}
+@section footer{
+
+}

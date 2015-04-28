@@ -1,0 +1,172 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    SLouple.MVC.Shared.Lang lang = ViewBag.lang;
+    Dictionary<int, string> ticketCategories = Ticket.GetAllTicketCategoryies();
+}
+@section lang{
+    @{
+        lang.AddKeyword("Main.Support.Ticket.Intro");
+        lang.AddKeyword("Main.Support.Ticket.Title");
+        lang.AddKeyword("Main.Support.Ticket.Category");
+        foreach (KeyValuePair<int, string> pair in ticketCategories)
+        {
+            lang.AddKeyword("Main.Support.Ticket.Category." + pair.Value);
+        }
+        lang.AddKeyword("Main.Support.Ticket.Comment");
+        lang.AddKeyword("Main.Support.Ticket.Rating");
+        lang.AddKeyword("Main.Support.Ticket.Rating.Value");
+        lang.AddKeyword("Main.Support.Ticket.Contact");
+        lang.AddKeyword("Main.Support.Ticket.Contact.Name");
+        lang.AddKeyword("Main.Support.Ticket.Contact.Email");
+        lang.AddKeyword("Main.Support.Ticket.Contact.Phone");
+        lang.AddKeyword("Main.Support.Ticket.Submit");
+        lang.AddKeyword("Main.Support.Ticket.Submit.Success");
+        lang.AddKeyword("Main.Support.Ticket.Submit.Failed");
+
+    }
+}
+@section head{
+    <link rel="stylesheet" href="//main.bnsstore.com/res/CSS/Support/0.0.1.min/css">
+    <script src="//main.bnsstore.com/res/JS/Support/Ticket/0.0.1.min/js"></script>
+}
+@section body{
+    <div id="ticket-arrow-container" class="click-through">
+        <div id="ticket-arrow-left" class="clickable ticket-arrow">
+            <div></div>
+        </div>
+        <div id="ticket-arrow-right" class="clickable ticket-arrow">
+            <div></div>
+        </div>
+    </div>
+}
+@section main{
+    <div id="ticket-container">
+        <!--Intro-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-intro-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Intro")
+                </div>
+            </div>
+        </div>
+        <!--Title-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-title-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Title")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-title-input">
+                    <input type="text" name="ticket-title-textbox" id="ticket-title-textbox">
+                </div>
+            </div>
+        </div>
+        <!--Category-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-category-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Category")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-category-input">
+                    <div id="ticket-category-selectmenu-container">
+                        <select name="ticket-category-selectmenu" id="ticket-category-selectmenu">
+                            @foreach (KeyValuePair<int, string> pair in ticketCategories)
+                            {
+                                <option id="product-category-@pair.Key" value="@pair.Key">@lang.GetHTMLTrans("Main.Support.Ticket.Category." + pair.Value)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Comment-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-comment-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Comment")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-comment-input">
+                    <textarea id="ticket-comment-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <!--Rating-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-rating-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Rating")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-rating-value">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Rating.Value")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-rating-input">
+                    <div id="ticket-rating-slider"></div>
+                </div>
+            </div>
+        </div>
+        <!--Contact-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-contact-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Contact")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-contact-name-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Contact.Name")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-contact-name-input">
+                    <input type="text" name="ticket-contact-textbox" id="ticket-contact-name-textbox">
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-contact-email-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Contact.Email")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-contact-email-input">
+                    <input type="text" name="ticket-contact-textbox" id="ticket-contact-email-textbox">
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-title" id="ticket-contact-phone-title">
+                    @lang.GetHTMLTrans("Main.Support.Ticket.Contact.Phone")
+                </div>
+            </div>
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-contact-phone-input">
+                    <input type="text" name="ticket-contact-textbox" id="ticket-contact-phone-textbox">
+                </div>
+            </div>
+        </div>
+        <!--Submit-->
+        <div class="ticket-subcontainer">
+            <div class="ticket-float-helper">
+                <div class="ticket-content ticket-input" id="ticket-submit-input">
+                    <button id="ticket-submit-button">@lang.GetHTMLTrans("Main.Support.Ticket.Submit")</button>
+                    <div id="ticket-submited-text" style="display: none">
+                        @lang.GetHTMLTrans("Main.Support.Ticket.Submit.Success")
+                    </div>
+                    <div id="ticket-submitfailed-text" style="display: none">
+                        @lang.GetHTMLTrans("Main.Support.Ticket.Submit.Failed")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section footer{
+
+}
