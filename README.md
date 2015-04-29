@@ -1,5 +1,5 @@
 # BNSStore Website
-Burnaby North Secondary School Store Website
+Burnaby North School Store Website
 
 ## Contributing
 
