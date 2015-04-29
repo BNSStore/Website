@@ -9,9 +9,13 @@
   <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://bnsstore.com/Store</loc>
+  <loc>http://store.bnsstore.com/</loc>
   <changefreq>always</changefreq>
 </url>
+  <url>
+    <loc>http://account.bnsstore.com/SignUp</loc>
+    <changefreq>always</changefreq>
+  </url>
 <url>
   <loc>http://bnsstore.com/Support</loc>
   <changefreq>always</changefreq>
@@ -21,7 +25,7 @@
   <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://bnsstore.com/Contribution</loc>
+  <loc>http://bnsstore.com/HelloWorld</loc>
   <changefreq>always</changefreq>
 </url>
 </urlset>
