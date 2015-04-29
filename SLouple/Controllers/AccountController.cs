@@ -115,7 +115,7 @@ namespace SLouple.MVC.Controllers
             bool simple = ids != null && ids.ContainsKey("simple") && Convert.ToBoolean(ids["simple"]) == true;
             if (user != null)
             {
-                return View("Settings");
+                return RedirectToAction("Settings");
             }
             if (postData != null)
             {
@@ -188,7 +188,7 @@ namespace SLouple.MVC.Controllers
             Load(title);
             if (user != null)
             {
-                return Settings();
+                return RedirectToAction("Settings");
             }
             if (postData != null)
             {
