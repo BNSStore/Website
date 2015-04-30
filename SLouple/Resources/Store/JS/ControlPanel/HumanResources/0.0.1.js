@@ -30,8 +30,7 @@
         }).done(function (data) {
             console.log(data);
             if (data != null && data != "" && data == "success") {
-                $("#add-shift-first-name").val("").focus();
-                $("#add-shift-last-name").val("");
+                $("#add-shift-name").val("").focus();
             } else {
                 $("#add-shift-button").velocity({ backgroundColor: "#ed3e18" }, 1000).velocity({ backgroundColor: "#62d317" }, 500);
             }
@@ -58,8 +57,7 @@
         }).done(function (data) {
             console.log(data);
             if (data != null && data != "" && data == "success") {
-                $("#del-shift-first-name").val("").focus();
-                $("#del-shift-last-name").val("");
+                $("#del-shift-name").val("").focus();
             } else {
                 $("#del-shift-button").velocity({ backgroundColor: "#ed3e18" }, 1000).velocity({ backgroundColor: "#62d317" }, 500);
             }
