@@ -10,8 +10,12 @@
     });
 
     function addShift() {
-        var firstName = $("#add-shift-first-name").val();
-        var lastName = $("#add-shift-last-name").val();
+        var name = $("#add-shift-name").val().trim().split(" ");
+        if(name.length < 2){
+            return;
+        }
+        var firstName = name[0];
+        var lastName = name[1];
         var year = $("#add-shift-year").val();
         var month = $("#add-shift-month").val();
         var day = $("#add-shift-day").val();
@@ -35,8 +39,12 @@
     }
 
     function delShift() {
-        var firstName = $("#del-shift-first-name").val();
-        var lastName = $("#del-shift-last-name").val();
+        var name = $("#del-shift-name").val().trim().split(" ");
+        if (name.length < 2) {
+            return;
+        }
+        var firstName = name[0];
+        var lastName = name[1];
         var year = $("#del-shift-year").val();
         var month = $("#del-shift-month").val();
         var day = $("#del-shift-day").val();
