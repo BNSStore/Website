@@ -214,6 +214,7 @@
     <Content Include="Resources\Main\CSS\Layout\0.0.1.min.css">
       <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
+    <Content Include="Resources\Main\Images\Home\Slides\0.png" />
     <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.css">
       <DependentUpon>0.0.1.scss</DependentUpon>
     </Content>
@@ -271,7 +272,6 @@
     <Content Include="Resources\Main\Images\Home\Slides\1.png" />
     <Content Include="Resources\Main\Images\Home\Slides\3.png" />
     <Content Include="Resources\Main\Images\Home\Slides\2.png" />
-    <Content Include="Resources\Main\Images\Home\Slides\0.png" />
     <Content Include="Resources\Main\Images\Intro\Glow.png" />
     <Content Include="Resources\Main\Images\Intro\Glow_Small.png" />
     <Content Include="Resources\Main\Images\Intro\Glow_Tiny.png" />
