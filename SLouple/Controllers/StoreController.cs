@@ -273,16 +273,16 @@ namespace SLouple.MVC.Controllers
                 DateTime date = DateTime.Now;
 
                 sb.AppendLine("\"Date\",\"Store\",\"Product Name\",\"Count\",\"Employee Count\"");
-                foreach(Sale saleCount in saleCounts){
-                    if(date != null && date != saleCount.date){
+                foreach(Sale sale in saleCounts){
+                    if(date != null && date != sale.GetDate()){
                         sb.AppendLine();
                     }
-                    date = saleCount.date;
-                    sb.Append("\"" + CSV.Escape(saleCount.date.ToShortDateString()) + "\"" + ",");
-                    sb.Append("\"" + CSV.Escape(Convert.ToString(saleCount.store)) + "\"" + ",");
-                    sb.Append("\"" + CSV.Escape(Convert.ToString(saleCount.productName)) + "\"" + ",");
-                    sb.Append("\"" + CSV.Escape(Convert.ToString(saleCount.count)) + "\"" + ",");
-                    sb.Append("\"" + CSV.Escape(Convert.ToString(saleCount.employeeCount)) + "\"");
+                    date = sale.GetDate();
+                    sb.Append("\"" + CSV.Escape(sale.GetDate().ToShortDateString()) + "\"" + ",");
+                    sb.Append("\"" + CSV.Escape(Convert.ToString(sale.GetStore())) + "\"" + ",");
+                    sb.Append("\"" + CSV.Escape(Convert.ToString(sale.GetProductName())) + "\"" + ",");
+                    sb.Append("\"" + CSV.Escape(Convert.ToString(sale.GetCount())) + "\"" + ",");
+                    sb.Append("\"" + CSV.Escape(Convert.ToString(sale.GetEmployeeCount())) + "\"");
                     sb.Append("\n");
                 }
 

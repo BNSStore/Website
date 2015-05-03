@@ -75,10 +75,10 @@ namespace SLouple.MVC.Store
         {
             char store = userStoreDic[Context.ConnectionId];
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-            List<Sale> counts = sqlSP.StoreSelectSales(store);
-            foreach (Sale count in counts)
+            List<Sale> sales = sqlSP.StoreSelectSales(store);
+            foreach (Sale sale in sales)
             {
-                Clients.Client(Context.ConnectionId).UpdateSaleCount(count.productID, count.count, count.employeeCount);
+                Clients.Client(Context.ConnectionId).UpdateSaleCount(sale.GetProductID(), sale.GetCount(), sale.GetEmployeeCount());
             }
             decimal total = sqlSP.StoreGetSaleTotal(store);
             Clients.Client(Context.ConnectionId).UpdateTotal(Convert.ToDouble(total).ToString("N2"));
