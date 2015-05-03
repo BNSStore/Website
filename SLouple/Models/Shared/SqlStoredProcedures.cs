@@ -1,10 +1,8 @@
-﻿using SLouple.MVC.Main;
-using SLouple.MVC.Store;
+﻿using SLouple.MVC.Store;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace SLouple.MVC.Shared
 {
@@ -330,6 +328,86 @@ namespace SLouple.MVC.Shared
         #endregion
 
         #region Store
+
+        #region Product
+
+        public int StoreGetProductID(string productName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetProductID", pars);
+            int productID = Convert.ToInt32(parCol["@ProductID"].Value);
+            return productID;
+        }
+
+        public string StoreGetProductName(int productID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, null, true));
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, productID, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetProductName", pars);
+            string productName = Convert.ToString(parCol["@ProductName"].Value);
+            return productName;
+        }
+
+        public decimal StoreGetProductPrice(int productID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, productID, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProductPrice", SqlDbType.SmallMoney, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetProductPrice", pars);
+            decimal productPrice = Convert.ToDecimal(parCol["@ProductPrice"].Value);
+            return productPrice;
+        }
+
+        public decimal StoreGetProductEmployeePrice(int productID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, productID, false));
+            pars.Add(Sql.GenerateSqlParameter("@EmployeePrice", SqlDbType.SmallMoney, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetProductEmployeePrice", pars);
+            decimal employeePrice = Convert.ToDecimal(parCol["@EmployeePrice"].Value);
+            return employeePrice;
+        }
+
+        public decimal? StoreGetOnSalePrice(int productID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, productID, false));
+            pars.Add(Sql.GenerateSqlParameter("@OnSalePrice", SqlDbType.SmallMoney, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetProductOnSalePrice", pars);
+            if (parCol["@OnSalePrice"].Value == DBNull.Value)
+            {
+                return null;
+            }
+            else
+            {
+                decimal onSalePrice = Convert.ToDecimal(parCol["@OnSalePrice"].Value);
+                return onSalePrice;
+            }
+        }
+
+        public int StoreGetProductCategoryID(int productID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, productID, false));
+            pars.Add(Sql.GenerateSqlParameter("@CategoryID", SqlDbType.TinyInt, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetCategoryID", pars);
+            int categoryID = Convert.ToInt32(parCol["@CategoryID"].Value);
+            return categoryID;
+        }
+
+        public bool StoreIsProductOnline(int productID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductID", SqlDbType.Int, 0, productID, false));
+            pars.Add(Sql.GenerateSqlParameter("@Online", SqlDbType.Bit, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspIsProductOnline", pars);
+            bool online = Convert.ToBoolean(parCol["@Online"].Value);
+            return online;
+        }
+
         public List<Product> StoreSelectProducts(int productID, string keyword, int categoryId, decimal minPrice, decimal maxPrice)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
@@ -395,91 +473,46 @@ namespace SLouple.MVC.Shared
             return categories;
         }
 
-        public Dictionary<int, char> StoreGetCurrentShifts()
-        {
-            Dictionary<int, char> shifts = new Dictionary<int, char>();
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspGetCurrentShifts", null, new string[] { "Date", "UserID", "Store" });
-            for (int i = 0; i < columns["Date"].Count; i++)
-            {
-                shifts.Add(Convert.ToInt32(columns["UserID"][i]), Convert.ToChar(columns["Store"][i]));
-            }
-            return shifts;
-        }
+        #endregion
 
-        public Dictionary<int, char> StoreGetNextShifts()
-        {
-            Dictionary<int, char> shifts = new Dictionary<int, char>();
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspGetNextShifts", null, new string[] { "Date", "UserID", "Store" });
-            for (int i = 0; i < columns["Date"].Count; i++)
-            {
-                shifts.Add(Convert.ToInt32(columns["UserID"][i]), Convert.ToChar(columns["Store"][i]));
-            }
-            return shifts;
-        }
+        #region Sales
 
-        public Dictionary<DateTime, Dictionary<int, char>> StoreSelectSchedule(int userID)
-        {
-            Dictionary<DateTime, Dictionary<int, char>> shifts = new Dictionary<DateTime, Dictionary<int, char>>();
-
-            List<SqlParameter> pars = new List<SqlParameter>();
-            if (userID > 0)
-            {
-                pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            }
-
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectSchedule", pars, new string[] { "Date", "UserID", "Store" });
-            for (int i = 0; i < columns["Date"].Count; i++)
-            {
-                DateTime shiftDate;
-                DateTime.TryParse(Convert.ToString(columns["Date"][i]), out shiftDate);
-                if(!shifts.ContainsKey(shiftDate)){
-                    shifts.Add(shiftDate, new Dictionary<int, char>());
-                }
-                shifts[shiftDate].Add(Convert.ToInt32(columns["UserID"][i]), Convert.ToChar(columns["Store"][i]));
-            }
-            return shifts;
-        }
-
-        public Dictionary<DateTime, Dictionary<string, char>> StoreSelectScheduleWithDisplayName(int userID)
-        {
-            Dictionary<DateTime, Dictionary<string, char>> shifts = new Dictionary<DateTime, Dictionary<string, char>>();
-
-            List<SqlParameter> pars = new List<SqlParameter>();
-            if (userID > 0)
-            {
-                pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            }
-
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectSchedule", pars, new string[] { "Date", "UserID", "Store" });
-            for (int i = 0; i < columns["Date"].Count; i++)
-            {
-                DateTime shiftDate;
-                DateTime.TryParse(Convert.ToString(columns["Date"][i]), out shiftDate);
-                if (!shifts.ContainsKey(shiftDate))
-                {
-                    shifts.Add(shiftDate, new Dictionary<string, char>());
-                }
-                string displayName = this.UserGetDisplayName(Convert.ToInt32(columns["UserID"][i]));
-                shifts[shiftDate].Add(displayName, Convert.ToChar(columns["Store"][i]));
-            }
-            return shifts;
-        }
-
-        public List<SaleCount> StoreSelectAllSaleCounts(char store)
+        public List<Sale> StoreSelectSales(char store)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@Store", SqlDbType.Char, 1, store, false));
-            List<SaleCount> counts = new List<SaleCount>();
+            List<Sale> counts = new List<Sale>();
             Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectAllSaleCounts", pars, new string[] { "ProductID", "Count", "EmployeeCount" });
             for (int i = 0; i < columns["ProductID"].Count; i++)
             {
-                counts.Add(new SaleCount(
+                counts.Add(new Sale(
                     Convert.ToInt32(columns["ProductID"][i]),
                     Convert.ToInt32(columns["Count"][i]),
                     Convert.ToInt32(columns["EmployeeCount"][i])
                     ));
             }
             return counts;
+        }
+
+        public List<Sale> StoreSelectSales(DateTime startDate, DateTime endDate)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@StartDate", SqlDbType.Date, 0, startDate, false));
+            pars.Add(Sql.GenerateSqlParameter("@EndDate", SqlDbType.Date, 0, endDate, false));
+
+            List<Sale> saleCounts = new List<Sale>();
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectSales", pars, new string[] { "Date", "Store", "ProductName", "Count", "EmployeeCount" });
+            for (int i = 0; i < columns["Date"].Count; i++)
+            {
+                saleCounts.Add(new Sale(
+                    Convert.ToDateTime(columns["Date"][i]),
+                    Convert.ToString(columns["ProductName"][i]),
+                    Convert.ToChar(columns["Store"][i]),
+                    Convert.ToInt32(columns["Count"][i]),
+                    Convert.ToInt32(columns["EmployeeCount"][i])
+                    ));
+            }
+            return saleCounts;
         }
 
         public void StoreUpdateSaleCount(char store, int productID, int count, int employeeCount)
@@ -502,32 +535,9 @@ namespace SLouple.MVC.Shared
             return total;
         }
 
-        public List<Shift> StoreSelectUnmarkedSchedule(int userID)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            List<Shift> schedule = new List<Shift>();
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectUnmarkedSchedule", pars, new string[] { "Date", "UserID", "Store" });
-            for (int i = 0; i < columns["Date"].Count; i++)
-            {
-                schedule.Add(new Shift(
-                    Convert.ToDateTime(columns["Date"][i]),
-                    Convert.ToInt32(columns["UserID"][i]),
-                    Convert.ToChar(columns["Store"][i])
-                    ));
-            }
-            return schedule;
-        }
+        #endregion
 
-        public void StoreUpdateMarkAndComment(int userID, DateTime date, int mark, string comment)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            pars.Add(Sql.GenerateSqlParameter("@Date", SqlDbType.Date, 0, date, false));
-            pars.Add(Sql.GenerateSqlParameter("@Mark", SqlDbType.TinyInt, 0, mark, false));
-            pars.Add(Sql.GenerateSqlParameter("@Comment", SqlDbType.NVarChar, -1, comment, false));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspUpdateMarkAndComment", pars);
-        }
+        #region Schedule
 
         public void StoreAddShift(int userID, DateTime date, char store)
         {
@@ -565,6 +575,108 @@ namespace SLouple.MVC.Shared
             pars.Add(Sql.GenerateSqlParameter("@Date", SqlDbType.Date, 0, date, false));
             SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspDelShift", pars);
         }
+
+        public Dictionary<int, char> StoreGetCurrentShifts()
+        {
+            Dictionary<int, char> shifts = new Dictionary<int, char>();
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspGetCurrentShifts", null, new string[] { "Date", "UserID", "Store" });
+            for (int i = 0; i < columns["Date"].Count; i++)
+            {
+                shifts.Add(Convert.ToInt32(columns["UserID"][i]), Convert.ToChar(columns["Store"][i]));
+            }
+            return shifts;
+        }
+
+        public Dictionary<int, char> StoreGetNextShifts()
+        {
+            Dictionary<int, char> shifts = new Dictionary<int, char>();
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspGetNextShifts", null, new string[] { "Date", "UserID", "Store" });
+            for (int i = 0; i < columns["Date"].Count; i++)
+            {
+                shifts.Add(Convert.ToInt32(columns["UserID"][i]), Convert.ToChar(columns["Store"][i]));
+            }
+            return shifts;
+        }
+
+        public Dictionary<DateTime, Dictionary<int, char>> StoreSelectSchedule(int userID)
+        {
+            Dictionary<DateTime, Dictionary<int, char>> shifts = new Dictionary<DateTime, Dictionary<int, char>>();
+
+            List<SqlParameter> pars = new List<SqlParameter>();
+            if (userID > 0)
+            {
+                pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            }
+
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectSchedule", pars, new string[] { "Date", "UserID", "Store" });
+            for (int i = 0; i < columns["Date"].Count; i++)
+            {
+                DateTime shiftDate;
+                DateTime.TryParse(Convert.ToString(columns["Date"][i]), out shiftDate);
+                if (!shifts.ContainsKey(shiftDate))
+                {
+                    shifts.Add(shiftDate, new Dictionary<int, char>());
+                }
+                shifts[shiftDate].Add(Convert.ToInt32(columns["UserID"][i]), Convert.ToChar(columns["Store"][i]));
+            }
+            return shifts;
+        }
+
+        public Dictionary<DateTime, Dictionary<string, char>> StoreSelectScheduleWithDisplayName(int userID)
+        {
+            Dictionary<DateTime, Dictionary<string, char>> shifts = new Dictionary<DateTime, Dictionary<string, char>>();
+
+            List<SqlParameter> pars = new List<SqlParameter>();
+            if (userID > 0)
+            {
+                pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            }
+
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectSchedule", pars, new string[] { "Date", "UserID", "Store" });
+            for (int i = 0; i < columns["Date"].Count; i++)
+            {
+                DateTime shiftDate;
+                DateTime.TryParse(Convert.ToString(columns["Date"][i]), out shiftDate);
+                if (!shifts.ContainsKey(shiftDate))
+                {
+                    shifts.Add(shiftDate, new Dictionary<string, char>());
+                }
+                string displayName = this.UserGetDisplayName(Convert.ToInt32(columns["UserID"][i]));
+                shifts[shiftDate].Add(displayName, Convert.ToChar(columns["Store"][i]));
+            }
+            return shifts;
+        }
+
+        public List<Shift> StoreSelectUnmarkedSchedule(int userID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            List<Shift> schedule = new List<Shift>();
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectUnmarkedSchedule", pars, new string[] { "Date", "UserID", "Store" });
+            for (int i = 0; i < columns["Date"].Count; i++)
+            {
+                schedule.Add(new Shift(
+                    Convert.ToDateTime(columns["Date"][i]),
+                    Convert.ToInt32(columns["UserID"][i]),
+                    Convert.ToChar(columns["Store"][i])
+                    ));
+            }
+            return schedule;
+        }
+
+        public void StoreUpdateMarkAndComment(int userID, DateTime date, int mark, string comment)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@Date", SqlDbType.Date, 0, date, false));
+            pars.Add(Sql.GenerateSqlParameter("@Mark", SqlDbType.TinyInt, 0, mark, false));
+            pars.Add(Sql.GenerateSqlParameter("@Comment", SqlDbType.NVarChar, -1, comment, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspUpdateMarkAndComment", pars);
+        }
+
+        #endregion
+
+        #region Employee
 
         public int StoreGetEmployeeGroupID(int userID)
         {
@@ -618,6 +730,21 @@ namespace SLouple.MVC.Shared
             return isManager;
         }
 
+        public bool StoreHasMissedShift(int userID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@HasMissedShift", SqlDbType.Bit, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspHasMissedShift", pars);
+            bool hasMissedShift = Convert.ToBoolean(parCol["@HasMissedShift"].Value);
+            return hasMissedShift;
+        }
+
+        #endregion
+
+        #region ShiftRequest
+
         public void StoreAddShiftRequest(int senderID, int recieverID, DateTime date)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
@@ -664,38 +791,7 @@ namespace SLouple.MVC.Shared
             SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspDeclineShiftRequest", pars);
         }
 
-        public bool StoreHasMissedShift(int userID)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-
-            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            pars.Add(Sql.GenerateSqlParameter("@HasMissedShift", SqlDbType.Bit, 0, null, true));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspHasMissedShift", pars);
-            bool hasMissedShift = Convert.ToBoolean(parCol["@HasMissedShift"].Value);
-            return hasMissedShift;
-        }
-
-        public List<SaleCount> StoreSelectSales(DateTime startDate, DateTime endDate)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@StartDate", SqlDbType.Date, 0, startDate, false));
-            pars.Add(Sql.GenerateSqlParameter("@EndDate", SqlDbType.Date, 0, endDate, false));
-
-            List<SaleCount> saleCounts = new List<SaleCount>();
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Store.uspSelectSales", pars, new string[] { "Date", "Store", "ProductName", "Count", "EmployeeCount"});
-            for (int i = 0; i < columns["Date"].Count; i++)
-            {
-                saleCounts.Add(new SaleCount(
-                    Convert.ToDateTime(columns["Date"][i]),
-                    -1,
-                    Convert.ToString(columns["ProductName"][i]),
-                    Convert.ToChar(columns["Store"][i]),
-                    Convert.ToInt32(columns["Count"][i]),
-                    Convert.ToInt32(columns["EmployeeCount"][i])
-                    ));
-            }
-            return saleCounts;
-        }
+        #endregion
 
         #endregion
 

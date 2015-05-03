@@ -612,7 +612,7 @@
     <Compile Include="Models\Shared\CSV.cs" />
     <Compile Include="Models\Store\NoPermissionException.cs" />
     <Compile Include="Models\Store\Product.cs" />
-    <Compile Include="Models\Store\SaleCount.cs" />
+    <Compile Include="Models\Store\Sale.cs" />
     <Compile Include="Models\Store\SalesHub.cs" />
     <Compile Include="Models\Store\Shift.cs" />
     <Compile Include="Models\Store\ShiftNotificationJob.cs" />

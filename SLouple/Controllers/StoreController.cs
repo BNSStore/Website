@@ -268,12 +268,12 @@ namespace SLouple.MVC.Controllers
                 DateTime startDate = Convert.ToDateTime(postData["startDate"]);
                 DateTime endDate = Convert.ToDateTime(postData["endDate"]);
 
-                List<SaleCount> saleCounts = sqlSP.StoreSelectSales(startDate, endDate);
+                List<Sale> saleCounts = sqlSP.StoreSelectSales(startDate, endDate);
                 StringBuilder sb = new StringBuilder();
                 DateTime date = DateTime.Now;
 
                 sb.AppendLine("\"Date\",\"Store\",\"Product Name\",\"Count\",\"Employee Count\"");
-                foreach(SaleCount saleCount in saleCounts){
+                foreach(Sale saleCount in saleCounts){
                     if(date != null && date != saleCount.date){
                         sb.AppendLine();
                     }

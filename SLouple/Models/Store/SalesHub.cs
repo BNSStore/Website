@@ -75,8 +75,8 @@ namespace SLouple.MVC.Store
         {
             char store = userStoreDic[Context.ConnectionId];
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-            List<SaleCount> counts = sqlSP.StoreSelectAllSaleCounts(store);
-            foreach (SaleCount count in counts)
+            List<Sale> counts = sqlSP.StoreSelectSales(store);
+            foreach (Sale count in counts)
             {
                 Clients.Client(Context.ConnectionId).UpdateSaleCount(count.productID, count.count, count.employeeCount);
             }
