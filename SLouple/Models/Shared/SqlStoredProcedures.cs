@@ -331,6 +331,69 @@ namespace SLouple.MVC.Shared
 
         #region Product
 
+        #region Product Control
+
+        public void StoreAddProduct(string productName, decimal productPrice, decimal employeePrice, string categoryName, bool online)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProductPrice", SqlDbType.SmallMoney, 0, productPrice, false));
+            pars.Add(Sql.GenerateSqlParameter("@EmployeePrice", SqlDbType.SmallMoney, 0, employeePrice, false));
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, categoryName, false));
+            pars.Add(Sql.GenerateSqlParameter("@Online", SqlDbType.Bit, 0, online, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspAddProduct", pars);
+        }
+
+        public void StoreChangeCategoryName(string categoryName, string newCategoryName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, categoryName, false));
+            pars.Add(Sql.GenerateSqlParameter("@NewCategoryName", SqlDbType.VarChar, 100, newCategoryName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspChangeCategoryName", pars);
+        }
+
+        public void StoreChangeProductCategory(string productName, string categoryName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, categoryName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspChangeProductCategory", pars);
+        }
+
+        public void StoreChangeProductName(string productName, string newProductName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@NewProductName", SqlDbType.VarChar, 100, newProductName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspChangeProductName", pars);
+        }
+
+        public void StoreChangeProductPrice(string productName, decimal productPrice)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProductPrice", SqlDbType.SmallMoney, 0, productPrice, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspChangeProductPrice", pars);
+        }
+
+        public void StoreChangeProductEmployeePrice(string productName, decimal employeePrice)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@EmployeePrice", SqlDbType.SmallMoney, 0, employeePrice, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspChangeProductEmployeePrice", pars);
+        }
+
+        public void StoreChangeProductOnSalePrice(string productName, decimal? onSalePrice)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            pars.Add(Sql.GenerateSqlParameter("@OnSalePrice", SqlDbType.SmallMoney, 0, onSalePrice, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspChangeProductOnSalePrice", pars);
+        }
+
+        #endregion
+
         public int StoreGetProductID(string productName)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
@@ -471,6 +534,24 @@ namespace SLouple.MVC.Shared
                 categories.Add(Convert.ToInt32(columns["CategoryID"][i]), Convert.ToString(columns["CategoryName"][i]));
             }
             return categories;
+        }
+
+        public int StoreGetCategoryID(string categoryName){
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@CategoryID", SqlDbType.TinyInt, 0, null, true));
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, categoryName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetCategoryID", pars);
+            int categoryID = Convert.ToInt32(parCol["@CategoryID"].Value);
+            return categoryID;
+        }
+
+        public string StoreGetCategoryName(int categoryID){
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@CategoryID", SqlDbType.TinyInt, 0, categoryID, false));
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetCategoryName", pars);
+            string categoryName = Convert.ToString(parCol["@CategoryID"].Value);
+            return categoryName;
         }
 
         #endregion

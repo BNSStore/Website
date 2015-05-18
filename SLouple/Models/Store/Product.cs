@@ -155,20 +155,20 @@ namespace SLouple.MVC.Store
 
         public static List<Product> GetProducts(int productID, string keyword, int categoryID, decimal minPrice, decimal maxPrice)
         {
-            SqlStoredProcedures sp = new SqlStoredProcedures();
-            return sp.StoreSelectProducts(productID, keyword, categoryID, minPrice, maxPrice);
+            SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+            return sqlSP.StoreSelectProducts(productID, keyword, categoryID, minPrice, maxPrice);
         }
 
         public static List<Product> GetAllProducts()
         {
-            SqlStoredProcedures sp = new SqlStoredProcedures();
-            return sp.StoreSelectProducts(-1, null, -1, -1, -1);
+            SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+            return sqlSP.StoreSelectProducts(-1, null, -1, -1, -1);
         }
 
         public static Dictionary<int,string> GetProductCategories()
         {
-            SqlStoredProcedures sp = new SqlStoredProcedures();
-            return sp.StoreSelectProductCategories();
+            SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+            return sqlSP.StoreSelectProductCategories();
         }
     }
 }
