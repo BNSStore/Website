@@ -221,6 +221,12 @@
     <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.min.css">
       <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Product\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Product\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
     <Content Include="Resources\Store\CSS\ControlPanel\HumanResources\0.0.1.css">
       <DependentUpon>0.0.1.scss</DependentUpon>
     </Content>
@@ -340,12 +346,20 @@
     <Content Include="Resources\Main\JS\Main\0.0.1.min.js">
       <DependentUpon>0.0.1.js</DependentUpon>
     </Content>
+    <Content Include="Resources\Store\JS\ControlPanel\0.0.1.js" />
+    <Content Include="Resources\Store\JS\ControlPanel\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
     <Content Include="Resources\Store\JS\ControlPanel\Accounting\0.0.1.js" />
     <Content Include="Resources\Store\JS\ControlPanel\Accounting\0.0.1.min.js">
       <DependentUpon>0.0.1.js</DependentUpon>
     </Content>
     <Content Include="Resources\Store\JS\ControlPanel\HumanResources\0.0.1.js" />
     <Content Include="Resources\Store\JS\ControlPanel\HumanResources\0.0.1.min.js">
+      <DependentUpon>0.0.1.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\ControlPanel\Product\0.0.1.js" />
+    <Content Include="Resources\Store\JS\ControlPanel\Product\0.0.1.min.js">
       <DependentUpon>0.0.1.js</DependentUpon>
     </Content>
     <Content Include="Resources\Store\JS\Marking\0.0.1.js" />
@@ -815,6 +829,21 @@
     <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.scss" />
     <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.css.map">
       <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Views\Store\ControlPanel\HumanResources.cshtml" />
+    <Content Include="Views\Store\ControlPanel\Accounting.cshtml" />
+    <Content Include="Views\Store\ControlPanel\Product.cshtml" />
+    <Content Include="Views\Store\ControlPanel\Manager.cshtml" />
+    <Content Include="Views\Store\ControlPanel\Default.cshtml" />
+    <Content Include="Resources\Store\JS\ControlPanel\Product\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Product\0.0.1.scss" />
+    <Content Include="Resources\Store\CSS\ControlPanel\Product\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\JS\ControlPanel\0.0.1.min.js.gzip">
+      <DependentUpon>0.0.1.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
