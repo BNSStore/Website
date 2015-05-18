@@ -1,0 +1,89 @@
+﻿@{
+    Lang lang = ViewBag.lang;
+    SLUser user = ViewBag.user;
+}
+<link rel="stylesheet" href="//store.bnsstore.com/res/CSS/ControlPanel/Accounting/0.0.1.min/css">
+<script src="//store.bnsstore.com/res/JS/ControlPanel/Accounting/0.0.1.min/js"></script>
+
+<div id="control-panel-method-download-sales">
+    <div id="download-sales-title" class="method-title">
+        Download Sales
+    </div>
+
+    <div id="download-sales-start-date">
+        Start Date:
+        <select name="year" id="download-sales-start-year">
+            <option value="@(DateTime.Now.Year - 1)">@(DateTime.Now.Year - 1)</option>
+            <option selected="selected" value="@DateTime.Now.Year">@DateTime.Now.Year</option>
+        </select>
+        <select name="month" id="download-sales-start-month">
+            @for (int i = 1; i <= 12; i++)
+            {
+                if (i == DateTime.Now.Month)
+                {
+                    <option selected="selected" value="@i">@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+
+            }
+        </select>
+        <select name="day" id="download-sales-start-day">
+            @for (int i = 1; i < 32; i++)
+            {
+                if (i == DateTime.Now.Day - 1)
+                {
+                    <option selected="selected" value="@i">@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+
+            }
+        </select>
+    </div>
+
+    <div id="download-sales-end-date">
+        End Date:
+        <select name="year" id="download-sales-end-year">
+            <option value="@(DateTime.Now.Year - 1)">@(DateTime.Now.Year - 1)</option>
+            <option selected="selected" value="@DateTime.Now.Year">@DateTime.Now.Year</option>
+        </select>
+        <select name="month" id="download-sales-end-month">
+            @for (int i = 1; i <= 12; i++)
+            {
+                if (i == DateTime.Now.Month)
+                {
+                    <option selected="selected" value="@i">@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+
+            }
+        </select>
+        <select name="day" id="download-sales-end-day">
+            @for (int i = 1; i < 32; i++)
+            {
+                if (i == DateTime.Now.Day)
+                {
+                    <option selected="selected" value="@i">@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+
+            }
+        </select>
+    </div>
+
+    <div id="download-sales-button-container">
+        <input id="download-sales-button" type="button" value="@lang.GetHTMLTrans("Store.ControlPanel.Download")" />
+    </div>
+</div>
+<hr />
