@@ -166,6 +166,8 @@
       <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
     <Content Include="Resources\Account\Images\image.jpg" />
+    <Content Include="Resources\Account\Images\User\Avatar\34.png" />
+    <Content Include="Resources\Account\Images\User\Avatar\55.png" />
     <Content Include="Resources\Account\Images\User\Avatar\62.png" />
     <Content Include="Resources\Account\Images\User\Avatar\Default.png" />
     <Content Include="Resources\Account\Images\User\Avatar\36.png" />
