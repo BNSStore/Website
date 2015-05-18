@@ -221,8 +221,12 @@ namespace SLouple.MVC.Controllers
                     }
                     return Content("success");
                 }
-                catch
+                catch(Exception e)
                 {
+                    if (user != null && user.IsManager())
+                    {
+                        return Content(e.Message + "|" + e.StackTrace);
+                    }
                     return Content("failed");
                 }
             }

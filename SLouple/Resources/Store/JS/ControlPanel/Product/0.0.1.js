@@ -187,7 +187,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '//store.bnsstore.com/ControlPanel/', true);
         xhr.onload = function () {
-            if (xhr.status === 200) {
+            if (xhr.status === 200 && xhr.responseText != null && xhr.responseText != "" && xhr.responseText == "success") {
                 $("#change-product-image-image").val("");
             } else {
                 $("#change-product-image-button").velocity({ backgroundColor: "#ed3e18" }, 1000).velocity({ backgroundColor: "#62d317" }, 500);
