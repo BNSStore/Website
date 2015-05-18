@@ -20,7 +20,7 @@
     </div>
     <div id="add-product-category-name-container">
         Category:
-        <select name="category" id="add-product-category">
+        <select name="category" id="add-product-category-name">
             @foreach (string categoryName in new SqlStoredProcedures().StoreSelectProductCategories().Values)
             {
                 <option value="@categoryName">@categoryName</option>

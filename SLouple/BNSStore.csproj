@@ -223,6 +223,12 @@
     <Content Include="Resources\Store\CSS\ControlPanel\0.0.1.min.css">
       <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Accounting\0.0.1.css">
+      <DependentUpon>0.0.1.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Accounting\0.0.1.min.css">
+      <DependentUpon>0.0.1.css</DependentUpon>
+    </Content>
     <Content Include="Resources\Store\CSS\ControlPanel\Product\0.0.1.css">
       <DependentUpon>0.0.1.scss</DependentUpon>
     </Content>
@@ -846,6 +852,9 @@
     </Content>
     <Content Include="Resources\Store\JS\ControlPanel\0.0.1.min.js.gzip">
       <DependentUpon>0.0.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Resources\Store\CSS\ControlPanel\Accounting\0.0.1.css.map">
+      <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
