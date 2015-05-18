@@ -351,6 +351,20 @@ namespace SLouple.MVC.Shared
             SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspAddProduct", pars);
         }
 
+        public void StoreAddCategory(string categoryName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, categoryName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspAddCategory", pars);
+        }
+
+        public void StoreDelCategory(string categoryName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@CategoryName", SqlDbType.VarChar, 100, categoryName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspDelCategory", pars);
+        }
+
         public void StoreChangeCategoryName(string categoryName, string newCategoryName)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
