@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
+using System.IO;
 
 namespace SLouple.MVC.Controllers
 {
@@ -201,11 +202,17 @@ namespace SLouple.MVC.Controllers
                     {
                         case "AddShift": CPAddShift(); break;
                         case "DelShift": CPDelShift(); break;
-                        case "AddProduct": ; break;
-                        case "DelProduct": ; break;
-                        case "ChangeProductPrice": ; break;
-                        case "ChangeProductOnSalePrice": ; break;
-                        case "ChangeProductEmployeePrice": ; break;
+                        case "AddProduct": CPAddProduct(); break;
+                        case "DelProduct": CPDelProduct(); break;
+                        case "ChangeProductPrice": CPChangeProductPrice(); break;
+                        case "ChangeProductOnSalePrice": CPChangeProductOnSalePrice(); break;
+                        case "ChangeProductEmployeePrice": CPChangeProductEmployeePrice(); break;
+                        case "ChangeProductName": CPChangeProductName(); break;
+                        case "ChangeProductCategory": CPChangeProductCategory(); break;
+                        case "ChangeProductImage": CPChangeProductImage(); break;
+                        case "ChangeCategoryName": CPChangeCategoryName(); break;
+                        case "AddCategory": CPAddCategory(); break;
+                        case "DelCategory": CPDelCategory(); break;
                         case "AddEmployee": ; break;
                         case "DelEmployee": ; break;
                         case "ChangeHomeSlide": ; break;
@@ -226,6 +233,182 @@ namespace SLouple.MVC.Controllers
         }
 
         #region Control Panel Methods
+
+        #region Product
+
+        private void CPAddProduct()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                decimal productPrice = Convert.ToDecimal(postData["productPrice"]);
+                decimal employeePrice = Convert.ToDecimal(postData["employeePrice"]);
+                string categoryName = postData["categoryName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreAddProduct(productName, productPrice, employeePrice, categoryName, false);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+
+        }
+
+        private void CPDelProduct()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreDelProduct(productName);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeProductPrice()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                decimal productPrice = Convert.ToDecimal(postData["productPrice"]);
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreChangeProductPrice(productName, productPrice);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeProductOnSalePrice()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                decimal? onSalePrice = Convert.ToDecimal(postData["onSalePrice"]);
+                if (onSalePrice != null && onSalePrice <= 0)
+                {
+                    onSalePrice = null;
+                }
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreChangeProductOnSalePrice(productName, onSalePrice);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeProductEmployeePrice()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                decimal employeePrice = Convert.ToDecimal(postData["employeePrice"]);
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreChangeProductEmployeePrice(productName, employeePrice);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeProductName()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                string newProductName = postData["newProductName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreChangeProductName(productName, newProductName);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeProductCategory()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                string categoryName = postData["categoryName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreChangeProductCategory(productName, categoryName);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeProductImage()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string productName = postData["productName"];
+                HttpPostedFileBase file = Request.Files[0];
+                string path = Path.Combine(Server.MapPath("~/Resources/Store/Images/Products"), new SqlStoredProcedures().StoreGetProductID(productName).ToString() + ".jpg");
+                file.SaveAs(path);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPAddCategory()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string categoryName = postData["categoryName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreAddCategory(categoryName);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPDelCategory()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string categoryName = postData["categoryName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreDelCategory(categoryName);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        private void CPChangeCategoryName()
+        {
+            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            {
+                string categoryName = postData["categoryName"];
+                string newCategoryName = postData["newCategoryName"];
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                sqlSP.StoreChangeCategoryName(categoryName, newCategoryName);
+            }
+            else
+            {
+                throw new NoPermissionException();
+            }
+        }
+
+        #endregion
+
+        #region Human Resources
+
         private void CPAddShift()
         {
             if (user.GetStoreGroupName() == "Human Resources" || user.IsManager())
@@ -294,6 +477,8 @@ namespace SLouple.MVC.Controllers
                 throw new NoPermissionException();
             }
         }
+
+        #endregion
 
         #endregion
 
