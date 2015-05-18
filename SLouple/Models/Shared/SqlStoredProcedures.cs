@@ -333,6 +333,13 @@ namespace SLouple.MVC.Shared
 
         #region Product Control
 
+        public void StoreDelProduct(string productName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@ProductName", SqlDbType.VarChar, 100, productName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspDelProduct", pars);
+        }
+
         public void StoreAddProduct(string productName, decimal productPrice, decimal employeePrice, string categoryName, bool online)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
