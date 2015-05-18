@@ -40,9 +40,9 @@
 
     function addProduct() {
         var productName = $("#add-product-name").val();
-        var productName = $("#add-product-price").val();
-        var productName = $("#add-product-employee-price").val();
-        var productName = $("#add-product-category-name").val();
+        var productPrice = $("#add-product-price").val();
+        var employeePrice = $("#add-product-employee-price").val();
+        var categoryName = $("#add-product-category-name").val();
         $.ajax({
             type: "POST",
             url: "//store.bnsstore.com/ControlPanel/",
