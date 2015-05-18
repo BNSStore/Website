@@ -60,22 +60,22 @@
         {
             <div class="product">
                 <div class="product-image">
-                    <img src="//store.bnsstore.com/res/Images/Products/@product.productID/jpg" alt="@product.productName" />
+                    <img src="//store.bnsstore.com/res/Images/Products/@product.GetProductID()/jpg" alt="@product.GetProductName()" />
                 </div>
                 <div class="product-name">
-                    @product.productName
+                    @product.GetProductName()
                 </div>
 
-                @if (product.isOnSale)
+                @if (product.IsOnSale())
                 {
                     <div class="product-price on-sale">
-                        $@Convert.ToDouble(product.onSalePrice).ToString("N2")
+                        $@Convert.ToDouble(product.GetOnSalePrice()).ToString("N2")
                     </div>
                 }
                 else
                 {
                     <div class="product-price">
-                        $@Convert.ToDouble(product.productPrice).ToString("N2")
+                        $@Convert.ToDouble(product.GetPrice()).ToString("N2")
                     </div>
                 }
             </div>

@@ -41,39 +41,39 @@
                 </div>
                 @foreach (Product product in products)
                 {
-                    if (product.categoryID == category.Key)
+                    if (product.GetCategoryID() == category.Key)
                     {
-                        <div class="product-container" id="product-container-@product.productID">
+                        <div class="product-container" id="product-container-@product.GetProductID()">
                             <!--Product Title-->
-                            <div class="product-title" id="product-title-@product.productID">
-                                @product.productName : @product.productID
+                            <div class="product-title" id="product-title-@product.GetProductID()">
+                                @product.GetProductName() : @product.GetProductID()
                             </div>
 
                             <!--Product Price-->
-                            <div class="product-price" id="product-price-@product.productID">
-                                @if (product.isOnSale)
+                            <div class="product-price" id="product-price-@product.GetProductID()">
+                                @if (product.IsOnSale())
                                 {
-                                    @:$@Convert.ToDouble(product.onSalePrice).ToString("N2")
+                                    @:$@Convert.ToDouble(product.GetOnSalePrice()).ToString("N2")
                                 }
                                 else
                                 {
-                                    @:$@Convert.ToDouble(product.productPrice).ToString("N2")
+                                    @:$@Convert.ToDouble(product.GetPrice()).ToString("N2")
                                 }
                             </div>
-                            <div class="product-price-input-container" id="product-price-input-@product.productID">
-                                <button class="product-subtract-button sales-button" name="@product.productID">-</button>
-                                <input type="text" value="0" class="product-count" id="product-count-@product.productID" name="@product.productID" maxlength="3" />
-                                <button class="product-add-button sales-button" name="@product.productID">+</button>
+                            <div class="product-price-input-container" id="product-price-input-@product.GetProductID()">
+                                <button class="product-subtract-button sales-button" name="@product.GetProductID()">-</button>
+                                <input type="text" value="0" class="product-count" id="product-count-@product.GetProductID()" name="@product.GetProductID()" maxlength="3" />
+                                <button class="product-add-button sales-button" name="@product.GetProductID()">+</button>
                             </div>
 
                             <!--Product Employee Price-->
-                            <div class="product-employee-price" id="product-employee-price-@product.productID">
-                                $@Convert.ToDouble(product.employeePrice).ToString("N2")
+                            <div class="product-employee-price" id="product-employee-price-@product.GetProductID()">
+                                $@Convert.ToDouble(product.GetEmployeePrice()).ToString("N2")
                             </div>
-                            <div class="product-employee-price-input-container" id="product-employee-price-input-@product.productID">
-                                <button class="product-employee-subtract-button sales-button" name="@product.productID">-</button>
-                                <input type="text" value="0" class="product-employee-count" id="product-employee-count-@product.productID" name="@product.productID" maxlength="3" />
-                                <button class="product-employee-add-button sales-button" name="@product.productID">+</button>
+                            <div class="product-employee-price-input-container" id="product-employee-price-input-@product.GetProductID()">
+                                <button class="product-employee-subtract-button sales-button" name="@product.GetProductID()">-</button>
+                                <input type="text" value="0" class="product-employee-count" id="product-employee-count-@product.GetProductID()" name="@product.GetProductID()" maxlength="3" />
+                                <button class="product-employee-add-button sales-button" name="@product.GetProductID()">+</button>
                             </div>
                         </div>
                     }
