@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
+    Lang lang = ViewBag.lang;
+    SLUser user = ViewBag.user;
+}
+@section head{
+    <link rel="stylesheet" href="//cosh.bnsstore.com/res/CSS/Grow/0.0.1.min/css">
+
+    <script src="//shared.bnsstore.com/res/JS/Pixi/3.0.6.min/js"></script>
+    <script src="//shared.bnsstore.com/res/JS/p2/0.6.1.min/js"></script>
+    <script src="//shared.bnsstore.com/res/JS/Phaser/2.3.0.min/js"></script>
+    <script src="//cosh.bnsstore.com/res/JS/Grow/0.0.1/js"></script>
+}
+@section lang{
+    @{
+        lang.AddKeyword("Test");
+    }
+
+}
+@section body{
+
+}
+@section main{
+    <div id="grow-container" onclick="
+    if (this.requestFullscreen) {
+        this.requestFullscreen();
+    } else if (this.msRequestFullscreen) {
+        this.msRequestFullscreen();
+    } else if (this.mozRequestFullScreen) {
+        this.mozRequestFullScreen();
+    } else if (this.webkitRequestFullscreen) {
+        this.webkitRequestFullscreen();
+    }">
+
+    </div>
+}
+@section footer{
+
+}
