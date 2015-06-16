@@ -39,7 +39,7 @@
         });
     });
     function showUserMenu() {
-        $('#user-menu').css({ display: 'inline-table' }).velocity("stop").velocity({ opacity: 1 }, 500);
+        $('#user-menu').css({ display: 'inline-block' }).velocity("stop").velocity({ opacity: 1 }, 500);
         $("#user-menu-border").css({ display: 'block' }).velocity("stop").velocity({ "width": "1vw", "opacity": "1" }, 500);
         $('#user-btn').velocity("stop").velocity({ "border-right-width": "1vw" }, 500);
         $(window).trigger("resize");
