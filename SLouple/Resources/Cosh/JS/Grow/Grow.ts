@@ -14,7 +14,6 @@ module SLouple.Cosh {
             this.state.add('Boot', Boot, false);
             this.state.add('TitleScreen', TitleScreen, false);
             this.state.start('Boot');
-            //this.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
         }
         
         render() {

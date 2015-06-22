@@ -7,4 +7,11 @@
   #grow-container canvas {
     display: inline-block !important; }
 
+#main-container {
+  padding-bottom: 0 !important;
+  height: 85% !important; }
+
+footer {
+  display: none !important; }
+
 /*# sourceMappingURL=0.0.1.css.map */

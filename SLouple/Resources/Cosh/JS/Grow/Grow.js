@@ -16,7 +16,6 @@ var SLouple;
                 this.state.add('Boot', Cosh.Boot, false);
                 this.state.add('TitleScreen', Cosh.TitleScreen, false);
                 this.state.start('Boot');
-                //this.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
             }
             Grow.prototype.render = function () {
                 this.fps++;
