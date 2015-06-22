@@ -1,10 +1,15 @@
 ﻿module SLouple.Cosh {
     export class TitleScreen extends Phaser.State {
-        background;
-        backgroundStars;
+        background: Phaser.Sprite;
+        backgroundStars: Phaser.Sprite;
+        
         backgroundStarsOpacity: number;
         backgroundStarsSwitch: boolean;
-        bgm;
+
+        cover: Phaser.Sprite;
+        coverSwitch: boolean;
+
+        bgm: Phaser.Sound;
 
         preload() {
             console.log('TitleScreen');
@@ -17,11 +22,26 @@
         }
         create() {
             this.background = this.game.add.sprite(0, 0, 'TitleScreen');
+            this.background.inputEnabled = true;
+            this.background.events.onInputDown.add(this.begin, this);
+
             this.backgroundStars = this.game.add.sprite(0, 0, 'TitleScreenStars');
             this.backgroundStarsOpacity = 0;
+
             this.bgm = this.game.add.audio('TitleScreenBGM');
             this.bgm.loop = true;
+            this.bgm.volume = 0;
             this.bgm.play();
+
+            var bmd = this.add.bitmapData(1920, 1080);
+
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, 1920, 1080);
+            bmd.ctx.fillStyle = '#000000';
+            bmd.ctx.fill();
+
+            this.cover = this.add.sprite(0, 0, bmd);
+            this.cover.anchor.setTo(0, 0);
         }
         update() {
             this.background.height = this.game.height;
@@ -41,7 +61,33 @@
                 this.backgroundStarsSwitch = false;
             }
 
+            if (this.coverSwitch) {
+                this.cover.alpha += 0.01;
+                this.bgm.volume -= 0.01;
+            } else {
+                this.cover.alpha -= 0.01;
+                this.bgm.volume += 0.01;
+            }
+            if (this.cover.alpha < 0) {
+                this.cover.alpha = 0;
+            } else if (this.cover.alpha > 1) {
+                this.cover.alpha = 1;
+            }
+            if (this.bgm.volume < 0) {
+                this.bgm.volume = 0;
+            } else if (this.bgm.volume > 1) {
+                this.bgm.volume = 1;
+            }
+
             this.backgroundStars.alpha = this.backgroundStarsOpacity;
+        }
+
+        begin() {
+            if (this.cover.alpha == 0) {
+                this.coverSwitch = true;
+            } else {
+                this.coverSwitch = false;
+            }
         }
     }
 } 

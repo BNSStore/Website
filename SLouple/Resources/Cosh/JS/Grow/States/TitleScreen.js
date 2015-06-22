@@ -24,11 +24,21 @@ var SLouple;
             };
             TitleScreen.prototype.create = function () {
                 this.background = this.game.add.sprite(0, 0, 'TitleScreen');
+                this.background.inputEnabled = true;
+                this.background.events.onInputDown.add(this.begin, this);
                 this.backgroundStars = this.game.add.sprite(0, 0, 'TitleScreenStars');
                 this.backgroundStarsOpacity = 0;
                 this.bgm = this.game.add.audio('TitleScreenBGM');
                 this.bgm.loop = true;
+                this.bgm.volume = 0;
                 this.bgm.play();
+                var bmd = this.add.bitmapData(1920, 1080);
+                bmd.ctx.beginPath();
+                bmd.ctx.rect(0, 0, 1920, 1080);
+                bmd.ctx.fillStyle = '#000000';
+                bmd.ctx.fill();
+                this.cover = this.add.sprite(0, 0, bmd);
+                this.cover.anchor.setTo(0, 0);
             };
             TitleScreen.prototype.update = function () {
                 this.background.height = this.game.height;
@@ -49,7 +59,35 @@ var SLouple;
                     this.backgroundStarsOpacity = 1;
                     this.backgroundStarsSwitch = false;
                 }
+                if (this.coverSwitch) {
+                    this.cover.alpha += 0.01;
+                    this.bgm.volume -= 0.01;
+                }
+                else {
+                    this.cover.alpha -= 0.01;
+                    this.bgm.volume += 0.01;
+                }
+                if (this.cover.alpha < 0) {
+                    this.cover.alpha = 0;
+                }
+                else if (this.cover.alpha > 1) {
+                    this.cover.alpha = 1;
+                }
+                if (this.bgm.volume < 0) {
+                    this.bgm.volume = 0;
+                }
+                else if (this.bgm.volume > 1) {
+                    this.bgm.volume = 1;
+                }
                 this.backgroundStars.alpha = this.backgroundStarsOpacity;
+            };
+            TitleScreen.prototype.begin = function () {
+                if (this.cover.alpha == 0) {
+                    this.coverSwitch = true;
+                }
+                else {
+                    this.coverSwitch = false;
+                }
             };
             return TitleScreen;
         })(Phaser.State);

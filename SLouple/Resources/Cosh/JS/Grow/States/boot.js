@@ -25,4 +25,4 @@ var SLouple;
         Cosh.Boot = Boot;
     })(Cosh = SLouple.Cosh || (SLouple.Cosh = {}));
 })(SLouple || (SLouple = {}));
-//# sourceMappingURL=boot.js.map
+//# sourceMappingURL=Boot.js.map
