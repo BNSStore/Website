@@ -17,11 +17,18 @@ var SLouple;
                 console.log('TitleScreen');
                 this.load.image('TitleScreen', SLouple.Cosh.baseImageURL + 'TitleScreen/png');
                 this.load.image('TitleScreenStars', SLouple.Cosh.baseImageURL + 'TitleScreenStars/png');
+                this.load.audio('TitleScreenBGM', [
+                    SLouple.Cosh.baseAudioURL + 'TitleScreenBGM/ogg',
+                    SLouple.Cosh.baseAudioURL + 'TitleScreenBGM/mp3'
+                ]);
             };
             TitleScreen.prototype.create = function () {
                 this.background = this.game.add.sprite(0, 0, 'TitleScreen');
                 this.backgroundStars = this.game.add.sprite(0, 0, 'TitleScreenStars');
                 this.backgroundStarsOpacity = 0;
+                this.bgm = this.game.add.audio('TitleScreenBGM');
+                this.bgm.loop = true;
+                this.bgm.play();
             };
             TitleScreen.prototype.update = function () {
                 this.background.height = this.game.height;

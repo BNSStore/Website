@@ -16,6 +16,7 @@ var SLouple;
             Boot.prototype.preload = function () {
                 console.log('Boot');
                 this.game.state.start('TitleScreen');
+                this.stage.disableVisibilityChange = true;
                 this.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
                 $(window).trigger('resize');
             };
@@ -24,4 +25,4 @@ var SLouple;
         Cosh.Boot = Boot;
     })(Cosh = SLouple.Cosh || (SLouple.Cosh = {}));
 })(SLouple || (SLouple = {}));
-//# sourceMappingURL=Boot.js.map
+//# sourceMappingURL=boot.js.map

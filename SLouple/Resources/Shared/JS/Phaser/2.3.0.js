@@ -56449,7 +56449,7 @@ Phaser.Loader.prototype = {
                     url = url.substr(0, url.indexOf("?"));
                 }
 
-                var extension = url.substr((Math.max(0, url.lastIndexOf(".")) || Infinity) + 1);
+                var extension = url.substr((Math.max(0, url.lastIndexOf("/")) || Infinity) + 1);
 
                 audioType = extension.toLowerCase();
             }

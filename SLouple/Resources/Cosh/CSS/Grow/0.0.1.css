@@ -8,8 +8,14 @@
     display: inline-block !important; }
 
 #main-container {
+  position: absolute !important;
+  padding-top: 0 !important;
   padding-bottom: 0 !important;
-  height: 85% !important; }
+  height: 100% !important;
+  overflow: hidden !important; }
+
+header {
+  display: none !important; }
 
 footer {
   display: none !important; }

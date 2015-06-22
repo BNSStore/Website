@@ -186,6 +186,8 @@
       <DependentUpon>0.0.1.js</DependentUpon>
     </Content>
     <Content Include="Resources\Account\JS\VerifyEmail\0.0.1.js" />
+    <Content Include="Resources\Cosh\Audios\Grow\TitleScreenBGM.mp3" />
+    <Content Include="Resources\Cosh\Audios\Grow\TitleScreenBGM.ogg" />
     <Content Include="Resources\Cosh\CSS\Grow\0.0.1.css">
       <DependentUpon>0.0.1.scss</DependentUpon>
     </Content>
@@ -913,7 +915,6 @@
     <Folder Include="Models\Error\" />
     <Folder Include="Resources\Account\Audios\" />
     <Folder Include="Resources\Account\Videos\" />
-    <Folder Include="Resources\Cosh\Audios\" />
     <Folder Include="Resources\Cosh\Videos\" />
     <Folder Include="Resources\Error\Audios\" />
     <Folder Include="Resources\Error\CSS\" />
