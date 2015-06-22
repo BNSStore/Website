@@ -195,7 +195,7 @@
     <Content Include="Resources\Cosh\Images\Grow\TitleScreen.png" />
     <Content Include="Resources\Cosh\Images\Grow\TitleScreenStars.png" />
     <Content Include="Resources\Cosh\JS\Grow\Grow.js" />
-    <Content Include="Resources\Cosh\JS\Grow\0.0.1.min.js">
+    <Content Include="Resources\Cosh\JS\Grow\Grow.min.js">
       <DependentUpon>Grow.js</DependentUpon>
     </Content>
     <Content Include="Resources\Main\Audios\Home\IntroSwitch.mp3" />
@@ -551,8 +551,8 @@
       <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
     <None Include="Resources\Cosh\CSS\Grow\0.0.1.scss" />
-    <Content Include="Resources\Cosh\JS\Grow\0.0.1.min.js.gzip">
-      <DependentUpon>0.0.1.min.js</DependentUpon>
+    <Content Include="Resources\Cosh\JS\Grow\Grow.min.js.gzip">
+      <DependentUpon>Grow.min.js</DependentUpon>
     </Content>
     <None Include="Resources\Shared\CSS\jQueryUI\1.11.2.scss" />
     <Content Include="Resources\Shared\CSS\jQueryUI\1.11.2.css">
