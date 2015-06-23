@@ -196,6 +196,11 @@
     </Content>
     <Content Include="Resources\Cosh\Images\Grow\TitleScreen.png" />
     <Content Include="Resources\Cosh\Images\Grow\TitleScreenStars.png" />
+    <Content Include="Resources\Cosh\Images\Grow\TitleScreen\Sky.png" />
+    <Content Include="Resources\Cosh\Images\Grow\TitleScreen\Stars.png" />
+    <Content Include="Resources\Cosh\Images\Grow\TitleScreen\Title.png" />
+    <Content Include="Resources\Cosh\Images\Grow\TitleScreen\TitleGlow.png" />
+    <Content Include="Resources\Cosh\Images\Grow\TitleScreen\Tree.png" />
     <Content Include="Resources\Cosh\JS\Grow\Grow.js" />
     <Content Include="Resources\Cosh\JS\Grow\Grow.min.js">
       <DependentUpon>Grow.js</DependentUpon>

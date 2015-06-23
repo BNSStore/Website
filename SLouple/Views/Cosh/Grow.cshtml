@@ -23,18 +23,26 @@
 
 }
 @section main{
-    <div id="grow-container" onclick="/*
-    if (this.requestFullscreen) {
-        this.requestFullscreen();
-    } else if (this.msRequestFullscreen) {
-        this.msRequestFullscreen();
-    } else if (this.mozRequestFullScreen) {
-        this.mozRequestFullScreen();
-    } else if (this.webkitRequestFullscreen) {
-        this.webkitRequestFullscreen();
-    }*/">
+    <button id="fullscreen-button">Fullscreen</button>
+    <div id="grow-container" onclick="
+    ">
 
     </div>
+    <script>
+        $('#fullscreen-button').click(function () {
+            var container = document.getElementById('grow-container');
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.msRequestFullscreen) {
+                container.msRequestFullscreen();
+            } else if (container.mozRequestFullScreen) {
+                container.mozRequestFullScreen();
+            } else if (container.webkitRequestFullscreen) {
+                container.webkitRequestFullscreen();
+            }
+        });
+        
+    </script>
 }
 @section footer{
 
