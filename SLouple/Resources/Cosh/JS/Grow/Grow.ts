@@ -13,6 +13,7 @@ module SLouple.Cosh {
             super(1920, 1080, Phaser.AUTO, 'grow-container');
             this.state.add('Boot', Boot, false);
             this.state.add('TitleScreen', TitleScreen, false);
+            this.state.add('Level1', Level1, false);
             this.state.start('Boot');
         }
         
@@ -27,8 +28,17 @@ module SLouple.Cosh {
             var widthRatio: number;
             var heightRatio: number;
             var ratio: number;
-            widthRatio = $('#grow-container').width() / this.width;
-            heightRatio = $('#grow-container').height() / this.height;
+           
+            var container = $('#grow-container');
+            if (container.parent().height() < 600) {
+                container.css("height", "100%");
+                container.css("top", "0");
+            } else {
+                container.css("height", "80%");
+                container.css("top", "10%");
+            }
+            widthRatio = container.width() / this.width;
+            heightRatio = container.height() / this.height;
             if (widthRatio < heightRatio) {
                 ratio = widthRatio;
             } else {

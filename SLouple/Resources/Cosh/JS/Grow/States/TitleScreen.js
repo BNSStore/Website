@@ -25,7 +25,6 @@ var SLouple;
                 ]);
             };
             TitleScreen.prototype.create = function () {
-                this.stage.setBackgroundColor('rgb(6,8,12)');
                 this.sky = this.game.add.sprite(0, 0, 'TitleScreen_Sky');
                 this.sky.inputEnabled = true;
                 this.sky.events.onInputDown.add(this.begin, this);
@@ -39,7 +38,7 @@ var SLouple;
                 var bmd = this.add.bitmapData(1920, 1080);
                 bmd.ctx.beginPath();
                 bmd.ctx.rect(0, 0, 1920, 1080);
-                bmd.ctx.fillStyle = '#000000';
+                bmd.ctx.fillStyle = "rgb(6,8,12)";
                 bmd.ctx.fill();
                 this.cover = this.add.sprite(0, 0, bmd);
                 this.cover.anchor.setTo(0, 0);
@@ -95,6 +94,10 @@ var SLouple;
                     this.stars.height -= speed / 2;
                     this.title.y -= speed / 4;
                     this.bgm.volume -= speed / 1000;
+                    if (this.tree.y < -1200) {
+                        this.bgm.stop();
+                        this.game.state.start("Level1");
+                    }
                 }
                 else {
                     if (this.offsetSwitch) {
@@ -121,14 +124,9 @@ var SLouple;
                 }
             };
             TitleScreen.prototype.begin = function () {
-                this.beginSwitch = true;
-                /*
-                if (this.cover.alpha == 0) {
-                    this.coverSwitch = true;
-                } else {
-                    this.coverSwitch = false;
+                if (this.bgm.isPlaying) {
+                    this.beginSwitch = true;
                 }
-                */
             };
             return TitleScreen;
         })(Phaser.State);

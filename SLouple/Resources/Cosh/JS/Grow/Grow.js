@@ -15,6 +15,7 @@ var SLouple;
                 _super.call(this, 1920, 1080, Phaser.AUTO, 'grow-container');
                 this.state.add('Boot', Cosh.Boot, false);
                 this.state.add('TitleScreen', Cosh.TitleScreen, false);
+                this.state.add('Level1', Cosh.Level1, false);
                 this.state.start('Boot');
             }
             Grow.prototype.render = function () {
@@ -28,8 +29,17 @@ var SLouple;
                 var widthRatio;
                 var heightRatio;
                 var ratio;
-                widthRatio = $('#grow-container').width() / this.width;
-                heightRatio = $('#grow-container').height() / this.height;
+                var container = $('#grow-container');
+                if (container.parent().height() < 600) {
+                    container.css("height", "100%");
+                    container.css("top", "0");
+                }
+                else {
+                    container.css("height", "80%");
+                    container.css("top", "10%");
+                }
+                widthRatio = container.width() / this.width;
+                heightRatio = container.height() / this.height;
                 if (widthRatio < heightRatio) {
                     ratio = widthRatio;
                 }
