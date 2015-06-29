@@ -18,8 +18,8 @@
 
 
         update() {
-            var xDistance = this.game.input.x - this.x;
-            var yDistance = this.game.input.y - this.y;
+            var xDistance = this.game.input.worldX - this.x;
+            var yDistance = this.game.input.worldY - this.y;
 
             var distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 

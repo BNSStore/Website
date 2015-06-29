@@ -34,7 +34,7 @@ var SLouple;
                 this.bgm = this.game.add.audio('TitleScreenBGM');
                 this.bgm.loop = true;
                 this.bgm.volume = 1;
-                this.bgm.play();
+                //this.bgm.play();
                 var bmd = this.add.bitmapData(1920, 1080);
                 bmd.ctx.beginPath();
                 bmd.ctx.rect(0, 0, 1920, 1080);
@@ -68,7 +68,7 @@ var SLouple;
                 if (this.coverSwitch) {
                     this.cover.alpha += 0.01;
                 }
-                else if (!this.coverSwitch && this.bgm.isPlaying) {
+                else if (!this.coverSwitch) {
                     this.cover.alpha -= 0.01;
                 }
                 if (this.cover.alpha < 0) {
@@ -124,9 +124,7 @@ var SLouple;
                 }
             };
             TitleScreen.prototype.begin = function () {
-                if (this.bgm.isPlaying) {
-                    this.beginSwitch = true;
-                }
+                this.beginSwitch = true;
             };
             return TitleScreen;
         })(Phaser.State);

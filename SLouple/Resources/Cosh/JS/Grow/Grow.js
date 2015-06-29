@@ -61,6 +61,16 @@ var SLouple;
             window.onresize = function () {
                 Cosh.grow.resize();
             };
+            /*
+            $('#grow-container').click(function () {
+                var canvas = $("#grow-container").get()[0];
+                canvas.requestPointerLock = canvas.requestPointerLock ||
+                canvas.mozRequestPointerLock ||
+                canvas.webkitRequestPointerLock;
+    
+                canvas.requestPointerLock();
+            });
+            */
         };
     })(Cosh = SLouple.Cosh || (SLouple.Cosh = {}));
 })(SLouple || (SLouple = {}));

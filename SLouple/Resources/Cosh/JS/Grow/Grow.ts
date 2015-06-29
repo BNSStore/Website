@@ -57,5 +57,17 @@ module SLouple.Cosh {
         window.onresize = () => {
             grow.resize();
         };
+
+        /*
+        $('#grow-container').click(function () {
+            var canvas = $("#grow-container").get()[0];
+            canvas.requestPointerLock = canvas.requestPointerLock ||
+            canvas.mozRequestPointerLock ||
+            canvas.webkitRequestPointerLock;
+
+            canvas.requestPointerLock();
+        });
+        */
+
     }
 }

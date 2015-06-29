@@ -41,7 +41,7 @@
             this.bgm = this.game.add.audio('TitleScreenBGM');
             this.bgm.loop = true;
             this.bgm.volume = 1;
-            this.bgm.play();
+            //this.bgm.play();
 
             var bmd = this.add.bitmapData(1920, 1080);
 
@@ -77,7 +77,7 @@
 
             if (this.coverSwitch ) {
                 this.cover.alpha += 0.01;
-            } else if (!this.coverSwitch && this.bgm.isPlaying) {
+            } else if (!this.coverSwitch) {
                 this.cover.alpha -= 0.01;
             }
             if (this.cover.alpha < 0) {
@@ -134,9 +134,7 @@
         }
 
         begin() {
-            if (this.bgm.isPlaying) {
                 this.beginSwitch = true;
-            }
         }
     }
 } 

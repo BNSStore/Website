@@ -18,8 +18,8 @@ var SLouple;
                 this.anchor.set(0.5, 0.5);
             }
             Player.prototype.update = function () {
-                var xDistance = this.game.input.x - this.x;
-                var yDistance = this.game.input.y - this.y;
+                var xDistance = this.game.input.worldX - this.x;
+                var yDistance = this.game.input.worldY - this.y;
                 var distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
                 var percentage = this.maxSpeed / distance;
                 this.xSpeed = xDistance * percentage;

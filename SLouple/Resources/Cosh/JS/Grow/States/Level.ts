@@ -13,7 +13,7 @@
         }
 
         create() {
-            this.game.world.setBounds(0, 0, 5000, 2000);
+            this.game.world.setBounds(0, 0, 5000, 1080);
             this.player = new Player(this.game);
             this.game.add.existing(this.player);
             console.log("Added Player");

@@ -194,6 +194,12 @@
     <Content Include="Resources\Cosh\CSS\Grow\0.0.1.min.css">
       <DependentUpon>0.0.1.css</DependentUpon>
     </Content>
+    <Content Include="Resources\Cosh\Images\Grow\Cursor\Black.png" />
+    <Content Include="Resources\Cosh\Images\Grow\Cursor\Blue.png" />
+    <Content Include="Resources\Cosh\Images\Grow\Cursor\Green.png" />
+    <Content Include="Resources\Cosh\Images\Grow\Cursor\Red.png" />
+    <Content Include="Resources\Cosh\Images\Grow\Cursor\White.png" />
+    <Content Include="Resources\Cosh\Images\Grow\Cursor\Yellow.png" />
     <Content Include="Resources\Cosh\Images\Grow\Dandelion\Dandelion_100px.png" />
     <Content Include="Resources\Cosh\Images\Grow\Dandelion\Dandelion_100px_Black.png" />
     <Content Include="Resources\Cosh\Images\Grow\TitleScreen.png" />
