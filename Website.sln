@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BNSStore", "SLouple\BNSStore.csproj", "{68340D94-E4C6-4200-B28B-876BF7148802}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DB_9B9A99_BNSStore", "DB_9B9A99_BNSStore\DB_9B9A99_BNSStore.sqlproj", "{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{68340D94-E4C6-4200-B28B-876BF7148802}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68340D94-E4C6-4200-B28B-876BF7148802}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68340D94-E4C6-4200-B28B-876BF7148802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCD83C87-B5F0-461C-9367-FB4E83BD81AA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

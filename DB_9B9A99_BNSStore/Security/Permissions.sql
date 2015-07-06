@@ -1,0 +1,6 @@
+﻿GRANT CONNECT TO [SL_MVC];
+
+
+GO
+GRANT EXECUTE TO [db_executor];
+

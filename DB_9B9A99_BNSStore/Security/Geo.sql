@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [Geo]
+    AUTHORIZATION [dbo];
+
