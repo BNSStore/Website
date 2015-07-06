@@ -1,2 +1,0 @@
-﻿CREATE USER [SL_MVC];
-

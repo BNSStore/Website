@@ -3,5 +3,3 @@
 
 
 GO
-ALTER ROLE [db_executor] ADD MEMBER [SL_MVC];
-

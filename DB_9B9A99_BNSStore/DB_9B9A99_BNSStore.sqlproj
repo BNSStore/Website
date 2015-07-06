@@ -273,9 +273,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\db_executor.sql" />
-    <Build Include="Security\SL_MVC.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="Store\Stored Procedures\uspSelectSales.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -624,6 +621,9 @@
     <Build Include="Security\User.sql" />
     <Build Include="Security\User_Vis.sql" />
     <Build Include="Security\Zone.sql" />
-    <Build Include="Security\Permissions.sql" />
+    <Build Include="Security\db_executor.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DB_9B9A99_BNSStore.publish.xml" />
   </ItemGroup>
 </Project>
