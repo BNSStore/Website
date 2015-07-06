@@ -1,0 +1,9 @@
+﻿CREATE TABLE [Zone].[User] (
+    [ZoneID] INT NOT NULL,
+    [UserID] INT NOT NULL,
+    [Admin]  BIT CONSTRAINT [DF_User_Admin] DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([ZoneID] ASC, [UserID] ASC),
+    CONSTRAINT [FK_User_Account] FOREIGN KEY ([UserID]) REFERENCES [User].[Account] ([UserID]) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT [FK_User_Group] FOREIGN KEY ([ZoneID]) REFERENCES [Zone].[Group] ([ZoneID])
+);
+

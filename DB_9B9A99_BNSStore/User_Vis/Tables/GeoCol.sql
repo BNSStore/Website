@@ -1,0 +1,7 @@
+﻿CREATE TABLE [User_Vis].[GeoCol] (
+    [ColID]   TINYINT       NOT NULL,
+    [ColName] VARCHAR (100) NOT NULL,
+    CONSTRAINT [PK_GeoCol] PRIMARY KEY CLUSTERED ([ColID] ASC),
+    CONSTRAINT [UK_GeoCol] UNIQUE NONCLUSTERED ([ColName] ASC)
+);
+
