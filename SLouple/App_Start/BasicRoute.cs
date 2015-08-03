@@ -10,12 +10,7 @@ namespace SLouple.MVC.App_Start
     public class BasicRoute : RouteBase
     {
         public override RouteData GetRouteData(HttpContextBase httpContext)
-        {
-            Logger logger = new Logger(httpContext);
-            if(httpContext.Request.Headers["Origin"] != null){
-                httpContext.Response.AddHeader("Access-Control-Allow-Origin", httpContext.Request.Headers["Origin"]);
-                httpContext.Response.AddHeader("Access-Control-Allow-Credentials", "true");
-            }
+        {   
             string url = httpContext.Request.Url.Host + httpContext.Request.Url.PathAndQuery;
 
             //Remove / at the end of URL
