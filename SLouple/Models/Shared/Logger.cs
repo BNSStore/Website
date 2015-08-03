@@ -112,9 +112,7 @@ namespace SLouple.MVC.Shared
 
             StringBuilder log = new StringBuilder();
 
-            //log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"]);
-            Random r = new Random();
-            log.Append(r.Next(254) + "." + r.Next(254) + "." + r.Next(254) + "." + r.Next(254));
+            log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"]);
             log.Append(" - ");
             log.Append("- ");
             log.Append("[" + DateTime.UtcNow.ToString("dd/MMM/yyyy:HH:mm:ss").Replace("-", "/") + " +0000" + "] ");
