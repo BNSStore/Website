@@ -13,7 +13,7 @@ namespace SLouple.MVC.Shared
 {
     public class Logger
     {
-        private static List<string> logs = new List<string>();
+        private static volatile List<string> logs = new List<string>();
         private HttpContext httpContext;
         private string format = "iis";
         private SqlStoredProcedures sqlSP;
@@ -112,7 +112,9 @@ namespace SLouple.MVC.Shared
 
             StringBuilder log = new StringBuilder();
 
-            log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"]);
+            //log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"]);
+            Random r = new Random();
+            log.Append(r.Next(254) + "." + r.Next(254) + "." + r.Next(254) + "." + r.Next(254));
             log.Append(" - ");
             log.Append("- ");
             log.Append("[" + DateTime.UtcNow.ToString("dd/MMM/yyyy:HH:mm:ss").Replace("-", "/") + " +0000" + "] ");
@@ -145,10 +147,18 @@ namespace SLouple.MVC.Shared
                 string file = System.AppDomain.CurrentDomain.BaseDirectory + "/Log/" + date.Year + "/" + date.Month + ".log";
                 Directory.CreateDirectory(Path.GetDirectoryName(file));
 
-                while (!stop)
+
+                using (StreamWriter writer = File.AppendText(file))
                 {
-                    using (StreamWriter writer = File.AppendText(file))
+                    int counter = 0;
+                    while (!stop)
                     {
+                        counter++;
+                        if (counter > 100)
+                        {
+                            writer.Flush();
+                            counter = 0;
+                        }
                         if (logs.Count == 0)
                         {
                             Thread.Sleep(500);
@@ -158,8 +168,8 @@ namespace SLouple.MVC.Shared
                             writer.WriteLine(logs.First());
                             logs.RemoveAt(0);
                         }
-
                     }
+
                 }
             }
             public void RequestStop()
