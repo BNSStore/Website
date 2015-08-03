@@ -11,6 +11,7 @@ namespace SLouple.MVC.App_Start
     {
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
+            Logger logger = new Logger(httpContext);
             if(httpContext.Request.Headers["Origin"] != null){
                 httpContext.Response.AddHeader("Access-Control-Allow-Origin", httpContext.Request.Headers["Origin"]);
                 httpContext.Response.AddHeader("Access-Control-Allow-Credentials", "true");
@@ -24,47 +25,22 @@ namespace SLouple.MVC.App_Start
             }
             string[] urlParts = url.Split('/');
 
-            
-            string[] domainParts = urlParts[0].Split('.');
-
-            //Support for localhost while debugging
-            int subDomainLevel = 3;
-            if (httpContext.Request.Url.Host.ToLower().EndsWith("localhost"))
-            {
-                subDomainLevel = 2;
-            }else if (httpContext.Request.Url.Host.ToLower().EndsWith("bnsstore-001-site1.mywindowshosting.com"))
-            {
-                subDomainLevel = 4;
-            }
-
             //Get SubDomain
+            string[] domainParts = urlParts[0].Split('.');
             string subDomain;
-            if (domainParts.Length >= subDomainLevel)
-            {
-                subDomain = domainParts[domainParts.Length - subDomainLevel];
-                if (subDomain == "www")
-                {
-                    subDomain = "main";
-                }
+            if(domainParts.Length > 2){
+                subDomain = domainParts[0];
+            }else{
+                subDomain = "Main";
             }
-            else
-            {
-                subDomain = "main";
-            }
-
-            
 
             //Capitalize first letter
             subDomain = char.ToUpper(subDomain[0]) + subDomain.ToLower().Substring(1);
 
             //Decide which route method
-            if (httpContext.Request.Url.Host.ToLower().EndsWith("bnsstore-001-site1.mywindowshosting.com") && urlParts.Length >= 6 && (urlParts[2].ToLower() == "res" || urlParts[2].ToLower() == "resources"))
-            {
-                return ResouecesRoute(urlParts.Skip(1).ToArray(), urlParts[1]);
-            }
             if (urlParts.Length >= 5 && (urlParts[1].ToLower() == "res" || urlParts[1].ToLower() == "resources"))
             {
-                    return ResouecesRoute(urlParts, subDomain);
+                return ResouecesRoute(urlParts, subDomain);
             }
             else
             {
