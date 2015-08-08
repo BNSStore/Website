@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SLouple.MVC.Controllers
+namespace SLouple.MVC.Shared
 {
     public class AdvancedController : Controller
     {
@@ -18,14 +18,20 @@ namespace SLouple.MVC.Controllers
         public Dictionary<string, string> ids;
         public Dictionary<string, string> postData;
 
+        [NonAction]
         public void Load(string title)
         {
-            ip = Request.ServerVariables["REMOTE_ADDR"];
+            LoadIP();
             LoadTitle(title);
             LoadIds();
             LoadPostData();
             LoadUser();
             LoadLanguage();
+        }
+
+        public void LoadIP()
+        {
+            ip = Request.ServerVariables["REMOTE_ADDR"];
         }
 
         public void LoadTitle(string title)
@@ -150,6 +156,11 @@ namespace SLouple.MVC.Controllers
                 return Redirect(protocol + "bnsstore.com/" + actionName + "/");
             }
             return Redirect(protocol + controllerName + ".bnsstore.com/" + actionName + "/");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
 
     }

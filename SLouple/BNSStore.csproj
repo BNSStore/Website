@@ -666,6 +666,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\BasicRoute.cs" />
+    <Compile Include="App_Start\ResponseLengthCalculatingStream.cs" />
+    <Compile Include="Models\Shared\Logger.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />

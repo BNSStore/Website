@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SLouple.MVC.Shared;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace SLouple.MVC.Controllers
 {
-    public class ResourcesController : Controller
+    public class ResourcesController : AdvancedController
     {
         public ActionResult Default()
         {
@@ -27,6 +28,7 @@ namespace SLouple.MVC.Controllers
 
         private ActionResult ReturnFile(string contentType)
         {
+            LoadIP();
             string file = HttpUtility.UrlDecode(this.RouteData.Values["file"].ToString());
             FileInfo fi = new FileInfo(Server.MapPath(file));
             if (contentType == null)
@@ -44,6 +46,12 @@ namespace SLouple.MVC.Controllers
             Response.Cache.SetExpires(DateTime.Now.AddMonths(1));
             Response.Cache.SetCacheability(HttpCacheability.Public);
             Response.Cache.SetLastModified(fi.LastWriteTimeUtc);
+            
+            if (Request.Headers["Origin"] != null)
+            {
+                Response.AppendHeader("Access-Control-Allow-Origin", Request.Headers["Origin"]);
+                Response.AppendHeader("Access-Control-Allow-Credentials", "true");
+            }
             return File(file, contentType);
         }
     }
