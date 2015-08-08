@@ -14,8 +14,9 @@ namespace SLouple.MVC.Shared
     public class Logger
     {
         private static volatile List<string> logs = new List<string>();
+
         private HttpContext httpContext;
-        private string format = "iis";
+        private string format = "ncsa";
         private SqlStoredProcedures sqlSP;
         private bool useDB = false;
         private static Writer writer = new Writer();
@@ -97,8 +98,18 @@ namespace SLouple.MVC.Shared
 
         private string GetIISLog()
         {
+            //Check if is 301 Redirect
+            if (httpContext.Response.Filter.GetType() != typeof(ResponseLengthCalculatingStream))
+            {
+                return null;
+            }
+
             StringBuilder log = new StringBuilder();
-            log.Append(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"));
+            log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"] + ", "); //IP
+            log.Append(", "); //Identity
+            DateTime now = DateTime.UtcNow;
+            log.Append(now.ToString("MM/dd/yy") + ", "); //Date
+            log.Append(now.ToString("HH/mm/ss") + ", "); //Time
             return log.ToString();
         }
 
@@ -112,17 +123,18 @@ namespace SLouple.MVC.Shared
 
             StringBuilder log = new StringBuilder();
 
-            log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"]);
-            log.Append(" - ");
-            log.Append("- ");
-            log.Append("[" + DateTime.UtcNow.ToString("dd/MMM/yyyy:HH:mm:ss").Replace("-", "/") + " +0000" + "] ");
+            log.Append(httpContext.Request.ServerVariables["REMOTE_ADDR"] + " "); //IP
+            log.Append("- "); //Identity
+            log.Append("- "); //Username
+            log.Append("[" + DateTime.UtcNow.ToString("dd/MMM/yyyy:HH:mm:ss").Replace("-", "/") + " +0000" + "] "); //Time
+
             string protocal = httpContext.Request.IsSecureConnection ? "HTTPS/1.1" : "HTTP/1.1";
-            log.Append("\"" + httpContext.Request.HttpMethod + " " + httpContext.Request.Path + " " + protocal + "\" ");
-            log.Append(httpContext.Response.StatusCode + " ");
+            log.Append("\"" + httpContext.Request.HttpMethod + " " + httpContext.Request.Path + " " + protocal + "\" "); //Request Line
+            log.Append(httpContext.Response.StatusCode + " "); //Status Code
             
             ResponseLengthCalculatingStream stream = (ResponseLengthCalculatingStream)httpContext.Response.Filter;
-            log.Append(stream.responseSize + " ");
-            if (httpContext.Request.Headers.AllKeys.Contains("Referer"))
+            log.Append(stream.responseSize + " "); //Response Size
+            if (httpContext.Request.Headers.AllKeys.Contains("Referer")) //Referer
             {
                 log.Append("\"" + httpContext.Request.Headers["Referer"] + "\" ");
             }
@@ -131,7 +143,7 @@ namespace SLouple.MVC.Shared
                 log.Append("\"" + "-" + "\"");
             }
 
-            log.Append("\"" + httpContext.Request.UserAgent + "\"");
+            log.Append("\"" + httpContext.Request.UserAgent + "\""); //User-agent
 
 
             return log.ToString();
