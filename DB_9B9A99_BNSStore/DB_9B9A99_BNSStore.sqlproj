@@ -131,6 +131,9 @@
     <Folder Include="Support\Stored Procedures\" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Permission" />
+    <Folder Include="Permission\Tables" />
+    <Folder Include="Permission\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="User_Vis\Tables\PhoneNumberCol.sql">
@@ -622,8 +625,22 @@
     <Build Include="Security\User_Vis.sql" />
     <Build Include="Security\Zone.sql" />
     <Build Include="Security\db_executor.sql" />
+    <Build Include="Security\Permission.sql" />
+    <Build Include="Permission\Tables\UserPolicy.sql" />
+    <Build Include="Permission\Tables\Policy.sql" />
+    <Build Include="Permission\Tables\Role.sql" />
+    <Build Include="Permission\Tables\RolePolicy.sql" />
+    <Build Include="Permission\Tables\UserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddPolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddUserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetRoleID.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetPolicyID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB_9B9A99_BNSStore.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DB_9B9A99_BNSStore.refactorlog" />
   </ItemGroup>
 </Project>
