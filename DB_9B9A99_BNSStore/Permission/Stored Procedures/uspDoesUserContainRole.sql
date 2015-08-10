@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE Permission.uspDoesUserContainPolicy
+﻿CREATE PROCEDURE Permission.uspDoesUserContainRole
 	@UserID int = NULL,
 	@Username varchar(100) = NULL,
-	@PolicyID smallint = NULL,
-	@PolicyName varchar(100) = NULL,
+	@RoleID smallint = NULL,
+	@RoleName varchar(100) = NULL,
 	@Contains bit = 0
 AS
 BEGIN
@@ -13,22 +13,14 @@ BEGIN
 		EXEC [User].uspGetUserID @Username = @Username, @UserID = @UserID OUTPUT
 	END
 
-	IF @PolicyID IS NULL
+	IF @RoleID IS NULL
 	BEGIN
-		EXEC [Permission].uspGetPolicyID @PolicyName = @PolicyName, @PolicyID = @PolicyID OUTPUT
+		EXEC [Permission].uspGetRoleID @RoleName = @RoleName, @RoleID = @RoleID OUTPUT
 	END
 	
-	IF (SELECT UserID FROM [Permission].[UserPolicy] WHERE UserID = @UserID AND PolicyID = @PolicyID) IS NOT NULL
+	IF (SELECT UserID FROM [Permission].[UserRole] WHERE UserID = @UserID AND RoleID = @RoleID) IS NOT NULL
 	BEGIN
 		SET @Contains = 1;
-	END
-	ELSE
-	BEGIN
-		IF(SELECT rp.RoleID FROM [Permission].[RolePolicy] rp WHERE rp.PolicyID = @PolicyID 
-		AND rp.RoleID = (SELECT ur.RoleID FROM [Permission].UserRole ur WHERE ur.UserID = @UserID)) IS NOT NULL
-		BEGIN
-			SET @Contains = 1;
-		END
 	END
 
 END

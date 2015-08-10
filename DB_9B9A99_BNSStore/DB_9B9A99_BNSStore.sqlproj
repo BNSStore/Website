@@ -643,9 +643,10 @@
     <Build Include="Permission\Stored Procedures\uspDelRolePolicy.sql" />
     <Build Include="Permission\Stored Procedures\uspDelUserRole.sql" />
     <Build Include="Permission\Stored Procedures\uspDelUserPolicy.sql" />
-    <Build Include="Permission\Stored Procedures\uspDoesUserContainPolicy.sql" />
     <Build Include="Permission\Stored Procedures\uspDoesUserContainRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspDoesUserContainPolicy.sql" />
     <Build Include="Permission\Stored Procedures\uspSelectUserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetPolicyName.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB_9B9A99_BNSStore.publish.xml" />
