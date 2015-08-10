@@ -19,19 +19,24 @@ BEGIN
 		EXEC [Permission].uspGetPolicyID @PolicyName = @PolicyName, @PolicyID = @PolicyID OUTPUT
 	END
 	
+	--Search from UserPolicy
 	IF (SELECT UserID FROM [Permission].[UserPolicy] WHERE UserID = @UserID AND PolicyID = @PolicyID) IS NOT NULL
 	BEGIN
 		SET @Contains = 1;
 	END
 	ELSE
 	BEGIN
-		IF(SELECT rp.RoleID FROM [Permission].[RolePolicy] rp WHERE rp.PolicyID = @PolicyID 
-		AND rp.RoleID = (SELECT ur.RoleID FROM [Permission].UserRole ur WHERE ur.UserID = @UserID)) IS NOT NULL
+		--Failed to find in UserPolicy. Search with RolePolicy
+		IF
+		(SELECT TOP 1 (SELECT rp.RoleID FROM [Permission].[RolePolicy] rp WHERE rp.PolicyID = 2)
+		WHERE EXISTS
+		(SELECT ur.RoleID FROM [Permission].UserRole ur WHERE ur.UserID = 36)) IS NOT NULL
 		BEGIN
 			SET @Contains = 1;
 		END
 		ELSE IF @WildCard = 1 AND @PolicyName != '*'
 		BEGIN
+			--Failed to find in RolePolicy. Search with WildCard
 			IF @PolicyName IS NULL
 			BEGIN
 				EXEC [Permission].uspGetPolicyID  @PolicyID = @PolicyID, @PolicyName = @PolicyName OUTPUT
@@ -51,6 +56,11 @@ BEGIN
 			END
 
 			EXEC [Permission].[uspDoesUserContainPolicy] @UserID = @UserID, @PolicyName = @Part, @Contains = @Contains OUTPUT;
+		END
+		ELSE
+		BEGIN
+			--Can't search with WildCard or Failed to find with WildCard
+			SET @Contains = 0
 		END
 	END
 
