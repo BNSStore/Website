@@ -16,6 +16,6 @@ BEGIN
 		EXEC [Permission].uspGetPolicyID @PolicyName = @PolicyName, @PolicyID = @PolicyID OUTPUT
 	END
 	
-	INSERT INTO [Permission].[RolePolicy] (RoleID, PolicyID) VALUES (@RoleName, @PolicyID)
+	INSERT INTO [Permission].[RolePolicy] (RoleID, PolicyID) VALUES (@RoleID, @PolicyID)
 
 END

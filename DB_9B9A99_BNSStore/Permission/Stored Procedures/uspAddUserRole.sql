@@ -18,6 +18,6 @@ BEGIN
 		EXEC [Permission].uspGetRoleID @RoleName = @RoleName, @RoleID = @RoleID OUTPUT
 	END
 	
-	INSERT INTO [Permission].[UserRole] (UserID, RoleID) VALUES (@UserID, @RoleName)
+	INSERT INTO [Permission].[UserRole] (UserID, RoleID) VALUES (@UserID, @RoleID)
 
 END
