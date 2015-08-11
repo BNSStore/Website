@@ -36,6 +36,13 @@
         WHERE [p].[ProductID] = [s].[ProductID]) AS [ProductName], [Count], [EmployeeCount] FROM [Store].[Sale] [s]
         ORDER BY [Date];
         <br>
+        @{
+            DateTime date = DateTime.Now;
+            string file = System.AppDomain.CurrentDomain.BaseDirectory + "Log\\" + date.Year + "\\" + date.Month + ".log";
+        }
+        @file
+        <br>
+        @(System.AppDomain.CurrentDomain.BaseDirectory + "/Log/" + date.Year + "/" + date.Month + ".log");
     </div>
 }
 @section footer{

@@ -18,7 +18,9 @@ namespace SLouple.MVC.Shared
         private HttpContext httpContext;
         private string format = "ncsa";
         private SqlStoredProcedures sqlSP;
+
         private bool useDB = false;
+
         private static Writer writer = new Writer();
         private static Thread writingThread;
 
@@ -71,8 +73,9 @@ namespace SLouple.MVC.Shared
                 }
                 else
                 {
-                    //System.Diagnostics.Debug.WriteLine(log);
+
                     logs.Add(log);
+
                 }
             }
         }
@@ -154,7 +157,7 @@ namespace SLouple.MVC.Shared
             public void Write()
             {
                 DateTime date = DateTime.Now;
-                string file = System.AppDomain.CurrentDomain.BaseDirectory + "/Log/" + date.Year + "/" + date.Month + ".log";
+                string file = System.AppDomain.CurrentDomain.BaseDirectory + "Log\\" + date.Year + "\\" + date.Month + ".log";
                 Directory.CreateDirectory(Path.GetDirectoryName(file));
 
 
@@ -179,6 +182,7 @@ namespace SLouple.MVC.Shared
                             logs.RemoveAt(0);
                         }
                     }
+                    writer.Flush();
 
                 }
             }
