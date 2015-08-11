@@ -19,23 +19,25 @@ namespace SLouple
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalHost.Configuration.DisconnectTimeout = TimeSpan.FromSeconds(6);
             QuartzStartUp.StartUp();
-            Logger.StartWriting();
+            //Logger.StartWriting();
         }
 
         protected void Application_End()
         {
-            Logger.StopWriting();
+            //Logger.StopWriting();
         }
 
         protected void Application_BeginRequest()
         {
-            Context.Response.Filter = new ResponseLengthCalculatingStream(Context.Response.Filter);
+            //Context.Response.Filter = new ResponseLengthCalculatingStream(Context.Response.Filter);
         }
 
         protected void Application_EndRequest(object sender, EventArgs e)
         {
+            /*
             Logger logger = new Logger(this.Context, "ncsa");
             logger.Log();
+             */
         }
     }
 }
