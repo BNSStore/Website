@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Layouts/Shared/_SharedLayout.cshtml";
     Lang lang = ViewBag.lang;
-    SLUser user = ViewBag.user;
+    User user = ViewBag.user;
     bool firstLoad;
     try
     {
@@ -188,7 +188,7 @@
                             {
                                 <div class="shift-request" id="@shiftRequest.Value.ToShortDateString()">
                                     <div class="shift-request-date" id="@shiftRequest.Value.ToShortDateString()">@shiftRequest.Value.ToShortDateString() : @lang.GetHTMLTrans("Date." + shiftRequest.Value.DayOfWeek)</div>
-                                    <div class="shift-request-name" id="@shiftRequest.Key">@SLUser.GetDisplayName(shiftRequest.Key)</div>
+                                    <div class="shift-request-name" id="@shiftRequest.Key">@User.GetDisplayName(shiftRequest.Key)</div>
                                     <button class="shift-request-accept" type="button">@lang.GetHTMLTrans("Store.ShiftRequest.Accept")</button>
                                     <button class="shift-request-decline" type="button">@lang.GetHTMLTrans("Store.ShiftRequest.Decline")</button>
                                 </div>

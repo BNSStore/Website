@@ -23,7 +23,7 @@ namespace SLouple.MVC.Store
         public void Login(int userID, string sessionToken, char store)
         {
             //Valid User and Is Manager
-            SLUser user = new SLUser(userID, null, null, GetIPAddress(), sessionToken);
+            User user = new User(userID, null, null, GetIPAddress(), sessionToken);
             if (user == null || !user.IsManager())
             {
                 return;

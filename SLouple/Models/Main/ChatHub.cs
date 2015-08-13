@@ -18,7 +18,7 @@ namespace SLouple.MVC.Main
 
         public virtual void Login(int userID, string sessionToken)
         {
-            SLUser user = new SLUser(userID, null, null, GetIPAddress(), sessionToken);
+            User user = new User(userID, null, null, GetIPAddress(), sessionToken);
             if (user != null)
             {
                 onlineUsers.Add(Context.ConnectionId, userID);
@@ -76,7 +76,7 @@ namespace SLouple.MVC.Main
             }
 
             int userID = onlineUsers[Context.ConnectionId];
-            string displayName = SLUser.GetDisplayName(userID);
+            string displayName = User.GetDisplayName(userID);
             string type = "normal";
 
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
@@ -118,7 +118,7 @@ namespace SLouple.MVC.Main
             ArrayList displayNames = new ArrayList();
             foreach (int userID in uniqueOnlineUsers)
             {
-                displayNames.Add(SLUser.GetDisplayName(userID));
+                displayNames.Add(User.GetDisplayName(userID));
             }
             Clients.All.updateOnlineUserList(displayNames.ToArray());
         }

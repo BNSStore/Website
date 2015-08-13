@@ -123,7 +123,7 @@ namespace SLouple.MVC.Controllers
                 {
                     string username = postData["username"];
                     string password = postData["password"];
-                    user = new SLUser(-1, username, password, ip, null);
+                    user = new User(-1, username, password, ip, null);
                     if (user.sessionToken != null)
                     {
                         if (simple)
@@ -200,7 +200,7 @@ namespace SLouple.MVC.Controllers
                     string password = postData["password"];
                     string emailAddress = postData["emailAddress"];
                     string reCapResponse = postData["g-recaptcha-response"];
-                    int userID = SLouple.MVC.Account.SLUser.CreateUser(username, displayName, password, emailAddress, lang.langName, ip, reCapResponse);
+                    int userID = SLouple.MVC.Account.User.CreateUser(username, displayName, password, emailAddress, lang.langName, ip, reCapResponse);
                     if (userID > 0)
                     {
                         if (simple)
@@ -213,7 +213,7 @@ namespace SLouple.MVC.Controllers
                         userIDCookie.Domain = ".bnsstore.com";
                         userIDCookie.Expires = new DateTime(2099, 12, 31);
 
-                        string sessionToken = SLouple.MVC.Account.SLUser.Login(userID, password, ip, null);
+                        string sessionToken = SLouple.MVC.Account.User.Login(userID, password, ip, null);
                         HttpCookie sessionTokenCookie = new HttpCookie("sessionToken", Convert.ToString(sessionToken));
                         sessionTokenCookie.Path = "/";
                         sessionTokenCookie.Domain = ".bnsstore.com";

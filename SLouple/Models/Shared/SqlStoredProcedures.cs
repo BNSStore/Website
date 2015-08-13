@@ -1096,7 +1096,7 @@ namespace SLouple.MVC.Shared
             return policyID;
         }
 
-        public string PermissionGetPolicyName(int roleID)
+        public string PermissionGetRoleName(int roleID)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, null, true));

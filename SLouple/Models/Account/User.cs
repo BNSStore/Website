@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace SLouple.MVC.Account
 {
-    public class SLUser
+    public class User
     {
         public int userID { get; set; }
         public string displayName { get; set; }
@@ -18,7 +18,7 @@ namespace SLouple.MVC.Account
         private int? storeGroupID;
         private string storeGroupName;
 
-        public SLUser(int userID, string username, string password, string ip, string sessionToken)
+        public User(int userID, string username, string password, string ip, string sessionToken)
         {
             if (username != null)
             {

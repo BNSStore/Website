@@ -13,7 +13,7 @@ namespace SLouple.MVC.Controllers
     {
         public string subdomain;
         public Lang lang;
-        public SLUser user;
+        public User user;
         public string ip;
         public Dictionary<string, string> ids;
         public Dictionary<string, string> postData;
@@ -118,7 +118,7 @@ namespace SLouple.MVC.Controllers
             {
                 int userID = Convert.ToInt32(Request.Cookies["userID"].Value);
                 string sessionToken = Convert.ToString(Request.Cookies["sessionToken"].Value);
-                this.user = new SLUser(userID, null, null, Request.UserHostAddress, sessionToken);
+                this.user = new User(userID, null, null, Request.UserHostAddress, sessionToken);
             }
             catch(Exception e)
             {
