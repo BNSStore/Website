@@ -647,6 +647,7 @@
     <Build Include="Permission\Stored Procedures\uspDoesUserContainPolicy.sql" />
     <Build Include="Permission\Stored Procedures\uspSelectUserRole.sql" />
     <Build Include="Permission\Stored Procedures\uspGetPolicyName.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetRoleName.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB_9B9A99_BNSStore.publish.xml" />

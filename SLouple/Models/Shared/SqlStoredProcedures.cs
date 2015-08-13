@@ -934,5 +934,178 @@ namespace SLouple.MVC.Shared
 
         #endregion
 
+        #region Permission
+
+        public void PermissionAddPolicy(string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspAddPolicy", pars);
+        }
+
+        public void PermissionDelPolicy(string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDelPolicy", pars);
+        }
+
+        public void PermissionAddRole(string roleName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspAddRole", pars);
+        }
+
+        public void PermissionDelRole(string roleName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDelRole", pars);
+        }
+
+        public void PermissionAddRolePolicy(string roleName, string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspAddRolePolicy", pars);
+        }
+
+        public void PermissionDelRolePolicy(string roleName, string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDelRolePolicy", pars);
+        }
+
+        public void PermissionAddUserPolicy(int userID, string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspAddUserPolicy", pars);
+        }
+
+        public void PermissionDelUserPolicy(int userID, string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDelUserPolicy", pars);
+        }
+
+        public void PermissionAddUserRole(int userID, string roleName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspAddUserRole", pars);
+        }
+
+        public void PermissionDelUserRole(int userID, string roleName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDelUserRole", pars);
+        }
+
+        public bool PermissionDoesUserContainPolicy(int userID, string policyName)
+        {
+            return PermissionDoesUserContainPolicy(userID, policyName, true);
+        }
+
+        public bool PermissionDoesUserContainPolicy(int userID, string policyName, bool wildCard)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            pars.Add(Sql.GenerateSqlParameter("@WildCard", SqlDbType.Bit, 0, wildCard, false));
+            pars.Add(Sql.GenerateSqlParameter("@Contains", SqlDbType.Bit, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDoesUserContainPolicy", pars);
+            bool contains = Convert.ToBoolean(parCol["@Contains"].Value);
+            return contains;
+        }
+
+        public bool PermissionDoesUserContainRole(int userID, string roleName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            pars.Add(Sql.GenerateSqlParameter("@Contains", SqlDbType.Bit, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspDoesUserContainRole", pars);
+            bool contains = Convert.ToBoolean(parCol["@Contains"].Value);
+            return contains;
+        }
+
+        public List<int> PermissionSelectRoleFromUserRole(int userID)
+        {
+            List<int> roles = new List<int>();
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserRole", pars, new string[] { "RoleID" });
+            for (int i = 0; i < columns["RoleID"].Count; i++)
+            {
+                roles.Add(Convert.ToInt32(columns["RoleID"][i]));
+            }
+            return roles;
+        }
+
+        public List<int> PermissionSelectUserFromUserRole(int roleID)
+        {
+            List<int> users = new List<int>();
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleID", SqlDbType.Int, 0, roleID, false));
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserRole", pars, new string[] { "UserID" });
+            for (int i = 0; i < columns["UserID"].Count; i++)
+            {
+                users.Add(Convert.ToInt32(columns["UserID"][i]));
+            }
+            return users;
+        }
+
+        public int PermissionGetPolicyID(string policyName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, policyName, false));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyID", SqlDbType.Int, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspGetPolicyID", pars);
+            int policyID = Convert.ToInt32(parCol["@PolicyID"].Value);
+            return policyID;
+        }
+
+        public string PermissionGetPolicyName(int policyID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@PolicyName", SqlDbType.VarChar, 100, null, true));
+            pars.Add(Sql.GenerateSqlParameter("@PolicyID", SqlDbType.Int, 0, policyID, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspGetPolicyName", pars);
+            string policyName = Convert.ToString(parCol["@PolicyName"].Value);
+            return policyName;
+        }
+
+        public int PermissionGetRoleID(string roleName)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, roleName, false));
+            pars.Add(Sql.GenerateSqlParameter("@RoleID", SqlDbType.Int, 0, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspGetRoleID", pars);
+            int policyID = Convert.ToInt32(parCol["@RoleID"].Value);
+            return policyID;
+        }
+
+        public string PermissionGetPolicyName(int roleID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@RoleName", SqlDbType.VarChar, 100, null, true));
+            pars.Add(Sql.GenerateSqlParameter("@RoleID", SqlDbType.Int, 0, roleID, false));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("Permission.uspGetRoleName", pars);
+            string roleName = Convert.ToString(parCol["@RoleName"].Value);
+            return roleName;
+        }
+
+        #endregion
     }
 }
