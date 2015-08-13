@@ -108,6 +108,11 @@ namespace SLouple.MVC.Account
             return roles;
         }
 
+        public bool HasRole(string roleName)
+        {
+            return HasRole(new Role(roleName));
+        }
+
         public bool HasRole(Role role)
         {
             if (roles == null)
@@ -115,6 +120,11 @@ namespace SLouple.MVC.Account
                 GetRoles();
             }
             return roles.Contains(role);
+        }
+
+        public bool HasPolicy(string policyName)
+        {
+            return HasPolicy(new Policy(policyName));
         }
 
         public bool HasPolicy(Policy policy)
@@ -135,7 +145,7 @@ namespace SLouple.MVC.Account
             }
         }
 
-        public static int CreateUser(string username, string displayName, string password, string emailAddress, string langName, string ip, string reCapResponse)
+        public static User CreateUser(string username, string displayName, string password, string emailAddress, string langName, string ip, string reCapResponse)
         {
             ValidateUsername(username);
             ValidateDisplayName(displayName);
@@ -153,12 +163,14 @@ namespace SLouple.MVC.Account
                 int userID = sqlSP.UserCreateUser(username, displayName, passwordSalt, passwordHash, emailAddress, langName, ip);
                 string verifyString = sqlSP.UserGetEmailVerifyString(emailAddress);
                 Email.SendVerifyEmail(emailAddress, verifyString, langName);
-                return userID;
+                User user = new User(userID);
+                user.SignInWithPassword(password, ip);
+                return user;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-                return -1;
+                return null;
             }
             
         }

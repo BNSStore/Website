@@ -88,7 +88,7 @@ namespace SLouple.MVC.Controllers
                 }
                 else if (user != null)
                 {
-                    this.lang = new Lang(user.GetLangID());
+                    this.lang = new Lang(user.GetLang().GetLangID());
                 }
                 else
                 {
@@ -118,7 +118,8 @@ namespace SLouple.MVC.Controllers
             {
                 int userID = Convert.ToInt32(Request.Cookies["userID"].Value);
                 string sessionToken = Convert.ToString(Request.Cookies["sessionToken"].Value);
-                this.user = new User(userID, null, null, Request.UserHostAddress, sessionToken);
+                user = new User(userID);
+                user.SignInWithSessionToken(sessionToken, Request.UserHostAddress);
             }
             catch(Exception e)
             {
@@ -126,7 +127,7 @@ namespace SLouple.MVC.Controllers
                 this.user = null;
             }
 
-            if (this.user != null && this.user.sessionToken == null)
+            if (this.user != null && this.user.GetSessionToken() == null)
             {
                 this.user = null;
             }

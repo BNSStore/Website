@@ -19,7 +19,7 @@
         <button type="button" id="profile" class="settings-sidebar-button">Profile</button>
         <button type="button" id="email" class="settings-sidebar-button">Email</button>
         <button type="button" id="chat" class="settings-sidebar-button">Chat</button>
-        @if (user.IsEmployee())
+        @if (user.HasRole("Store.Employee") || user.HasRole("Store.Manager"))
         {
             <button type="button" id="employee" class="settings-sidebar-button">Employee</button>
         }
@@ -39,7 +39,7 @@
             <div class="settings-item-title">
             </div>
             <div id="settings-email-sub-item" class="settings-item">
-                @if (new SqlStoredProcedures().UserIsEmailSub(user.userID))
+                @if (new SqlStoredProcedures().UserIsEmailSub(user.GetUserID()))
                 {
                     <input type="checkbox" id="settings-email-sub-checkbox" checked="checked" name="emailSub" value="emailSub">
                     <span>Subscribe for news and notifications.</span>
@@ -55,7 +55,7 @@
             <div class="settings-item-title">
             </div>
         </div>
-        @if (user.IsEmployee())
+        @if (user.HasRole("Store.Employee") || user.HasRole("Store.Manager"))
         {
             <div id="settings-employee-container" class="settings-item-container">
                 <div class="settings-item-title">

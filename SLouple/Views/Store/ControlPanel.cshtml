@@ -20,38 +20,11 @@
 }
 @section main{
     <div id="control-panel-container">
-        @if (user.IsManager())
-        {
-            <div>
-                @Html.Partial("ControlPanel/Manager")
-                @Html.Partial("ControlPanel/HumanResources")
-                @Html.Partial("ControlPanel/Product")
-                @Html.Partial("ControlPanel/Accounting")
-                @Html.Partial("ControlPanel/Default")
-            </div>
-        }
-        else
-        {
-            switch (user.GetStoreGroupName())
-            {
-                case "Human Resources":
-                    <div>
-                        @Html.Partial("ControlPanel/HumanResources")
-                    </div> break;
-                case "Product":
-                <div>
-                    @Html.Partial("ControlPanel/Product")
-                </div> break;
-                case "Accounting":
-                <div>
-                    @Html.Partial("ControlPanel/Accounting")
-                </div> break;
-                default: <div>
-                    @Html.Partial("ControlPanel/Default")
-                </div> break;
-            }
-
-        }
+        @Html.Partial("ControlPanel/Manager")
+        @Html.Partial("ControlPanel/HumanResources")
+        @Html.Partial("ControlPanel/Product")
+        @Html.Partial("ControlPanel/Accounting")
+        @Html.Partial("ControlPanel/Default")
     </div>
 
 }

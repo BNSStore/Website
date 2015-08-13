@@ -12,7 +12,7 @@ namespace SLouple.MVC.Shared
         //Unsafe! Move to config file
         #if DEBUG
         public const string SqlUsername = "SL_MVC";
-        public const string SqlPassword = "b5e2bd52c9";
+        public const string SqlPassword = "59713e03ac";
         public const string SqlServer = "COSH_C1\\SLDEVSQLSERVER";
         public const string SqlDatabase = "BNSStore";
         #else

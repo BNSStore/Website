@@ -64,7 +64,7 @@
     <script src="//main.bnsstore.com/res/JS/PageTrans/0.0.1.min/js"></script>
     <script src="//account.bnsstore.com/res/JS/UserBtn/0.0.1.min/js"></script>
     <script src="//main.bnsstore.com/res/JS/LangBtn/0.0.1.min/js"></script>
-    @if (user != null && user.IsEmployee())
+    @if (user != null && (user.HasRole("Store.Employee") || user.HasRole("Store.Manager")))
     {
         <link rel="stylesheet" href="//store.bnsstore.com/res/CSS/ShiftRequest/0.0.1.min/css" />
         <script src="//store.bnsstore.com/res/JS/ShiftRequest/0.0.1.min/js"></script>
@@ -114,7 +114,7 @@
                             }
                             else
                             {
-                                <a class="vc-child">@user.displayName</a>
+                                <a class="vc-child">@user.GetDisplayName()</a>
 
                             }
                         </div>
@@ -127,7 +127,7 @@
                         }
                         else
                         {
-                            <img id="user-avatar" class="hc-margin" src="//account.bnsstore.com/res/Images/User/Avatar/@user.userID/png" alt="Avatar" onerror="this.src = '//account.bnsstore.com/res/Images/User/Avatar/Default/png'">
+                            <img id="user-avatar" class="hc-margin" src="//account.bnsstore.com/res/Images/User/Avatar/@user.GetUserID()/png" alt="Avatar" onerror="this.src = '//account.bnsstore.com/res/Images/User/Avatar/Default/png'">
                         }
                     </div>
                 </div>
@@ -178,9 +178,9 @@
             }
             else
             {
-                if (user.IsEmployee())
+                if (user.HasRole("Store.Employee") || user.HasRole("Store.Manager"))
                 {
-                    var shiftRequests = new SqlStoredProcedures().StoreSelectShiftRequest(user.userID);
+                    var shiftRequests = new SqlStoredProcedures().StoreSelectShiftRequest(user.GetUserID());
                     if (shiftRequests.Count > 0)
                     {
                         <div id="shift-request-container">
@@ -188,7 +188,7 @@
                             {
                                 <div class="shift-request" id="@shiftRequest.Value.ToShortDateString()">
                                     <div class="shift-request-date" id="@shiftRequest.Value.ToShortDateString()">@shiftRequest.Value.ToShortDateString() : @lang.GetHTMLTrans("Date." + shiftRequest.Value.DayOfWeek)</div>
-                                    <div class="shift-request-name" id="@shiftRequest.Key">@User.GetDisplayName(shiftRequest.Key)</div>
+                                    <div class="shift-request-name" id="@shiftRequest.Key">@(new User(shiftRequest.Key).GetDisplayName())</div>
                                     <button class="shift-request-accept" type="button">@lang.GetHTMLTrans("Store.ShiftRequest.Accept")</button>
                                     <button class="shift-request-decline" type="button">@lang.GetHTMLTrans("Store.ShiftRequest.Decline")</button>
                                 </div>
@@ -204,9 +204,9 @@
                     <div id="user-menu-control-panel-button-container" class="user-menu-button-container">
                         <button id="user-menu-control-panel-button" class="user-menu-button" type="button" onclick="location.href='//store.bnsstore.com/ControlPanel'">@lang.GetHTMLTrans("Store.ControlPanel")</button>
                     </div>
-                    if (user.IsManager())
+                    if (user.HasRole("Store.Employee") || user.HasRole("Store.Manager"))
                     {
-                        if (new SqlStoredProcedures().StoreGetCurrentShifts().ContainsKey(user.userID))
+                        if (new SqlStoredProcedures().StoreGetCurrentShifts().ContainsKey(user.GetUserID()))
                         {
                             <div id="user-menu-sale-button-container" class="user-menu-button-container">
                                 <button id="user-menu-sale-button" class="user-menu-button" type="button" onclick="location.href='//store.bnsstore.com/Sales'">@lang.GetHTMLTrans("Store.Sales")</button>

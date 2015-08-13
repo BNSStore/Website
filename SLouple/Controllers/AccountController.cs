@@ -60,11 +60,11 @@ namespace SLouple.MVC.Controllers
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
             if (sub)
             {
-                sqlSP.UserAddEmailSub(user.userID);
+                sqlSP.UserAddEmailSub(user.GetUserID());
             }
             else
             {
-                sqlSP.UserDelEmailSub(user.userID);
+                sqlSP.UserDelEmailSub(user.GetUserID());
             }
         }
 
@@ -123,17 +123,18 @@ namespace SLouple.MVC.Controllers
                 {
                     string username = postData["username"];
                     string password = postData["password"];
-                    user = new User(-1, username, password, ip, null);
-                    if (user.sessionToken != null)
+                    user = new User(username);
+                    user.SignInWithPassword(password, ip);
+                    if (user.GetSessionToken() != null)
                     {
                         if (simple)
                         {
-                            return Content(user.userID + "|" + user.sessionToken);
+                            return Content(user.GetUserID() + "|" + user.GetSessionToken());
                         }
-                        HttpCookie userIDCookie = new HttpCookie("userID", Convert.ToString(user.userID));
+                        HttpCookie userIDCookie = new HttpCookie("userID", Convert.ToString(user.GetUserID()));
                         userIDCookie.Path = "/";
                         userIDCookie.Domain = ".bnsstore.com";
-                        HttpCookie sessionTokenCookie = new HttpCookie("sessionToken", Convert.ToString(user.sessionToken));
+                        HttpCookie sessionTokenCookie = new HttpCookie("sessionToken", Convert.ToString(user.GetSessionToken()));
                         sessionTokenCookie.Path = "/";
                         sessionTokenCookie.Domain = ".bnsstore.com";
 
@@ -200,20 +201,21 @@ namespace SLouple.MVC.Controllers
                     string password = postData["password"];
                     string emailAddress = postData["emailAddress"];
                     string reCapResponse = postData["g-recaptcha-response"];
-                    int userID = SLouple.MVC.Account.User.CreateUser(username, displayName, password, emailAddress, lang.langName, ip, reCapResponse);
-                    if (userID > 0)
+                    user = SLouple.MVC.Account.User.CreateUser(username, displayName, password, emailAddress, lang.GetLangName(), ip, reCapResponse);
+                    if (user != null)
                     {
                         if (simple)
                         {
                             return Content("success");
                         }
 
-                        HttpCookie userIDCookie = new HttpCookie("userID", Convert.ToString(userID));
+                        HttpCookie userIDCookie = new HttpCookie("userID", Convert.ToString(user.GetUserID()));
                         userIDCookie.Path = "/";
                         userIDCookie.Domain = ".bnsstore.com";
                         userIDCookie.Expires = new DateTime(2099, 12, 31);
 
-                        string sessionToken = SLouple.MVC.Account.User.Login(userID, password, ip, null);
+
+                        string sessionToken = user.GetSessionToken();
                         HttpCookie sessionTokenCookie = new HttpCookie("sessionToken", Convert.ToString(sessionToken));
                         sessionTokenCookie.Path = "/";
                         sessionTokenCookie.Domain = ".bnsstore.com";
