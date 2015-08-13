@@ -1,14 +1,16 @@
-﻿using System;
+﻿using SLouple.MVC.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace SLouple.MVC.Shared
 {
-    public class Role
+    public class Role : IEquatable<Role>
     {
         private int? roleID;
         private string roleName;
+        private List<User> users;
 
         public Role(int roleID)
         {
@@ -37,6 +39,33 @@ namespace SLouple.MVC.Shared
                 roleName = sqlSP.PermissionGetRoleName(roleID.Value);
             }
             return roleName;
+        }
+
+        public List<User> GetUsers()
+        {
+            if (users == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                users = sqlSP.PermissionSelectUserFromUserRole(this.GetRoleID());
+            }
+            return users;
+        }
+
+        public bool HasUser(User user)
+        {
+            return users.Contains(user);
+        }
+
+        public bool Equals(Role other)
+        {
+            if (roleID == null)
+            {
+                return other.GetRoleName() == GetRoleName();
+            }
+            else
+            {
+                return other.GetRoleID() == GetRoleID();
+            }
         }
     }
 }

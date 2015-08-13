@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SLouple.MVC.Shared
 {
-    public class Policy
+    public class Policy : IEquatable<Policy>
     {
         private int? policyID;
         private string policyName;
@@ -37,6 +37,19 @@ namespace SLouple.MVC.Shared
                 policyName = sqlSP.PermissionGetPolicyName(policyID.Value);
             }
             return policyName;
+        }
+
+        public bool Equals(Policy other)
+        {
+            if (policyID == null)
+            {
+                return other.GetPolicyName() == GetPolicyName();
+            }
+            else
+            {
+                return other.GetPolicyID() == GetPolicyID();
+            }
+            
         }
     }
 }

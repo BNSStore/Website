@@ -8,151 +8,131 @@ using System.Text.RegularExpressions;
 
 namespace SLouple.MVC.Account
 {
-    public class User
+    public class User : IEquatable<User>
     {
-        public int userID { get; set; }
-        public string displayName { get; set; }
-        public string sessionToken { get; set; }
-        private bool? employee;
-        private bool? manager;
-        private int? storeGroupID;
-        private string storeGroupName;
+        private int? userID;
+        private string username;
+        private string displayName;
+        private string sessionToken;
+        private Lang lang;
+        private List<Role> roles;
 
-        public User(int userID, string username, string password, string ip, string sessionToken)
+        public User(int userID)
         {
-            if (username != null)
-            {
-                ValidateUsername(username);
-                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-                this.userID = sqlSP.UserGetUserID(username);
-                if (this.userID < 0)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                ValidateUserID(userID);
-                this.userID = userID;
-            }
-            this.sessionToken = Login(this.userID, password, ip, sessionToken);
-            this.displayName = GetDisplayName(this.userID);
+            this.userID = userID;
         }
 
-        public int GetLangID()
+        public User(string username)
+        {
+            this.username = username;
+        }
+
+        public void SignInWithPassword(string password, string ip)
         {
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-            return sqlSP.UserGetMainLang(this.userID);
-        }
-
-        //??
-        public bool SendVerifyEmail()
-        {
-            if (sessionToken != null)
+            try
             {
-
+                this.sessionToken = sqlSP.UserLogin(GetUserID(), password, ip, null);
             }
-            return false;
-        }
-
-        public bool IsEmployee()
-        {
-            if (employee == null)
+            catch
             {
-                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-                employee = sqlSP.StoreIsEmployee(this.userID);
-            }
-            return (bool)(employee);
-        }
-
-        public bool IsManager()
-        {
-            if (manager == null)
-            {
-                if (!IsEmployee())
-                {
-                    manager = false;
-                }
-                else
-                {
-                    SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-                    manager = sqlSP.StoreIsManager(this.userID);
-                }
-            }
-            return (bool)(manager);
-        }
-
-        public int GetStoreGroupID()
-        {
-            if (!IsEmployee())
-            {
-                return -1;
-            }
-            else if (storeGroupID != null)
-            {
-                return (int)storeGroupID;
-            }
-            else
-            {
-                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-                storeGroupID = sqlSP.StoreGetEmployeeGroupID(userID);
-                return (int)storeGroupID;
+                this.sessionToken = null;
             }
         }
 
-        public string GetStoreGroupName()
-        {
-            if (!IsEmployee())
-            {
-                return null;
-            }
-            else
-            {
-                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-                storeGroupName = sqlSP.StoreGetGroupName(GetStoreGroupID());
-                return storeGroupName;
-            }
-        }
-
-        public static string GetDisplayName(int userID)
+        public void SignInWithSessionToken(string sessionToken, string ip)
         {
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-            string displayName = sqlSP.UserGetDisplayName(userID);
+            try
+            {
+                this.sessionToken = sqlSP.UserLogin(GetUserID(), null, ip, sessionToken);
+            }
+            catch
+            {
+                this.sessionToken = null;
+            }
+        }
+
+        public string GetSessionToken()
+        {
+            return sessionToken;
+        }
+
+        public int GetUserID()
+        {
+            if (userID == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                userID = sqlSP.UserGetUserID(username);
+            }
+            return userID.Value;
+        }
+
+        public string GetUsername()
+        {
+            if (username == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                username = sqlSP.UserGetUsername(userID.Value);
+            }
+            return username;
+        }
+
+        public Lang GetLang()
+        {
+            if (lang == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                lang = new Lang(sqlSP.UserGetMainLang(GetUserID()));
+            }
+            return lang;
+        }
+
+        public string GetDisplayName()
+        {
+            if (displayName == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                displayName = sqlSP.UserGetDisplayName(GetUserID());
+            }
             return displayName;
         }
 
-        public static string Login(int userID, string password, string ip, string sessionToken)
+        public List<Role> GetRoles()
         {
-            ValidateUserID(userID);
-            SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-            string outputSessionToken;
-            if (sessionToken != null)
+            if (roles == null)
             {
-                ValidateSessionToken(sessionToken);
-                try
-                {
-                    outputSessionToken = sqlSP.UserLogin(userID, null, ip, sessionToken);
-                }
-                catch
-                {
-                    return null;
-                }
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                roles = sqlSP.PermissionSelectRoleFromUserRole(GetUserID());
+            }
+            return roles;
+        }
+
+        public bool HasRole(Role role)
+        {
+            if (roles == null)
+            {
+                GetRoles();
+            }
+            return roles.Contains(role);
+        }
+
+        public bool HasPolicy(Policy policy)
+        {
+            SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+            return sqlSP.PermissionDoesUserContainPolicy(GetUserID(), policy.GetPolicyName());
+        }
+
+        public bool Equals(User other)
+        {
+            if (userID == null)
+            {
+                return other.GetUsername() == GetUsername();
             }
             else
             {
-                ValidatePassword(password);
-                string passwordSalt = sqlSP.UserGetPasswordSalt(userID);
-                string passwordHash = Hash.HashString(password, passwordSalt, new SHA3.SHA3Managed(512));
-                try
-                {
-                    outputSessionToken = sqlSP.UserLogin(userID, passwordHash, ip, null);
-                }
-                catch
-                {
-                    return null;
-                }
+                return other.GetUserID() == GetUserID();
             }
-            return outputSessionToken;
         }
 
         public static int CreateUser(string username, string displayName, string password, string emailAddress, string langName, string ip, string reCapResponse)

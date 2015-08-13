@@ -1,4 +1,5 @@
-﻿using SLouple.MVC.Store;
+﻿using SLouple.MVC.Account;
+using SLouple.MVC.Store;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,6 +35,16 @@ namespace SLouple.MVC.Shared
             SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspGetUserID", pars);
             int userID = Convert.ToInt32(parCol["@UserID"].Value);
             return userID;
+        }
+
+        public string UserGetUsername(int userID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@Username", SqlDbType.VarChar, 100, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspGetUsername", pars);
+            string username = Convert.ToString(parCol["@Username"].Value);
+            return username;
         }
 
         public string UserGetDisplayName(int userID)
@@ -1040,28 +1051,28 @@ namespace SLouple.MVC.Shared
             return contains;
         }
 
-        public List<int> PermissionSelectRoleFromUserRole(int userID)
+        public List<Role> PermissionSelectRoleFromUserRole(int userID)
         {
-            List<int> roles = new List<int>();
+            List<Role> roles = new List<Role>();
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
             Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserRole", pars, new string[] { "RoleID" });
             for (int i = 0; i < columns["RoleID"].Count; i++)
             {
-                roles.Add(Convert.ToInt32(columns["RoleID"][i]));
+                roles.Add(new Role(Convert.ToInt32(columns["RoleID"][i])));
             }
             return roles;
         }
 
-        public List<int> PermissionSelectUserFromUserRole(int roleID)
+        public List<User> PermissionSelectUserFromUserRole(int roleID)
         {
-            List<int> users = new List<int>();
+            List<User> users = new List<User>();
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@RoleID", SqlDbType.Int, 0, roleID, false));
             Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserRole", pars, new string[] { "UserID" });
             for (int i = 0; i < columns["UserID"].Count; i++)
             {
-                users.Add(Convert.ToInt32(columns["UserID"][i]));
+                users.Add(new User(Convert.ToInt32(columns["UserID"][i])));
             }
             return users;
         }
