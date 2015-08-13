@@ -1,0 +1,10 @@
+﻿CREATE USER [SL_MVC]
+	WITH PASSWORD = '59713e03ac'
+
+GO
+
+GRANT CONNECT TO [SL_MVC];
+GO
+
+EXEC sp_addrolemember 'db_owner', 'SL_MVC';
+GO

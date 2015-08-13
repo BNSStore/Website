@@ -652,6 +652,7 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="Security\SL_MVC.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB_9B9A99_BNSStore.publish.xml" />
