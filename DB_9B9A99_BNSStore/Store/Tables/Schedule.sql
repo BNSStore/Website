@@ -5,6 +5,6 @@
     [Mark]    TINYINT        NULL,
     [Comment] NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_Schedule] PRIMARY KEY CLUSTERED ([Date] ASC, [UserID] ASC),
-    CONSTRAINT [FK_Schedule_Account] FOREIGN KEY ([UserID]) REFERENCES [Store].[Employee] ([UserID])
+    CONSTRAINT [FK_Schedule_Account] FOREIGN KEY ([UserID]) REFERENCES [User].[Account] ([UserID])
 );
 

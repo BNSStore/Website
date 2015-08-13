@@ -791,27 +791,6 @@ namespace SLouple.MVC.Shared
 
         #region Employee
 
-        public int StoreGetEmployeeGroupID(int userID)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            pars.Add(Sql.GenerateSqlParameter("@GroupID", SqlDbType.TinyInt, 0, null, true));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetEmployeeGroupID", pars);
-            int groupID = Convert.ToInt32(parCol["@GroupID"].Value);
-            return groupID;
-        }
-
-        public string StoreGetGroupName(int groupID)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-
-            pars.Add(Sql.GenerateSqlParameter("@GroupID", SqlDbType.TinyInt, 0, groupID, false));
-            pars.Add(Sql.GenerateSqlParameter("@GroupName", SqlDbType.VarChar, 50, null, true));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetGroupName", pars);
-            string groupName = Convert.ToString(parCol["@GroupName"].Value);
-            return groupName;
-        }
-
         public int StoreGetEmployeeID(string firstName, string lastName)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
@@ -821,26 +800,6 @@ namespace SLouple.MVC.Shared
             SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspGetEmployeeID", pars);
             int userID = Convert.ToInt32(parCol["@UserID"].Value);
             return userID;
-        }
-
-        public bool StoreIsEmployee(int userID)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            pars.Add(Sql.GenerateSqlParameter("@IsEmployee", SqlDbType.Bit, 0, null, true));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspIsEmployee", pars);
-            bool isEmployee = Convert.ToBoolean(parCol["@IsEmployee"].Value);
-            return isEmployee;
-        }
-
-        public bool StoreIsManager(int userID)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            pars.Add(Sql.GenerateSqlParameter("@IsManager", SqlDbType.Bit, 0, null, true));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("Store.uspIsManager", pars);
-            bool isManager = Convert.ToBoolean(parCol["@IsManager"].Value);
-            return isManager;
         }
 
         public bool StoreHasMissedShift(int userID)

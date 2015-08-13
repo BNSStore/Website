@@ -82,11 +82,11 @@ namespace SLouple.MVC.Main
             string type = "normal";
 
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-             if (sqlSP.StoreIsManager(userID))
+             if (user.HasRole("Store.Manager"))
             {
                 type = "manager";
             }
-            else if (sqlSP.StoreIsEmployee(userID))
+            else if (user.HasRole("Store.Employee"))
             {
                 type = "employee";
             }

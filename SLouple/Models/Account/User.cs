@@ -32,7 +32,8 @@ namespace SLouple.MVC.Account
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
             try
             {
-                this.sessionToken = sqlSP.UserLogin(GetUserID(), password, ip, null);
+                string passwordHash = Hash.HashString(password, sqlSP.UserGetPasswordSalt(GetUserID()), new SHA3.SHA3Managed(512));
+                this.sessionToken = sqlSP.UserLogin(GetUserID(), passwordHash, ip, null);
             }
             catch
             {
