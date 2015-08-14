@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SLouple.MVC.Store
+namespace SLouple.MVC.Shared
 {
     public class NoPermissionException : Exception
     {

@@ -23,8 +23,9 @@ namespace SLouple.MVC.Store
         public void Login(int userID, string sessionToken, char store)
         {
             //Valid User and Is Manager
-            SLUser user = new SLUser(userID, null, null, GetIPAddress(), sessionToken);
-            if (user == null || !user.IsManager())
+            User user = new User(userID);
+            user.SignInWithSessionToken(sessionToken, GetIPAddress());
+            if (user.GetSessionToken() == null || !user.HasPolicy(new Policy("Store.Sales.Access")))
             {
                 return;
             }

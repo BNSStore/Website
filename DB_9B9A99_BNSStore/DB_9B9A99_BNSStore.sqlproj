@@ -131,6 +131,9 @@
     <Folder Include="Support\Stored Procedures\" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Permission" />
+    <Folder Include="Permission\Tables" />
+    <Folder Include="Permission\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="User_Vis\Tables\PhoneNumberCol.sql">
@@ -162,14 +165,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="Svc\Tables\Provider.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Store\Tables\Group.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Store\Tables\Employee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -273,9 +268,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\db_executor.sql" />
-    <Build Include="Security\SL_MVC.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="Store\Stored Procedures\uspSelectSales.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -448,15 +440,7 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Store\Stored Procedures\uspIsEmployee.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="User\Stored Procedures\uspVerifyEmail.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Store\Stored Procedures\uspIsManager.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -469,10 +453,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="Store\Stored Procedures\uspUpdateSaleCount.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Store\Stored Procedures\uspGetEmployeeGroupID.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -624,6 +604,46 @@
     <Build Include="Security\User.sql" />
     <Build Include="Security\User_Vis.sql" />
     <Build Include="Security\Zone.sql" />
-    <Build Include="Security\Permissions.sql" />
+    <Build Include="Security\db_executor.sql" />
+    <Build Include="Security\Permission.sql" />
+    <Build Include="Permission\Tables\UserPolicy.sql" />
+    <Build Include="Permission\Tables\Policy.sql" />
+    <Build Include="Permission\Tables\Role.sql" />
+    <Build Include="Permission\Tables\RolePolicy.sql" />
+    <Build Include="Permission\Tables\UserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddPolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddUserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetRoleID.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetPolicyID.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddRolePolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspAddUserPolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspDelPolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspDelRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspDelRolePolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspDelUserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspDelUserPolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspDoesUserContainRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspDoesUserContainPolicy.sql" />
+    <Build Include="Permission\Stored Procedures\uspSelectUserRole.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetPolicyName.sql" />
+    <Build Include="Permission\Stored Procedures\uspGetRoleName.sql" />
+    <Build Include="User\Stored Procedures\uspGetUsername.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Security\SL_MVC.sql" />
+    <Build Include="User\Stored Procedures\uspGetFullName.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DB_9B9A99_BNSStore.publish.xml" />
+    <None Include="DB_9B9A99_BNSStore_1.publish.xml" />
+    <None Include="DB_9B9A99_BNSStore_Dev.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DB_9B9A99_BNSStore.refactorlog" />
   </ItemGroup>
 </Project>

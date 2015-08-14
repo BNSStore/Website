@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Layouts/Main/_MainLayout.cshtml";
     Lang lang = ViewBag.lang;
-    SLUser user = ViewBag.user;
+    User user = ViewBag.user;
     Dictionary<DateTime, Dictionary<int, char>> schedule = ViewBag.schedule;
     List<char> stores = ViewBag.stores;
 }
@@ -21,7 +21,7 @@
 
 }
 @section body{
-    @if (user != null && user.IsEmployee())
+    @if (user != null && (user.HasRole("Store.Employee") || user.HasRole("Store.Manager")))
     {
         <div id="show-all-checkbox-container">
             <input type="checkbox" id="show-all-checkbox" />@lang.GetHTMLTrans("Store.Schedule.ShowAll")
@@ -30,7 +30,7 @@
     }
 }
 @section main{
-@if (user != null && user.IsEmployee())
+@if (user != null && (user.HasRole("Store.Employee") || user.HasRole("Store.Manager")))
 {
     <div id="shift-request-popup-container">
         <div id="shift-request-popup">
@@ -72,16 +72,16 @@
                             {
                                 if (store == shift.Value)
                                 {
-                                    if (user != null && user.userID == shift.Key)
+                                    if (user != null && user.GetUserID() == shift.Key)
                                     {
                                         <button type="button" class="shifts-display-name self" id="@shifts.Key.ToShortDateString()">
-                                            @SLUser.GetDisplayName(shift.Key)
+                                            @(new User(shift.Key).GetDisplayName())
                                         </button>
                                     }
                                     else
                                     {
                                         <div class="shifts-display-name others" id="@shift.Key">
-                                            @SLUser.GetDisplayName(shift.Key)
+                                            @(new User(shift.Key).GetDisplayName())
                                         </div>
                                     }
 

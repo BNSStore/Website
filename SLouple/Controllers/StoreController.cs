@@ -63,7 +63,7 @@ namespace SLouple.MVC.Controllers
             }
             else
             {
-                schedule = sqlSP.StoreSelectSchedule(user.userID);
+                schedule = sqlSP.StoreSelectSchedule(user.GetUserID());
             }
             List<char> stores = new List<char>();
             foreach (Dictionary<int, char> shifts in schedule.Values)
@@ -97,15 +97,15 @@ namespace SLouple.MVC.Controllers
                 {
                     case "add":
                         int recieverID = sqlSP.StoreGetEmployeeID(postData["firstName"], postData["lastName"]);
-                        sqlSP.StoreAddShiftRequest(user.userID, recieverID, Convert.ToDateTime(postData["date"]));
+                        sqlSP.StoreAddShiftRequest(user.GetUserID(), recieverID, Convert.ToDateTime(postData["date"]));
                         break;
                     case "accept":
                         int senderID = Convert.ToInt32(postData["senderID"]);
                         DateTime date = Convert.ToDateTime(postData["date"]);
-                        sqlSP.StoreAcceptShiftRequest(senderID, user.userID, date);
+                        sqlSP.StoreAcceptShiftRequest(senderID, user.GetUserID(), date);
                         break;
                     case "decline":
-                        sqlSP.StoreDeclineShiftRequest(Convert.ToInt32(postData["senderID"]), user.userID, Convert.ToDateTime(postData["date"]));
+                        sqlSP.StoreDeclineShiftRequest(Convert.ToInt32(postData["senderID"]), user.GetUserID(), Convert.ToDateTime(postData["date"]));
                         break;
                     default: break;
                 }
@@ -127,13 +127,13 @@ namespace SLouple.MVC.Controllers
             var shifts = sqlSP.StoreGetCurrentShifts();
 
 
-            if (user == null || !user.IsManager() || !shifts.ContainsKey(user.userID))
+            if (user == null || !user.HasPolicy(new Policy("Store.Sales.Access")) || !shifts.ContainsKey(user.GetUserID()))
             {
                 return RedirectToAction("Home", "Main");
             }
 
             foreach (KeyValuePair<int, char> shift in shifts){
-                if (shift.Key == user.userID)
+                if (shift.Key == user.GetUserID())
                 {
                     ViewBag.store = shift.Value;
                     break;
@@ -151,7 +151,7 @@ namespace SLouple.MVC.Controllers
             string title = "Marking";
             Load(title);
 
-            if (user == null || !user.IsManager())
+            if (user == null || !user.HasPolicy(new Policy("Store.Marking.Add")))
             {
                 return RedirectToAction("Home", "Main");
             }
@@ -179,7 +179,7 @@ namespace SLouple.MVC.Controllers
             {
                 SqlStoredProcedures sqlSP = new SqlStoredProcedures();
 
-                ViewBag.unmarkedSchedule = sqlSP.StoreSelectUnmarkedSchedule(user.userID);
+                ViewBag.unmarkedSchedule = sqlSP.StoreSelectUnmarkedSchedule(user.GetUserID());
 
                 return View(title);
             }
@@ -189,7 +189,7 @@ namespace SLouple.MVC.Controllers
         {
             string title = "ControlPanel";
             Load(title);
-            if (user == null || !user.IsEmployee())
+            if (user == null || !user.HasPolicy("Store.ControlPanel.Access"))
             {
                 return RedirectToAction("Home", "Main");
             }
@@ -223,10 +223,6 @@ namespace SLouple.MVC.Controllers
                 }
                 catch(Exception e)
                 {
-                    if (user != null && user.IsManager())
-                    {
-                        return Content(e.Message + "|" + e.StackTrace);
-                    }
                     return Content("failed");
                 }
             }
@@ -242,7 +238,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPAddProduct()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Add"))
             {
                 string productName = postData["productName"];
                 decimal productPrice = Convert.ToDecimal(postData["productPrice"]);
@@ -260,7 +256,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPDelProduct()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Del"))
             {
                 string productName = postData["productName"];
                 SqlStoredProcedures sqlSP = new SqlStoredProcedures();
@@ -274,7 +270,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeProductPrice()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Update"))
             {
                 string productName = postData["productName"];
                 decimal productPrice = Convert.ToDecimal(postData["productPrice"]);
@@ -289,7 +285,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeProductOnSalePrice()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Update"))
             {
                 string productName = postData["productName"];
                 decimal? onSalePrice = Convert.ToDecimal(postData["onSalePrice"]);
@@ -308,7 +304,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeProductEmployeePrice()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Update"))
             {
                 string productName = postData["productName"];
                 decimal employeePrice = Convert.ToDecimal(postData["employeePrice"]);
@@ -323,7 +319,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeProductName()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Update"))
             {
                 string productName = postData["productName"];
                 string newProductName = postData["newProductName"];
@@ -338,7 +334,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeProductCategory()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Update"))
             {
                 string productName = postData["productName"];
                 string categoryName = postData["categoryName"];
@@ -353,7 +349,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeProductImage()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Product.Update"))
             {
                 string productName = postData["productName"];
                 HttpPostedFileBase file = Request.Files[0];
@@ -368,7 +364,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPAddCategory()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Category.Add"))
             {
                 string categoryName = postData["categoryName"];
                 SqlStoredProcedures sqlSP = new SqlStoredProcedures();
@@ -382,7 +378,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPDelCategory()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Category.Del"))
             {
                 string categoryName = postData["categoryName"];
                 SqlStoredProcedures sqlSP = new SqlStoredProcedures();
@@ -396,7 +392,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPChangeCategoryName()
         {
-            if (user.GetStoreGroupName() == "Product" || user.IsManager())
+            if (user.HasPolicy("Store.Category.Update"))
             {
                 string categoryName = postData["categoryName"];
                 string newCategoryName = postData["newCategoryName"];
@@ -415,7 +411,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPAddShift()
         {
-            if (user.GetStoreGroupName() == "Human Resources" || user.IsManager())
+            if (user.HasPolicy("Store.Shift.Add"))
             {
                 string firstName = postData["firstName"];
                 string lastName = postData["lastName"];
@@ -432,7 +428,7 @@ namespace SLouple.MVC.Controllers
 
         private void CPDelShift()
         {
-            if (user.GetStoreGroupName() == "Human Resources" || user.IsManager())
+            if (user.HasPolicy("Store.Shift.Del"))
             {
                 string firstName = postData["firstName"];
                 string lastName = postData["lastName"];
@@ -446,9 +442,13 @@ namespace SLouple.MVC.Controllers
             }
         }
 
+        #endregion
+
+        #region Accounting
+
         private ActionResult CPDownloadSales()
         {
-            if (user.GetStoreGroupName() == "Accounting" || user.IsManager())
+            if (user.HasPolicy("Store.Sales.Download"))
             {
                 SqlStoredProcedures sqlSP = new SqlStoredProcedures();
 

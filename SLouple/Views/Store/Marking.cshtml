@@ -28,7 +28,7 @@
                     @lang.GetHTMLTrans("Store.Name." + shift.store) :
                 </div>
                 <div class="unmarked-shift-name">
-                    @SLUser.GetDisplayName(shift.userID)
+                    @(new User(shift.userID).GetDisplayName())
                 </div>
                 <div class="unmarked-shift-bottom">
                     <div class=" unmarked-shift-bottom-left">

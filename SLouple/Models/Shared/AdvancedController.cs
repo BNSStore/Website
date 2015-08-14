@@ -13,7 +13,7 @@ namespace SLouple.MVC.Shared
     {
         public string subdomain;
         public Lang lang;
-        public SLUser user;
+        public User user;
         public string ip;
         public Dictionary<string, string> ids;
         public Dictionary<string, string> postData;
@@ -94,7 +94,7 @@ namespace SLouple.MVC.Shared
                 }
                 else if (user != null)
                 {
-                    this.lang = new Lang(user.GetLangID());
+                    this.lang = new Lang(user.GetLang().GetLangID());
                 }
                 else
                 {
@@ -124,7 +124,8 @@ namespace SLouple.MVC.Shared
             {
                 int userID = Convert.ToInt32(Request.Cookies["userID"].Value);
                 string sessionToken = Convert.ToString(Request.Cookies["sessionToken"].Value);
-                this.user = new SLUser(userID, null, null, Request.UserHostAddress, sessionToken);
+                user = new User(userID);
+                user.SignInWithSessionToken(sessionToken, Request.UserHostAddress);
             }
             catch(Exception e)
             {
@@ -132,7 +133,7 @@ namespace SLouple.MVC.Shared
                 this.user = null;
             }
 
-            if (this.user != null && this.user.sessionToken == null)
+            if (this.user != null && this.user.GetSessionToken() == null)
             {
                 this.user = null;
             }
