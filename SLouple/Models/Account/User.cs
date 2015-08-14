@@ -99,7 +99,7 @@ namespace SLouple.MVC.Account
             }
             if (HasRole("Store.Employee") || HasRole("Store.Manager"))
             {
-                return displayName + " (" + GetFullName() + ")";
+                return GetFullName() + " (" + displayName + ") ";
             }
             return displayName;
         }
