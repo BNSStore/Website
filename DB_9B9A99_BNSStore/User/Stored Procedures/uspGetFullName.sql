@@ -16,8 +16,8 @@ BEGIN
 	DECLARE @LastName varchar(100)
 	
 	SET @FirstName = (SELECT FirstName FROM [User].Info WHERE UserID = @UserID)
-	SET @MiddleName = (SELECT FirstName FROM [User].Info WHERE UserID = @UserID)
-	SET @LastName = (SELECT FirstName FROM [User].Info WHERE UserID = @UserID)
+	SET @MiddleName = (SELECT MiddleName FROM [User].Info WHERE UserID = @UserID)
+	SET @LastName = (SELECT LastName FROM [User].Info WHERE UserID = @UserID)
 
 	IF @FirstName IS NOT NULL
 	BEGIN
