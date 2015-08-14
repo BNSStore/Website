@@ -67,6 +67,16 @@ namespace SLouple.MVC.Shared
             return emailAddress;
         }
 
+        public string UserGetFullName(int userID)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            pars.Add(Sql.GenerateSqlParameter("@FullName", SqlDbType.NVarChar, 300, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspGetFullName", pars);
+            string fullName = Convert.ToString(parCol["@FullName"].Value);
+            return fullName;
+        }
+
         public string UserGetPasswordSalt(int userID)
         {
             List<SqlParameter> pars = new List<SqlParameter>();

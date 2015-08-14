@@ -13,6 +13,7 @@ namespace SLouple.MVC.Account
         private int? userID;
         private string username;
         private string displayName;
+        private string fullName;
         private string sessionToken;
         private Lang lang;
         private List<Role> roles;
@@ -96,7 +97,22 @@ namespace SLouple.MVC.Account
                 SqlStoredProcedures sqlSP = new SqlStoredProcedures();
                 displayName = sqlSP.UserGetDisplayName(GetUserID());
             }
+            if (HasRole("Store.Employee") || HasRole("Store.Manager"))
+            {
+                return displayName + " (" + GetFullName() + ")";
+            }
             return displayName;
+        }
+
+        public string GetFullName()
+        {
+            if (fullName == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                fullName = sqlSP.UserGetFullName(GetUserID());
+            }
+
+            return fullName;
         }
 
         public List<Role> GetRoles()
