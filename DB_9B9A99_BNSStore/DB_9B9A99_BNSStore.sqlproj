@@ -642,6 +642,7 @@
     <None Include="DB_9B9A99_BNSStore.publish.xml" />
     <None Include="DB_9B9A99_BNSStore_1.publish.xml" />
     <None Include="DB_9B9A99_BNSStore_Dev.publish.xml" />
+    <None Include="DB_9B9A99_BNSStore_DROP.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DB_9B9A99_BNSStore.refactorlog" />

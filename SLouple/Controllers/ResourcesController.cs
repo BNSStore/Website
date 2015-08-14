@@ -46,12 +46,7 @@ namespace SLouple.MVC.Controllers
             Response.Cache.SetExpires(DateTime.Now.AddMonths(1));
             Response.Cache.SetCacheability(HttpCacheability.Public);
             Response.Cache.SetLastModified(fi.LastWriteTimeUtc);
-            
-            if (Request.Headers["Origin"] != null)
-            {
-                Response.AppendHeader("Access-Control-Allow-Origin", Request.Headers["Origin"]);
-                Response.AppendHeader("Access-Control-Allow-Credentials", "true");
-            }
+
             return File(file, contentType);
         }
     }
