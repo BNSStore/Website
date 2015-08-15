@@ -17,6 +17,7 @@ namespace SLouple.MVC.Account
         private string sessionToken;
         private Lang lang;
         private List<Role> roles;
+        private List<Policy> policies;
 
         public User(int userID)
         {
@@ -123,6 +124,16 @@ namespace SLouple.MVC.Account
                 roles = sqlSP.PermissionSelectRoleFromUserRole(GetUserID());
             }
             return roles;
+        }
+
+        public List<Policy> GetPolicies()
+        {
+            if (policies == null)
+            {
+                SqlStoredProcedures sqlSP = new SqlStoredProcedures();
+                policies = sqlSP.PermissionSelectPolicyFromUser(GetUserID());
+            }
+            return policies;
         }
 
         public bool HasRole(string roleName)

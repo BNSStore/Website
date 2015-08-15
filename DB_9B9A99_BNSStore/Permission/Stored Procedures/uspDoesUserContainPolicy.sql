@@ -52,7 +52,7 @@ AS
 
 								IF @PolicyName IS NULL
 								    BEGIN
-									   EXEC [Permission].[uspGetPolicyID]
+									   EXEC [Permission].[uspGetPolicyName]
 										   @PolicyID = @PolicyID,
 										   @PolicyName = @PolicyName OUTPUT;
 								    END;

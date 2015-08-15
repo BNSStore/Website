@@ -1025,7 +1025,7 @@ namespace SLouple.MVC.Shared
             List<Role> roles = new List<Role>();
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserRole", pars, new string[] { "RoleID" });
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectRoleFromUserRole", pars, new string[] { "RoleID" });
             for (int i = 0; i < columns["RoleID"].Count; i++)
             {
                 roles.Add(new Role(Convert.ToInt32(columns["RoleID"][i])));
@@ -1038,12 +1038,39 @@ namespace SLouple.MVC.Shared
             List<User> users = new List<User>();
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@RoleID", SqlDbType.Int, 0, roleID, false));
-            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserRole", pars, new string[] { "UserID" });
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserFromUserRole", pars, new string[] { "UserID" });
             for (int i = 0; i < columns["UserID"].Count; i++)
             {
                 users.Add(new User(Convert.ToInt32(columns["UserID"][i])));
             }
             return users;
+        }
+
+        public List<User> PermissionSelectUserFromPolicy(int policyID)
+        {
+            List<User> users = new List<User>();
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@PolicyID", SqlDbType.Int, 0, policyID, false));
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectUserFromPolicy", pars, new string[] { "UserID" });
+            for (int i = 0; i < columns["UserID"].Count; i++)
+            {
+                users.Add(new User(Convert.ToInt32(columns["UserID"][i])));
+            }
+            return users;
+        }
+
+        //DO NOT SUPPORT ROLE
+        public List<Policy> PermissionSelectPolicyFromUser(int userID)
+        {
+            List<Policy> policies = new List<Policy>();
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
+            Dictionary<string, List<object>> columns = sql.RunStoredProcedure("Permission.uspSelectPolicyFromUser", pars, new string[] { "PolicyID" });
+            for (int i = 0; i < columns["PolicyID"].Count; i++)
+            {
+                policies.Add(new Policy(Convert.ToInt32(columns["PolicyID"][i])));
+            }
+            return policies;
         }
 
         public int PermissionGetPolicyID(string policyName)
