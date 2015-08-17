@@ -10,6 +10,7 @@ CREATE PROCEDURE [User].[uspCreateUser]
 	@PasswordSalt char(64) = NULL,
 	@PasswordHash char(128) = NULL,
 	@EmailAddress nvarchar(254) = NULL,
+	@VerifyString char(64) = NULL,
 	@LangName varchar(100) = 'English',
 	@LangID tinyint = NULL,
 	@IP varchar(45) = NULL,
@@ -46,11 +47,13 @@ BEGIN
 		INSERT INTO [User].Account(Username, PasswordSalt, PasswordHash) 
 		VALUES (@Username, @PasswordSalt, @PasswordHash)
 
-		EXECUTE [User].uspGetUserID @Username = @Username, @UserID = @UserID OUTPUT
+		EXEC [User].uspGetUserID @Username = @Username, @UserID = @UserID OUTPUT
 
 		EXEC [User].uspAddDisplayName @UserID = @UserID, @DisplayName = @DisplayName
 
-		EXEC [User].uspAddEmailAddress @UserID = @UserID, @EmailAddress = @EmailAddress, @Main = 1
+		--Email
+		UPDATE [User].EmailVerify SET UserID = @UserID WHERE EmailAddress = @EmailAddress AND VerifyString = @VerifyString
+		EXEC [User].uspVerifyEmailAddress @EmailAddress = @EmailAddress, @VerifyString = @VerifyString
 
 		EXEC [User].uspAddLang @UserID = @UserID, @LangName = @LangName, @Main = 1
 
@@ -60,7 +63,7 @@ BEGIN
 	BEGIN CATCH
 		DELETE FROM [User].Account WHERE Username = @Username
 		SET @UserID = -1
-		 select
+		SELECT
         error_message() as errormessage,
         error_number() as erronumber,
         error_state() as errorstate,
@@ -68,10 +71,3 @@ BEGIN
         error_line() as errorline;
 	END CATCH
 END
-
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[User].[uspCreateUser] TO [db_executor]
-    AS [dbo];
-

@@ -1,37 +1,25 @@
-﻿-- =============================================
--- Author:		Cosh_
--- Create date: 2014.11.6
--- Description:	Add Translation
--- =============================================
-CREATE PROCEDURE [User].[uspAddEmailAddress]
+﻿CREATE PROCEDURE [User].[uspAddEmailAddress]
 	@UserID int = NULL,
-	@Username varchar(100) = NULL,
+	@Username varchar(100) = null,
 	@EmailAddress nvarchar(254) = NULL,
-	@Main bit = 0,
 	@VerifyString varchar(64) = NULL OUTPUT
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    -- Insert statements for procedure here
-	IF @UserID IS NULL
+	IF @UserID IS NULL AND @Username IS NOT NULL
 	BEGIN
 		EXEC [User].uspGetUserID @Username = @Username, @UserID = @UserID OUTPUT
 	END
-	IF @Main IS NULL
-	BEGIN
-		SET @Main = 0
-	END
+
 	EXEC dbo.uspGenerateRandomString @Length = 64, @LetterCase = 'L', @Numbers = 1, @RandomString = @VerifyString OUTPUT
 
-	INSERT INTO [User].Email(UserID, EmailAddress,VerifyString, Main)
-	VALUES (@UserID, @EmailAddress, @VerifyString, @Main)
+	IF (SELECT EmailAddress FROM [User].EmailVerify WHERE EmailAddress = @EmailAddress) IS NOT NULL
+	BEGIN
+		INSERT INTO [User].EmailVerify(EmailAddress,VerifyString, UserID) VALUES (@EmailAddress, @VerifyString, @UserID)
+	END
+	ELSE
+	BEGIN
+		UPDATE [User].EmailVerify SET VerifyString = @VerifyString, UserID = @UserID WHERE EmailAddress = @EmailAddress
+	END
 END
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[User].[uspAddEmailAddress] TO [db_executor]
-    AS [dbo];
-

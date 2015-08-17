@@ -1,9 +1,4 @@
-﻿-- =============================================
--- Author:		Cosh_
--- Create date: 2014.9.13
--- Description:	Create simple user
--- =============================================
-CREATE PROCEDURE [Lang].[uspGetTranslation]
+﻿CREATE PROCEDURE [Lang].[uspGetTranslation]
 	@LangID tinyint = NULL,
 	@LangName varchar(100) = NULL,
 	@ProviderID int = NULL,
@@ -12,11 +7,7 @@ CREATE PROCEDURE [Lang].[uspGetTranslation]
 	@Context nvarchar(MAX) = NULL OUTPUT
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
 	IF @LangID IS NULL
 	BEGIN
 		EXEC Lang.uspGetLangID @LangName = @LangName, @LangID = @LangID OUTPUT
@@ -69,9 +60,3 @@ BEGIN
 		SET @Part = ''
 	END
 END
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[Lang].[uspGetTranslation] TO [db_executor]
-    AS [dbo];
-

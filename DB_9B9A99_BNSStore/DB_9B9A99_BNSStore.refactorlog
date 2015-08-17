@@ -49,4 +49,53 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RoleID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b319ae8c-cccb-469b-843a-861133910ebb" ChangeDateTime="08/16/2015 01:05:57">
+    <Property Name="ElementName" Value="[dbo].[EmailVerify].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmailVerify]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmailAddress" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4d1f8d5a-1788-4574-b549-8a75d998da8e" ChangeDateTime="08/16/2015 01:10:11">
+    <Property Name="ElementName" Value="[User].[EmailSub].[Type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[User].[EmailSub]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2b2b670b-13df-49f9-81a4-0d3f9c0925fe" ChangeDateTime="08/16/2015 01:10:25">
+    <Property Name="ElementName" Value="[dbo].[EmailType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmailType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="318e9cbd-2cbc-4fbc-836a-2d7d69cfef43" ChangeDateTime="08/16/2015 01:10:37">
+    <Property Name="ElementName" Value="[dbo].[EmailType].[SubType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmailType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Provider" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="169d7e35-e8c5-4bfd-80f5-f2c3c8bb5b1b" ChangeDateTime="08/16/2015 01:11:22">
+    <Property Name="ElementName" Value="[dbo].[EmailType].[SubType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmailType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubTypeID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f8b3f47f-cc03-4930-9f81-c282ffdf3e88" ChangeDateTime="08/16/2015 05:00:41">
+    <Property Name="ElementName" Value="[User].[EmailSub].[SubType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[User].[EmailSub]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubTypeID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d5662138-1380-408b-963b-70a377934ff8" ChangeDateTime="08/16/2015 05:13:06">
+    <Property Name="ElementName" Value="[Svc].[SubType].[Provider]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Svc].[SubType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProviderID" />
+  </Operation>
 </Operations>

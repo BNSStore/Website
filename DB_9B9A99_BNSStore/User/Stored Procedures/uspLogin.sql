@@ -83,10 +83,3 @@ BEGIN
 		END
 	END
 END
-
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[User].[uspLogin] TO [db_executor]
-    AS [dbo];
-

@@ -1,16 +1,7 @@
-﻿-- =============================================
--- Author:		Cosh_
--- Create date: 2014.11.6
--- Description:	Add Translation
--- =============================================
-CREATE PROCEDURE [Lang].[uspSelectLangListNative]
+﻿CREATE PROCEDURE [Lang].[uspSelectLangListNative]
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
 
 	DECLARE @LangNameTable TABLE(LangName varchar(100));
 	INSERT INTO @LangNameTable EXEC Lang.uspGetLangName;
@@ -43,9 +34,3 @@ BEGIN
 	SELECT LangName AS LangName, LangNameNative AS LangNameNative FROM @LangNameTableNative;
 	
 END
-
-GO
-GRANT EXECUTE
-    ON OBJECT::[Lang].[uspSelectLangListNative] TO [db_executor]
-    AS [dbo];
-
