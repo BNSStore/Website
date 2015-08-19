@@ -5,6 +5,7 @@
 AS
 BEGIN
 	SET NOCOUNT ON;
+
 	IF @LangID IS NULL
 	BEGIN
 		EXEC Lang.uspGetLangID @LangName = @LangName, @LangID = @LangID OUTPUT

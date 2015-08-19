@@ -5,10 +5,11 @@
 AS
 BEGIN
 	SET NOCOUNT ON;
+
 	DECLARE @Output TABLE(UserID int NOT NULL);
 
 	PD:
-
+	BEGIN
 		IF @PolicyID IS NULL
 		BEGIN
 			EXEC [Permission].uspGetPolicyID @PolicyName = @PolicyName, @PolicyID = @PolicyID OUTPUT
@@ -85,4 +86,5 @@ BEGIN
 		BEGIN
 			SELECT UserID FROM @Output
 		END
+	END
 END

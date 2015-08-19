@@ -262,10 +262,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Store\Stored Procedures\uspGetGroupID.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="Store\Stored Procedures\uspGetProductCategoryID.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -430,14 +426,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Store\Stored Procedures\uspGetGroupName.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="User\Stored Procedures\uspIsEmailVerified.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="Store\Stored Procedures\uspAddShiftRequest.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -455,10 +443,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="User\Stored Procedures\uspAddFailedLogin.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Store\Stored Procedures\uspGetEmployeeID.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -558,15 +542,7 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Store\Stored Procedures\uspAddEmployee.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="Store\Stored Procedures\uspAddMarkAndComment.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="User\Stored Procedures\uspGetMainEmailAddress.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -578,7 +554,6 @@
     <Build Include="Security\User.sql" />
     <Build Include="Security\User_Vis.sql" />
     <Build Include="Security\Zone.sql" />
-    <Build Include="Security\db_executor.sql" />
     <Build Include="Security\Permission.sql" />
     <Build Include="Permission\Tables\UserPolicy.sql" />
     <Build Include="Permission\Tables\Policy.sql" />
@@ -617,7 +592,8 @@
     <Build Include="User\Tables\EmailVerify.sql" />
     <Build Include="Svc\Tables\SubType.sql" />
     <Build Include="Svc\Stored Procedures\uspAddSubType.sql" />
-    <Build Include="Svc\Stored Procedures\GetSubTypeID.sql" />
+    <Build Include="Svc\Stored Procedures\uspGetSubTypeID.sql" />
+    <Build Include="User\Stored Procedures\uspSelectEmailAddressFromEmailSub.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB_9B9A99_BNSStore.publish.xml" />

@@ -1,9 +1,4 @@
-﻿-- =============================================
--- Author:		Cosh_
--- Create date: 2014.9.13
--- Description:	Create simple user
--- =============================================
-CREATE PROCEDURE [User].[uspCreateUser]
+﻿CREATE PROCEDURE [User].[uspCreateUser]
 	@UserID int = NULL OUTPUT, 
 	@Username varchar(100) = NULL,
 	@DisplayName nvarchar(100) = @Username, 
@@ -21,11 +16,7 @@ CREATE PROCEDURE [User].[uspCreateUser]
 
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
 	BEGIN TRY
 		IF @ProviderID IS NULL
 		BEGIN

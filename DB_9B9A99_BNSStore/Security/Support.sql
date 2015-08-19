@@ -1,3 +1,3 @@
 ﻿CREATE SCHEMA [Support]
-    AUTHORIZATION [db_owner];
+    AUTHORIZATION [dbo];
 

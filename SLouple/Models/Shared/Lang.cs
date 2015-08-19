@@ -72,7 +72,7 @@ namespace SLouple.MVC.Shared
                 }
             }
             SqlStoredProcedures sqlSP = new SqlStoredProcedures();
-            string contextString = sqlSP.LangGetTranslation(GetLangID(), "SL_MVC", keywordString);
+            string contextString = sqlSP.LangGetTranslation(GetLangID(), keywordString);
             contextString = contextString.Replace("\\|", "\\"); //TODO: Add FULL support for \| escape
             string[] context = contextString.Split('|');
             for (int i = 0; i < keywords.Length; i++)

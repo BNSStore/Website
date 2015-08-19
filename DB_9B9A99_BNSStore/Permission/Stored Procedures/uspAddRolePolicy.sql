@@ -5,6 +5,7 @@
 	@PolicyName varchar(100) = NULL
 AS
 BEGIN
+	SET NOCOUNT ON;
 
 	IF @RoleID IS NULL
 	BEGIN

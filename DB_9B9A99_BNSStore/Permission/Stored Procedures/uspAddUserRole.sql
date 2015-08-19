@@ -5,7 +5,6 @@
 	@RoleName varchar(100) = NULL
 AS
 BEGIN
-
 	SET NOCOUNT ON;
 
 	IF @UserID IS NULL

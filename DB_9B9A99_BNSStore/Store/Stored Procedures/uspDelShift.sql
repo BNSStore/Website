@@ -16,11 +16,7 @@ CREATE PROCEDURE [Store].[uspDelShift]
 	@Year smallint = NULL
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
 
 	IF @UserID IS NULL AND @Username IS NOT NULL
 	BEGIN

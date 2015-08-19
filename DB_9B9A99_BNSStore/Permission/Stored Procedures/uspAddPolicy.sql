@@ -5,5 +5,4 @@ BEGIN
 	SET NOCOUNT ON;
 	
 	INSERT INTO [Permission].[Policy] (PolicyName) VALUES (@PolicyName)
-
 END

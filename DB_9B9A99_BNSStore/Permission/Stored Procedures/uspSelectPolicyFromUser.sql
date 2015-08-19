@@ -6,8 +6,8 @@
 	@WildCard bit = 1
 AS
 BEGIN
-
 	SET NOCOUNT ON;
+
 	IF @UserID IS NULL
 	BEGIN
 		EXEC [User].uspGetUserID @Username = @Username, @UserID = @UserID OUTPUT

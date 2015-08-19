@@ -4,10 +4,11 @@
 AS
 BEGIN
 	SET NOCOUNT ON;
+
 	IF @UserID IS NULL
 	BEGIN
 		EXEC [User].uspGetUserID @Username = @Username, @UserID = @UserID OUTPUT
 	END
-	SELECT RoleID FROM [Permission].UserRole WHERE UserID = @UserID
 
+	SELECT RoleID FROM [Permission].UserRole WHERE UserID = @UserID
 END

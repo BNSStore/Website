@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [User].[uspVerifyEmailAddress]
 	@EmailAddress nvarchar(254) = NULL,
-	@VerifyString varchar(64) = NULL OUTPUT
+	@VerifyString varchar(64) = NULL
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -87,7 +87,12 @@ namespace SLouple.MVC.Shared
             return passwordSalt;
         }
 
-        public int UserCreateUser(string username, string displayName, string passwordSalt, string passwordHash, string emailAddress, string langName, string ip)
+        public int UserCreateUser(string username, string displayName, string passwordSalt, string passwordHash, string emailAddress, string verifyString, string langName, string ip)
+        {
+            return UserCreateUser(username, displayName, passwordSalt, passwordHash, emailAddress, verifyString, langName, ip, Sql.ProviderName);
+        }
+
+        public int UserCreateUser(string username, string displayName, string passwordSalt, string passwordHash, string emailAddress, string verifyString, string langName, string ip, string providerName)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, null, true));
@@ -96,9 +101,10 @@ namespace SLouple.MVC.Shared
             pars.Add(Sql.GenerateSqlParameter("@PasswordSalt", SqlDbType.Char, 64, passwordSalt, false));
             pars.Add(Sql.GenerateSqlParameter("@PasswordHash", SqlDbType.Char, 128, passwordHash, false));
             pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
+            pars.Add(Sql.GenerateSqlParameter("@VerifyString", SqlDbType.Char, 64, verifyString, false));
             pars.Add(Sql.GenerateSqlParameter("@LangName", SqlDbType.VarChar, 100, langName, false));
             pars.Add(Sql.GenerateSqlParameter("@IP", SqlDbType.VarChar, 45, ip, false));
-            pars.Add(Sql.GenerateSqlParameter("@ProviderName", SqlDbType.VarChar, 100, Sql.ProviderName, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProviderName", SqlDbType.VarChar, 100, providerName, false));
             SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspCreateUser", pars);
             int userID = Convert.ToInt32(parCol["@UserID"].Value);
             return userID;
@@ -151,12 +157,22 @@ namespace SLouple.MVC.Shared
             return exist;
         }
 
-        public string UserAddEmail(int userID, string emailAddress, bool main)
+        public string UserAddEmail(string emailAddress)
+        {
+            List<SqlParameter> pars = new List<SqlParameter>();
+            pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, null, false));
+            pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
+            pars.Add(Sql.GenerateSqlParameter("@VerifyString", SqlDbType.VarChar, 64, null, true));
+            SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspAddEmailAddress", pars);
+            string verifyString = Convert.ToString(parCol["@VerifyString"].Value);
+            return verifyString;
+        }
+
+        public string UserAddEmail(int userID, string emailAddress)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
             pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
-            pars.Add(Sql.GenerateSqlParameter("@Main", SqlDbType.Bit, 0, main, false));
             pars.Add(Sql.GenerateSqlParameter("@VerifyString", SqlDbType.VarChar, 64, null, true));
             SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspAddEmailAddress", pars);
             string verifyString = Convert.ToString(parCol["@VerifyString"].Value);
@@ -174,40 +190,30 @@ namespace SLouple.MVC.Shared
 
         }
 
-        public bool UserIsEmailVerified(string emailAddress)
-        {
-            List<SqlParameter> pars = new List<SqlParameter>();
-            pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
-            pars.Add(Sql.GenerateSqlParameter("@Verified", SqlDbType.Bit, 0, null, true));
-            SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspIsEmailVerified", pars);
-            bool verified = Convert.ToBoolean(parCol["@Verified"].Value);
-            return verified;
-        }
-
-        public bool UserVerifyEmail(string emailAddress, string verifyString)
+        public void UserVerifyEmail(string emailAddress, string verifyString)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
             pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
             pars.Add(Sql.GenerateSqlParameter("@VerifyString", SqlDbType.VarChar, 64, verifyString, false));
-            pars.Add(Sql.GenerateSqlParameter("@Verified", SqlDbType.Bit, 0, null, true));
             SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspVerifyEmail", pars);
-            bool verified = Convert.ToBoolean(parCol["@Verified"].Value);
-            return verified;
         }
 
-        public bool UserIsEmailSub(int userID)
+        public bool UserIsEmailSub(int userID, string subTypeName)
         {
-            bool isEmailSub = UserIsEmailSub(userID, null);
-            return isEmailSub;
+            return UserIsEmailSub(userID, null, subTypeName);
         }
 
-        public bool UserIsEmailSub(string emailAddress)
+        public bool UserIsEmailSub(string emailAddress, string subTypeName)
         {
-            bool isEmailSub = UserIsEmailSub(-1, emailAddress);
-            return isEmailSub;
+            return UserIsEmailSub(-1, emailAddress, subTypeName);
         }
 
-        public bool UserIsEmailSub(int userID, string emailAddress)
+        public bool UserIsEmailSub(int userID, string emailAddress, string subTypeName)
+        {
+            return UserIsEmailSub(userID, emailAddress, Sql.ProviderName, subTypeName);
+        }
+
+        public bool UserIsEmailSub(int userID, string emailAddress, string providerName, string subTypeName)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
             if (userID > 0)
@@ -215,30 +221,25 @@ namespace SLouple.MVC.Shared
                 pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
             }
             pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProviderName", SqlDbType.VarChar, 100, providerName, false));
+            pars.Add(Sql.GenerateSqlParameter("@SubTypeName", SqlDbType.VarChar, 100, subTypeName, false));
             pars.Add(Sql.GenerateSqlParameter("@IsEmailSub", SqlDbType.Bit, 0, null, true));
             SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspIsEmailSub", pars);
             bool isEmailSub = Convert.ToBoolean(parCol["@IsEmailSub"].Value);
             return isEmailSub;
         }
 
-        public void UserAddEmailSub(int userID)
+        public void UserAddEmailSub(string emailAddress, string subTypeName)
         {
-            UserAddEmailSub(userID, null);
+            UserAddEmailSub(emailAddress, Sql.ProviderName, subTypeName);
         }
 
-        public void UserAddEmailSub(string emailAddress)
-        {
-            UserAddEmailSub(-1, emailAddress);
-        }
-
-        public void UserAddEmailSub(int userID, string emailAddress)
+        public void UserAddEmailSub(string emailAddress, string providerName, string subTypeName)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
-            if (userID > 0)
-            {
-                pars.Add(Sql.GenerateSqlParameter("@UserID", SqlDbType.Int, 0, userID, false));
-            }
             pars.Add(Sql.GenerateSqlParameter("@EmailAddress", SqlDbType.NVarChar, 254, emailAddress, false));
+            pars.Add(Sql.GenerateSqlParameter("@ProviderName", SqlDbType.VarChar, 100, providerName, false));
+            pars.Add(Sql.GenerateSqlParameter("@SubTypeName", SqlDbType.VarChar, 100, subTypeName, false));
             SqlParameterCollection parCol = sql.RunStoredProcedure("User.uspAddEmailSub", pars);
         }
 
@@ -298,6 +299,11 @@ namespace SLouple.MVC.Shared
             return langCode;
         }
 
+        public string LangGetTranslation(int langID, string keywords)
+        {
+            return LangGetTranslation(langID, Sql.ProviderName, keywords);
+        }
+
         public string LangGetTranslation(int langID, string providerName, string keywords)
         {
             List<SqlParameter> pars = new List<SqlParameter>();
@@ -308,6 +314,11 @@ namespace SLouple.MVC.Shared
             SqlParameterCollection parCol = sql.RunStoredProcedure("Lang.uspGetTranslation", pars);
             string context = Convert.ToString(parCol["@Context"].Value);
             return context;
+        }
+
+        public void LangAddTranslation(string langName, string keyword, string context)
+        {
+            LangAddTranslation(langName, Sql.ProviderName, keyword, context);
         }
 
         public void LangAddTranslation(string langName, string providerName, string keyword, string context)
