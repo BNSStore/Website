@@ -1,0 +1,6 @@
+﻿CREATE PROCEDURE [Lang].[uspSelectLangName]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT LangName FROM Lang.LangList
+END

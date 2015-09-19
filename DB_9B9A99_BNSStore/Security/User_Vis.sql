@@ -1,3 +1,0 @@
-﻿CREATE SCHEMA [User_Vis]
-    AUTHORIZATION [dbo];
-

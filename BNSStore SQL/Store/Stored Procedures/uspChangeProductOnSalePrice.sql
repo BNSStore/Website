@@ -1,0 +1,16 @@
+﻿CREATE PROCEDURE [Store].[uspChangeProductOnSalePrice]
+    @ProductID smallint = NULL,
+    @ProductName varchar(100) = NULL,
+    @OnSalePrice smallmoney = NULL
+AS
+BEGIN
+
+	SET NOCOUNT ON
+
+	IF @ProductID IS NULL
+	BEGIN
+		EXEC Store.uspGetProductID @ProductID = @ProductID OUTPUT, @ProductName = @ProductName
+	END
+
+	UPDATE Store.Product SET OnSalePrice = @OnSalePrice WHERE ProductID = @ProductID
+END

@@ -1,3 +1,0 @@
-﻿CREATE SCHEMA [Zone]
-    AUTHORIZATION [dbo];
-
