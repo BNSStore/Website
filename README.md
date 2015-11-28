@@ -1,7 +1,10 @@
+#*DEPRECATED*
+Moved to <a href="https://github.com/SLouple">SLouple</a> (Private)
+
 # BNSStore Website
-*DEPRECATED*
-Burnaby North School Store Website
-(Has been moved to SLouple's organization account.)
+Burnaby North School Store Website<br />
+
+
 ## Contributing
 
 1. Send us a email at admin@bnsstore.com
