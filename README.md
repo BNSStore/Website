@@ -7,7 +7,7 @@ Burnaby North School Store Website<br />
 
 ## Contributing
 
-1. Send us a email at admin@bnsstore.com
+1. Send us an email at admin@bnsstore.com
 
 ## Credits
 
